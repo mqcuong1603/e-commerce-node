@@ -53,7 +53,7 @@ const ProductVariantSchema = new Schema(
 
 // Indexes for faster queries
 ProductVariantSchema.index({ productId: 1 });
-ProductVariantSchema.index({ sku: 1 });
+// ProductVariantSchema.index({ sku: 1 });
 
 // Virtual for variant images
 ProductVariantSchema.virtual("images", {

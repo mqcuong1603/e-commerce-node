@@ -56,9 +56,9 @@ CartSchema.pre("save", function (next) {
   }
 });
 
-// Index for faster queries
-CartSchema.index({ userId: 1 });
-CartSchema.index({ sessionId: 1 });
+// // Index for faster queries
+// CartSchema.index({ userId: 1 });
+// CartSchema.index({ sessionId: 1 });
 CartSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 }); // TTL index for cart expiration
 
 // Methods for cart operations
