@@ -1,3 +1,5 @@
+// middleware/response.middleware.js (ES Modules version)
+
 /**
  * Response middleware to standardize API responses
  *
@@ -5,7 +7,7 @@
  * - res.success(data, message, statusCode)
  * - res.error(message, statusCode, errors)
  */
-const responseMiddleware = (req, res, next) => {
+export const responseMiddleware = (req, res, next) => {
   // Success response method
   res.success = function (data = null, message = "Success", statusCode = 200) {
     return this.status(statusCode).json({
@@ -34,7 +36,7 @@ const responseMiddleware = (req, res, next) => {
 };
 
 // Error handler middleware that uses the res.error method
-const errorHandler = (err, req, res, next) => {
+export const errorHandler = (err, req, res, next) => {
   console.error(err.stack);
 
   const statusCode = err.statusCode || 500;
@@ -45,7 +47,7 @@ const errorHandler = (err, req, res, next) => {
 };
 
 // Custom error class for API errors
-class ApiError extends Error {
+export class ApiError extends Error {
   constructor(message, statusCode = 400, errors = null) {
     super(message);
     this.statusCode = statusCode;
@@ -54,9 +56,3 @@ class ApiError extends Error {
     Error.captureStackTrace(this, this.constructor);
   }
 }
-
-export default {
-  responseMiddleware,
-  errorHandler,
-  ApiError,
-};
