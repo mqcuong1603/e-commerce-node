@@ -66,10 +66,21 @@ CartSchema.methods.addItem = async function (
   quantity,
   price
 ) {
-  // Check if item exists
-  const itemIndex = this.items.findIndex(
-    (item) => item.productVariantId.toString() === productVariantId.toString()
-  );
+  // Extract the ID string regardless of whether productVariantId is an object or string
+  const variantIdStr =
+    typeof productVariantId === "object" && productVariantId._id
+      ? productVariantId._id.toString()
+      : productVariantId.toString();
+
+  // Check if item exists by comparing IDs as strings
+  const itemIndex = this.items.findIndex((item) => {
+    const itemIdStr =
+      typeof item.productVariantId === "object" && item.productVariantId._id
+        ? item.productVariantId._id.toString()
+        : item.productVariantId.toString();
+
+    return itemIdStr === variantIdStr;
+  });
 
   if (itemIndex > -1) {
     // Update existing item

@@ -12,7 +12,7 @@ import productRoutes from "./routes/product.routes.js";
 import categoryRoutes from "./routes/category.routes.js";
 import cartRoutes from "./routes/cart.routes.js";
 // import orderRoutes from "./routes/order.routes.js";
-// import reviewRoutes from "./routes/review.routes.js";
+import reviewRoutes from "./routes/review.routes.js";
 // import discountRoutes from "./routes/discount.routes.js";
 // import adminRoutes from "./routes/admin.routes.js";
 
@@ -89,7 +89,7 @@ app.use("/api/products", productRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/cart", cartRoutes);
 // app.use("/api/orders", orderRoutes);
-// app.use("/api/reviews", reviewRoutes);
+app.use("/api/reviews", reviewRoutes);
 // app.use("/api/discounts", discountRoutes);
 // app.use("/api/admin", authMiddleware, adminMiddleware, adminRoutes);
 
@@ -144,7 +144,6 @@ const initializeApp = async () => {
     process.on("unhandledRejection", (reason, promise) => {
       logger.error("Unhandled Rejection at:", promise);
       logger.error("Reason:", reason);
-      // Application continues running but logs the error
     });
 
     return server;
@@ -159,5 +158,5 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   initializeApp();
 }
 8;
-// For testing purposes
+
 export default app;

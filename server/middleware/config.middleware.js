@@ -50,7 +50,7 @@ export const configureMiddleware = (app, config, logger) => {
     session({
       secret: config.sessionSecret,
       resave: false,
-      saveUninitialized: false,
+      saveUninitialized: true,
       cookie: {
         secure: config.nodeEnv === "production",
         httpOnly: true,
