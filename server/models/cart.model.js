@@ -55,9 +55,6 @@ CartSchema.pre("save", function (next) {
   }
 });
 
-// // Index for faster queries
-// CartSchema.index({ userId: 1 });
-// CartSchema.index({ sessionId: 1 });
 CartSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 }); // TTL index for cart expiration
 
 // Methods for cart operations
@@ -99,9 +96,21 @@ CartSchema.methods.addItem = async function (
 };
 
 CartSchema.methods.updateItem = function (productVariantId, quantity) {
-  const itemIndex = this.items.findIndex(
-    (item) => item.productVariantId.toString() === productVariantId.toString()
-  );
+  // Extract the ID string regardless of whether productVariantId is an object or string
+  const variantIdStr =
+    typeof productVariantId === "object" && productVariantId._id
+      ? productVariantId._id.toString()
+      : productVariantId.toString();
+
+  // Check if item exists by comparing IDs as strings
+  const itemIndex = this.items.findIndex((item) => {
+    const itemIdStr =
+      typeof item.productVariantId === "object" && item.productVariantId._id
+        ? item.productVariantId._id.toString()
+        : item.productVariantId.toString();
+
+    return itemIdStr === variantIdStr;
+  });
 
   if (itemIndex > -1) {
     this.items[itemIndex].quantity = quantity;
@@ -112,9 +121,21 @@ CartSchema.methods.updateItem = function (productVariantId, quantity) {
 };
 
 CartSchema.methods.removeItem = function (productVariantId) {
-  this.items = this.items.filter(
-    (item) => item.productVariantId.toString() !== productVariantId.toString()
-  );
+  // Extract the ID string regardless of whether productVariantId is an object or string
+  const variantIdStr =
+    typeof productVariantId === "object" && productVariantId._id
+      ? productVariantId._id.toString()
+      : productVariantId.toString();
+
+  // Filter items by comparing IDs as strings
+  this.items = this.items.filter((item) => {
+    const itemIdStr =
+      typeof item.productVariantId === "object" && item.productVariantId._id
+        ? item.productVariantId._id.toString()
+        : item.productVariantId.toString();
+
+    return itemIdStr !== variantIdStr;
+  });
 
   return this.save();
 };
@@ -138,6 +159,7 @@ CartSchema.virtual("total").get(function () {
     0
   );
 });
+88;
 
 // Virtual for total items count
 CartSchema.virtual("itemCount").get(function () {
