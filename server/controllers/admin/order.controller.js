@@ -218,7 +218,7 @@ export const updateOrderStatus = async (req, res, next) => {
       // Handle inventory return process
       // This is done in a try/catch to ensure status is saved even if inventory fails
       try {
-        const ProductVariant = require("../../models/productVariant.model");
+        const ProductVariant = require("../../models/productVariant.model.js");
 
         for (const item of order.items) {
           const variant = await ProductVariant.findById(item.productVariantId);
@@ -235,7 +235,7 @@ export const updateOrderStatus = async (req, res, next) => {
     // Notify customer if needed
     try {
       // Send status update email
-      const user = await require("../../models/user.model").findById(
+      const user = await require("../../models/user.model.js").findById(
         order.userId
       );
 
