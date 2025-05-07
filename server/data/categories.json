@@ -1,0 +1,93 @@
+[
+  {
+    "name": "Laptops",
+    "description": "Portable computers for work and play",
+    "image": "/images/categories/laptops.jpg",
+    "isActive": true,
+    "sortOrder": 1
+  },
+  {
+    "name": "Monitors",
+    "description": "Displays for computers and gaming",
+    "image": "/images/categories/monitors.jpg",
+    "isActive": true,
+    "sortOrder": 2
+  },
+  {
+    "name": "Storage",
+    "description": "Storage solutions for all your data needs",
+    "image": "/images/categories/storage.jpg",
+    "isActive": true,
+    "sortOrder": 3
+  },
+  {
+    "name": "Processors",
+    "description": "CPUs for desktops and laptops",
+    "image": "/images/categories/processors.jpg",
+    "isActive": true,
+    "sortOrder": 4
+  },
+  {
+    "name": "Graphics Cards",
+    "description": "GPUs for gaming and content creation",
+    "image": "/images/categories/gpu.jpg",
+    "isActive": true,
+    "sortOrder": 5
+  },
+  {
+    "name": "Ultrabooks",
+    "description": "Ultra-thin, lightweight laptops with premium performance",
+    "parentName": "Laptops",
+    "image": "/images/categories/ultrabooks.jpg",
+    "isActive": true,
+    "sortOrder": 1
+  },
+  {
+    "name": "Gaming Laptops",
+    "description": "High-performance laptops designed for gaming",
+    "parentName": "Laptops",
+    "image": "/images/categories/gaming-laptops.jpg",
+    "isActive": true,
+    "sortOrder": 2
+  },
+  {
+    "name": "Business Laptops",
+    "description": "Reliable laptops for business and productivity",
+    "parentName": "Laptops",
+    "image": "/images/categories/business-laptops.jpg",
+    "isActive": true,
+    "sortOrder": 3
+  },
+  {
+    "name": "Full HD Monitors",
+    "description": "1080p displays for everyday computing",
+    "parentName": "Monitors",
+    "image": "/images/categories/fullhd-monitors.jpg",
+    "isActive": true,
+    "sortOrder": 1
+  },
+  {
+    "name": "4K Monitors",
+    "description": "Ultra high definition displays for detailed visuals",
+    "parentName": "Monitors",
+    "image": "/images/categories/4k-monitors.jpg",
+    "isActive": true,
+    "sortOrder": 2
+  },
+  {
+    "name": "Internal SSD",
+    "description": "Fast solid state drives for system and application storage",
+    "parentName": "Storage",
+    "image": "/images/categories/internal-ssd.jpg",
+    "isActive": true,
+    "sortOrder": 1
+  },
+  {
+    "name": "Internal HDD",
+    "description": "High capacity hard disk drives for mass storage",
+    "parentName": "Storage",
+    "image": "/images/categories/internal-hdd.jpg",
+    "isActive": true,
+    "sortOrder": 2
+  }
+]

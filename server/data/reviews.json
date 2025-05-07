@@ -1,0 +1,56 @@
+[
+  {
+    "productName": "Dell XPS 13",
+    "userEmail": "john.doe@example.com",
+    "userName": "John Doe",
+    "rating": 5,
+    "comment": "This laptop exceeded all my expectations. The build quality is outstanding, and the performance is blazing fast. The battery life is impressive, easily lasting a full workday.",
+    "isVerifiedPurchase": true,
+    "createdAt": "2024-04-15T10:30:00.000Z"
+  },
+  {
+    "productName": "Dell XPS 13",
+    "userEmail": "sarah.johnson@example.com",
+    "userName": "Sarah Johnson",
+    "rating": 4,
+    "comment": "Great laptop overall. The display is stunning with vibrant colors and the keyboard feels great to type on. My only complaint is that it runs a bit hot during intensive tasks.",
+    "isVerifiedPurchase": true,
+    "createdAt": "2024-04-20T14:45:00.000Z"
+  },
+  {
+    "productName": "ASUS ROG Zephyrus G15",
+    "userEmail": "michael.chen@example.com",
+    "userName": "Michael Chen",
+    "rating": 5,
+    "comment": "Perfect for gaming and development. Handles AAA games at high settings without breaking a sweat. The screen refresh rate makes for incredibly smooth gameplay.",
+    "isVerifiedPurchase": false,
+    "createdAt": "2024-04-25T09:15:00.000Z"
+  },
+  {
+    "productName": "ASUS ROG Zephyrus G15",
+    "userEmail": "emily.wilson@example.com",
+    "userName": "Emily Wilson",
+    "rating": 4,
+    "comment": "Amazing gaming performance in a relatively thin and light package. The fans can get loud when gaming but that's expected for this level of performance.",
+    "isVerifiedPurchase": true,
+    "createdAt": "2024-05-01T18:20:00.000Z"
+  },
+  {
+    "productName": "Samsung 980 PRO",
+    "userEmail": "david.rodriguez@example.com",
+    "userName": "David Rodriguez",
+    "rating": 5,
+    "comment": "The SSD is insanely fast! Boot times are almost instantaneous, and applications load in a blink. File transfers that used to take minutes now complete in seconds.",
+    "isVerifiedPurchase": true,
+    "createdAt": "2024-04-10T11:15:00.000Z"
+  },
+  {
+    "productName": "Samsung 980 PRO",
+    "userEmail": "guest@example.com",
+    "userName": "Lisa Thompson",
+    "rating": 4,
+    "comment": "Great upgrade from my old SATA SSD. The performance boost is noticeable in everyday tasks. Installation was straightforward, though the drive runs a bit warm under heavy loads.",
+    "isVerifiedPurchase": false,
+    "createdAt": "2024-04-18T16:30:00.000Z"
+  }
+]

@@ -2,6 +2,7 @@ import Review from "../models/review.model.js";
 import Product from "../models/product.model.js";
 import Order from "../models/order.model.js";
 import { ApiError } from "../middleware/response.middleware.js";
+import mongoose from "mongoose";
 
 /**
  * Get reviews for a product
@@ -9,15 +10,16 @@ import { ApiError } from "../middleware/response.middleware.js";
 export const getProductReviews = async (req, res, next) => {
   try {
     const { productId } = req.params;
+    const objectIdProductId = new mongoose.Types.ObjectId(productId);
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
     const skip = (page - 1) * limit;
 
     // Count total reviews for this product
-    const total = await Review.countDocuments({ productId });
+    const total = await Review.countDocuments({ productId: objectIdProductId });
 
     // Get reviews with pagination
-    const reviews = await Review.find({ productId })
+    const reviews = await Review.find({ productId: objectIdProductId })
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(limit)
