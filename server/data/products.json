@@ -176,5 +176,167 @@
         "alt": "Samsung 980 PRO angle view"
       }
     ]
+  },
+  {
+    "name": "LG UltraGear 27GN950",
+    "brand": "LG",
+    "description": "The LG UltraGear 27GN950 is a premium 4K gaming monitor that delivers exceptional visual performance. With a 27-inch Nano IPS display, 144Hz refresh rate, and 1ms response time, it provides incredibly smooth and responsive gameplay. The monitor supports both NVIDIA G-SYNC and AMD FreeSync Premium Pro for tear-free gaming experiences across different GPU platforms.",
+    "shortDescription": "27-inch 4K gaming monitor with 144Hz refresh rate and HDR support",
+    "basePrice": 899.99,
+    "isActive": true,
+    "isNewProduct": true,
+    "isBestSeller": false,
+    "isFeatured": true,
+    "categoryNames": ["4K Monitors", "Monitors"],
+    "tags": ["monitor", "gaming", "4k", "144hz", "hdr", "ips"],
+    "variants": [
+      {
+        "name": "Standard",
+        "sku": "LG-27GN950-STD",
+        "attributes": {
+          "size": "27 inches",
+          "resolution": "3840 x 2160 (4K UHD)",
+          "refreshRate": "144Hz",
+          "responseTime": "1ms GtG",
+          "panelType": "Nano IPS",
+          "hdrSupport": "DisplayHDR 600"
+        },
+        "price": 899.99,
+        "salePrice": 849.99,
+        "inventory": 15,
+        "isActive": true
+      }
+    ],
+    "images": [
+      {
+        "imageUrl": "/images/products/lg-ultragear-1.jpg",
+        "isMain": true,
+        "alt": "LG UltraGear 27GN950 front view"
+      },
+      {
+        "imageUrl": "/images/products/lg-ultragear-2.jpg",
+        "isMain": false,
+        "alt": "LG UltraGear 27GN950 side view"
+      }
+    ]
+  },
+  {
+    "name": "Intel Core i9-12900K",
+    "brand": "Intel",
+    "description": "The Intel Core i9-12900K is Intel's flagship 12th Generation desktop processor. Featuring a hybrid architecture with 8 Performance cores and 8 Efficient cores, it offers incredible multi-threaded performance for demanding workloads while maintaining high single-thread performance for gaming. With a maximum turbo frequency of 5.2 GHz, support for DDR5 memory, and PCIe 5.0, it's designed for enthusiasts and power users.",
+    "shortDescription": "Intel's flagship 12th Gen desktop processor with 16 cores and 24 threads",
+    "basePrice": 589.99,
+    "isActive": true,
+    "isNewProduct": true,
+    "isBestSeller": true,
+    "isFeatured": false,
+    "categoryNames": ["Processors"],
+    "tags": ["cpu", "intel", "12th gen", "desktop", "high-performance"],
+    "variants": [
+      {
+        "name": "Processor Only",
+        "sku": "INT-I9-12900K",
+        "attributes": {
+          "cores": "16 (8P+8E)",
+          "threads": "24",
+          "baseFrequency": "3.2 GHz (P-cores), 2.4 GHz (E-cores)",
+          "maxTurbo": "5.2 GHz",
+          "socket": "LGA 1700",
+          "tdp": "125W"
+        },
+        "price": 589.99,
+        "salePrice": null,
+        "inventory": 25,
+        "isActive": true
+      },
+      {
+        "name": "With CPU Cooler",
+        "sku": "INT-I9-12900K-CLR",
+        "attributes": {
+          "cores": "16 (8P+8E)",
+          "threads": "24",
+          "baseFrequency": "3.2 GHz (P-cores), 2.4 GHz (E-cores)",
+          "maxTurbo": "5.2 GHz",
+          "socket": "LGA 1700",
+          "tdp": "125W",
+          "cooler": "Premium RGB Liquid Cooler"
+        },
+        "price": 689.99,
+        "salePrice": 649.99,
+        "inventory": 15,
+        "isActive": true
+      }
+    ],
+    "images": [
+      {
+        "imageUrl": "/images/products/intel-i9-12900k-1.jpg",
+        "isMain": true,
+        "alt": "Intel Core i9-12900K processor"
+      },
+      {
+        "imageUrl": "/images/products/intel-i9-12900k-2.jpg",
+        "isMain": false,
+        "alt": "Intel Core i9-12900K in package"
+      }
+    ]
+  },
+  {
+    "name": "NVIDIA GeForce RTX 3080",
+    "brand": "NVIDIA",
+    "description": "The NVIDIA GeForce RTX 3080 represents a significant leap in graphics processing technology. Built on the Ampere architecture, it delivers exceptional performance for gaming and creative workloads. With 10GB of GDDR6X memory, 8704 CUDA cores, and 2nd generation Ray Tracing cores, it enables realistic lighting and effects in supported games. The card also features DLSS technology powered by Tensor cores for AI-enhanced performance.",
+    "shortDescription": "High-performance graphics card with ray tracing and AI capabilities",
+    "basePrice": 699.99,
+    "isActive": true,
+    "isNewProduct": false,
+    "isBestSeller": true,
+    "isFeatured": true,
+    "categoryNames": ["Graphics Cards"],
+    "tags": ["gpu", "nvidia", "rtx", "gaming", "ray tracing", "ampere"],
+    "variants": [
+      {
+        "name": "Founders Edition",
+        "sku": "NV-RTX3080-FE",
+        "attributes": {
+          "memory": "10GB GDDR6X",
+          "cudaCores": "8704",
+          "boostClock": "1.71 GHz",
+          "memorySpeed": "19 Gbps",
+          "memoryInterface": "320-bit",
+          "tdp": "320W"
+        },
+        "price": 699.99,
+        "salePrice": null,
+        "inventory": 10,
+        "isActive": true
+      },
+      {
+        "name": "ASUS ROG STRIX OC",
+        "sku": "NV-RTX3080-STRIX",
+        "attributes": {
+          "memory": "10GB GDDR6X",
+          "cudaCores": "8704",
+          "boostClock": "1.94 GHz (OC Mode)",
+          "memorySpeed": "19 Gbps",
+          "memoryInterface": "320-bit",
+          "tdp": "350W"
+        },
+        "price": 849.99,
+        "salePrice": 799.99,
+        "inventory": 5,
+        "isActive": true
+      }
+    ],
+    "images": [
+      {
+        "imageUrl": "/images/products/rtx-3080-1.jpg",
+        "isMain": true,
+        "alt": "NVIDIA GeForce RTX 3080 Founders Edition"
+      },
+      {
+        "imageUrl": "/images/products/rtx-3080-2.jpg",
+        "isMain": false,
+        "alt": "NVIDIA GeForce RTX 3080 angle view"
+      }
+    ]
   }
 ]
