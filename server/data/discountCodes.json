@@ -9,7 +9,7 @@
     "isActive": true
   },
   {
-    "code": "SAVE20",
+    "code": "SAV20",
     "discountType": "percentage",
     "discountValue": 20,
     "usageLimit": 5,
@@ -18,7 +18,7 @@
     "isActive": true
   },
   {
-    "code": "FIX50K",
+    "code": "FIX50",
     "discountType": "fixed",
     "discountValue": 50000,
     "usageLimit": 10,
@@ -36,7 +36,7 @@
     "isActive": true
   },
   {
-    "code": "WELCOM",
+    "code": "WELCM",
     "discountType": "percentage",
     "discountValue": 15,
     "usageLimit": 10,
