@@ -28,7 +28,7 @@ export const getUserProfile = async (req, res, next) => {
  */
 export const updateUserProfile = async (req, res, next) => {
   try {
-    const { fullName, email } = req.body;
+    const { fullName } = req.body;
 
     // Find the user
     const user = await User.findById(req.user._id);
@@ -37,16 +37,12 @@ export const updateUserProfile = async (req, res, next) => {
       throw new ApiError("User not found", 404);
     }
 
-    // Update fields
+    // Update fullName field
     if (fullName) user.fullName = fullName;
 
-    // Handle email update (check if new email is not already in use)
-    if (email && email !== user.email) {
-      const existingUserWithEmail = await User.findOne({ email });
-      if (existingUserWithEmail) {
-        throw new ApiError("Email is already in use", 400);
-      }
-      user.email = email;
+    // Email update is not allowed
+    if (req.body.email && req.body.email !== user.email) {
+      return res.error("Email updates are not permitted", 403);
     }
 
     await user.save();
