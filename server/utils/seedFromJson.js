@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -13,7 +12,6 @@ import DiscountCode from "../models/discountCode.model.js";
 import Order from "../models/order.model.js";
 import OrderStatus from "../models/orderStatus.model.js";
 import Cart from "../models/cart.model.js";
-import { hash } from "bcryptjs";
 
 // Get __dirname equivalent in ES modules
 const __filename = fileURLToPath(import.meta.url);
