@@ -60,20 +60,17 @@ const seedUsers = async () => {
       continue;
     }
 
-    // Hash the password
-    const passwordHash = await hash(userData.password, 10);
-
-    // Create new user
+    // Create new user - NOTE: Set the passwordHash field, not password
     const user = new User({
       email: userData.email,
       fullName: userData.fullName,
-      passwordHash,
+      passwordHash: userData.password, // This will trigger the pre-save hook
       role: userData.role || "customer",
       status: userData.status || "active",
       loyaltyPoints: userData.loyaltyPoints || 0,
     });
 
-    await user.save();
+    await user.save(); // The pre-save hook will hash the password
     createdUsers[userData.email] = user;
     console.log(`User ${userData.email} created successfully`);
   }

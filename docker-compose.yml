@@ -16,6 +16,8 @@ services:
       - SEED_DATABASE=true
     ports:
       - "3000:3000"
+    env_file:
+      - ./.env
     depends_on:
       mongo:
         condition: service_healthy
