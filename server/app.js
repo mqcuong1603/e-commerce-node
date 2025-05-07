@@ -1,62 +1,43 @@
 import express from "express";
+import mongoose from "mongoose";
+import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
+import passport from "passport";
+import session from "express-session";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import dotenv from "dotenv";
 
 // Import route files
 import authRoutes from "./routes/auth.routes.js";
-// import userRoutes from "./routes/user.routes.js";
 import productRoutes from "./routes/product.routes.js";
 import categoryRoutes from "./routes/category.routes.js";
 import cartRoutes from "./routes/cart.routes.js";
+import reviewRoutes from "./routes/review.routes.js";
+// import userRoutes from "./routes/user.routes.js";
 // import orderRoutes from "./routes/order.routes.js";
-// import reviewRoutes from "./routes/review.routes.js";
 // import discountRoutes from "./routes/discount.routes.js";
 // import adminRoutes from "./routes/admin.routes.js";
 
-// Import middleware and configurations
-import { errorHandler } from "./middleware/response.middleware.js";
+// Import middleware
 import {
-  configureMiddleware,
-  configureErrorHandlers,
-} from "./middleware/config.middleware.js";
-import { configureSocketIO } from "./middleware/socket.middleware.js";
+  responseMiddleware,
+  errorHandler,
+} from "./middleware/response.middleware.js";
 import {
-  connectDatabase,
-  getDatabaseStatus,
-  closeDatabase,
-} from "./config/database.config.js";
+  authMiddleware,
+  adminMiddleware,
+} from "./middleware/auth.middleware.js";
 
 // Import passport configuration
 import "./config/passport.config.js";
 
-// Import database seeding function and verification
-import seedDatabase from "./utils/seedData.js";
-import verifySetup from "./utils/verifySetup.js";
+// Import database seeding function
+import seedDatabaseFromJson from "./utils/seedFromJson.js";
 
 // Configure dotenv
 dotenv.config();
-
-// Create a config object for centralized configuration
-const config = {
-  port: process.env.PORT || 3000,
-  clientUrl: process.env.CLIENT_URL || "http://localhost:3000",
-  dbUri:
-    process.env.MONGODB_URI ||
-    "mongodb://admin:password123@mongo:27017/ecommerce?authSource=admin",
-  sessionSecret: process.env.SESSION_SECRET || "your-secret-key",
-  nodeEnv: process.env.NODE_ENV || "development",
-};
-
-// Set up simple structured logging
-const logger = {
-  info: (message) =>
-    console.log(`[INFO] ${new Date().toISOString()} - ${message}`),
-  error: (message, error) =>
-    console.error(`[ERROR] ${new Date().toISOString()} - ${message}`, error),
-};
 
 // Get __dirname equivalent in ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -67,97 +48,159 @@ const app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: {
-    origin: config.clientUrl,
+    origin: process.env.CLIENT_URL || "http://localhost:3000",
     methods: ["GET", "POST"],
     credentials: true,
   },
 });
 
-// Configure all middleware from the separate file
-configureMiddleware(app, config, logger);
-
-// Serve static files
+// Configure middleware
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL || "http://localhost:3000",
+    credentials: true,
+  })
+);
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(responseMiddleware);
 
-// Configure Socket.io
-configureSocketIO(io, logger);
+// Session configuration
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET || "your-secret-key",
+    resave: false,
+    saveUninitialized: false, // Changed to false for better security
+    cookie: {
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+      sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // Important for cross-site cookies in production
+    },
+  })
+);
 
-// Register all API routes
+// Initialize passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Database connection
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(async () => {
+    console.log("MongoDB connected successfully");
+
+    // Seed database with initial data if needed
+    // Only seed in development or if explicitly enabled
+    // This allows you to control seeding in production
+    if (
+      process.env.NODE_ENV !== "production" ||
+      process.env.SEED_DATABASE === "true"
+    ) {
+      try {
+        await seedDatabaseFromJson();
+      } catch (error) {
+        console.error("Error seeding database:", error);
+      }
+    }
+  })
+  .catch((err) => console.error("MongoDB connection error:", err));
+
+// API routes
 app.use("/api/auth", authRoutes);
-// app.use("/api/users", userRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/categories", categoryRoutes);
 app.use("/api/cart", cartRoutes);
+app.use("/api/reviews", reviewRoutes);
+// Future routes to uncomment as you develop them:
+// app.use("/api/users", userRoutes);
 // app.use("/api/orders", orderRoutes);
-// app.use("/api/reviews", reviewRoutes);
 // app.use("/api/discounts", discountRoutes);
 // app.use("/api/admin", authMiddleware, adminMiddleware, adminRoutes);
 
-// Enhanced Health check endpoint
+// Health check endpoint
 app.get("/health", (req, res) => {
-  const dbStatus = getDatabaseStatus();
+  const dbStatus =
+    mongoose.connection.readyState === 1 ? "connected" : "disconnected";
 
   res.status(200).json({
     status: "ok",
     message: "Server is running",
-    timestamp: new Date().toISOString(),
-    environment: config.nodeEnv,
     database: dbStatus,
+    environment: process.env.NODE_ENV || "development",
+    timestamp: new Date().toISOString(),
   });
 });
 
-// Configure error handlers from the separate file
-configureErrorHandlers(app, errorHandler);
+// Socket.io setup for real-time features
+io.on("connection", (socket) => {
+  console.log("User connected:", socket.id);
 
-// Initialize the application
-const initializeApp = async () => {
-  try {
-    // Connect to database
-    await connectDatabase(config, logger, seedDatabase, verifySetup);
+  // Handle product reviews in real-time
+  socket.on("new_review", (data) => {
+    socket.broadcast.emit("review_update", data);
+  });
 
-    // Start the server
-    const server = httpServer.listen(config.port, () => {
-      logger.info(`Server running on port ${config.port}`);
-      logger.info(`Environment: ${config.nodeEnv}`);
-    });
+  // Handle real-time cart updates
+  socket.on("cart_update", (data) => {
+    socket.broadcast.emit("cart_changed", data);
+  });
 
-    // Graceful shutdown handlers
-    process.on("SIGTERM", async () => {
-      logger.info("SIGTERM signal received: closing HTTP server");
-      server.close(async () => {
-        logger.info("HTTP server closed");
-        await closeDatabase(logger);
+  socket.on("disconnect", () => {
+    console.log("User disconnected:", socket.id);
+  });
+});
+
+// Error handling middleware (should be last)
+app.use(errorHandler);
+
+// Handle 404
+app.use((req, res) => {
+  res.status(404).json({ message: "Route not found" });
+});
+
+// Graceful shutdown handling
+process.on("SIGTERM", () => {
+  console.log(
+    "SIGTERM signal received. Closing HTTP server and database connection."
+  );
+  httpServer.close(() => {
+    console.log("HTTP server closed");
+    mongoose.connection
+      .close(false)
+      .then(() => {
+        console.log("MongoDB connection closed");
         process.exit(0);
+      })
+      .catch((err) => {
+        console.error("Error closing MongoDB connection:", err);
+        process.exit(1);
       });
-    });
+  });
+});
 
-    process.on("SIGINT", async () => {
-      logger.info("SIGINT signal received: closing HTTP server");
-      server.close(async () => {
-        logger.info("HTTP server closed");
-        await closeDatabase(logger);
+// Also handle SIGINT (Ctrl+C)
+process.on("SIGINT", () => {
+  console.log(
+    "SIGINT signal received. Closing HTTP server and database connection."
+  );
+  httpServer.close(() => {
+    console.log("HTTP server closed");
+    mongoose.connection
+      .close(false)
+      .then(() => {
+        console.log("MongoDB connection closed");
         process.exit(0);
+      })
+      .catch((err) => {
+        console.error("Error closing MongoDB connection:", err);
+        process.exit(1);
       });
-    });
+  });
+});
 
-    // Unhandled promise rejections
-    process.on("unhandledRejection", (reason, promise) => {
-      logger.error("Unhandled Rejection at:", promise);
-      logger.error("Reason:", reason);
-      // Application continues running but logs the error
-    });
-
-    return server;
-  } catch (error) {
-    logger.error("Failed to initialize application", error);
-    process.exit(1);
-  }
-};
-
-// Initialize the app if this file is run directly (not imported)
-if (import.meta.url === `file://${process.argv[1]}`) {
-  initializeApp();
-}
-8;
-// For testing purposes
-export default app;
+const PORT = process.env.PORT || 3000;
+httpServer.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log(`Environment: ${process.env.NODE_ENV || "development"}`);
+});

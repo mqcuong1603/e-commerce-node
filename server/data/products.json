@@ -1,0 +1,180 @@
+[
+  {
+    "name": "Dell XPS 13",
+    "brand": "Dell",
+    "description": "The Dell XPS 13 is a premium ultrabook with an InfinityEdge display that maximizes screen space. Featuring a 13.4-inch 4K display with minimal bezels, it delivers stunning visuals for both work and entertainment. Powered by Intel's latest Core processors and up to 32GB of RAM, this ultrabook handles multitasking with ease.",
+    "shortDescription": "Premium ultrabook with InfinityEdge display and all-day battery life",
+    "basePrice": 1299.99,
+    "isActive": true,
+    "isNewProduct": true,
+    "isBestSeller": true,
+    "isFeatured": true,
+    "categoryNames": ["Ultrabooks", "Laptops"],
+    "tags": ["ultrabook", "premium", "dell", "infinity edge", "lightweight"],
+    "variants": [
+      {
+        "name": "Core i5 / 8GB / 256GB",
+        "sku": "XPS13-I5-8-256",
+        "attributes": {
+          "processor": "Intel Core i5-1135G7",
+          "memory": "8GB LPDDR4X",
+          "storage": "256GB PCIe NVMe SSD",
+          "display": "13.4\" FHD+ (1920 x 1200)",
+          "color": "Platinum Silver"
+        },
+        "price": 1299.99,
+        "salePrice": 1199.99,
+        "inventory": 35,
+        "isActive": true
+      },
+      {
+        "name": "Core i7 / 16GB / 512GB",
+        "sku": "XPS13-I7-16-512",
+        "attributes": {
+          "processor": "Intel Core i7-1185G7",
+          "memory": "16GB LPDDR4X",
+          "storage": "512GB PCIe NVMe SSD",
+          "display": "13.4\" 4K UHD+ (3840 x 2400) Touch",
+          "color": "Platinum Silver"
+        },
+        "price": 1799.99,
+        "salePrice": null,
+        "inventory": 25,
+        "isActive": true
+      }
+    ],
+    "images": [
+      {
+        "imageUrl": "/images/products/dell-xps13-1.jpg",
+        "isMain": true,
+        "alt": "Dell XPS 13 front view"
+      },
+      {
+        "imageUrl": "/images/products/dell-xps13-2.jpg",
+        "isMain": false,
+        "alt": "Dell XPS 13 side view"
+      },
+      {
+        "imageUrl": "/images/products/dell-xps13-3.jpg",
+        "isMain": false,
+        "alt": "Dell XPS 13 keyboard view"
+      }
+    ]
+  },
+  {
+    "name": "ASUS ROG Zephyrus G15",
+    "brand": "ASUS",
+    "description": "The ASUS ROG Zephyrus G15 represents the pinnacle of gaming laptop engineering, combining raw power with surprising portability. At just 4.2 pounds and 0.8 inches thin, it houses AMD's Ryzen 9 processor and NVIDIA GeForce RTX graphics in a sleek magnesium-alloy chassis.",
+    "shortDescription": "Premium gaming laptop with Ryzen 9 processor and RTX graphics in a portable form factor",
+    "basePrice": 1799.99,
+    "isActive": true,
+    "isNewProduct": true,
+    "isBestSeller": true,
+    "isFeatured": true,
+    "categoryNames": ["Gaming Laptops", "Laptops"],
+    "tags": ["gaming", "laptop", "asus", "rog", "rtx", "ryzen"],
+    "variants": [
+      {
+        "name": "RTX 3070 / 16GB / 1TB",
+        "sku": "ROG-ZEPH-G15-3070",
+        "attributes": {
+          "processor": "AMD Ryzen 9 5900HS",
+          "memory": "16GB DDR4 3200MHz",
+          "storage": "1TB NVMe SSD",
+          "display": "15.6\" QHD 165Hz",
+          "graphics": "NVIDIA GeForce RTX 3070 8GB"
+        },
+        "price": 1799.99,
+        "salePrice": 1699.99,
+        "inventory": 20,
+        "isActive": true
+      },
+      {
+        "name": "RTX 3080 / 32GB / 1TB",
+        "sku": "ROG-ZEPH-G15-3080",
+        "attributes": {
+          "processor": "AMD Ryzen 9 5900HS",
+          "memory": "32GB DDR4 3200MHz",
+          "storage": "1TB NVMe SSD",
+          "display": "15.6\" QHD 165Hz",
+          "graphics": "NVIDIA GeForce RTX 3080 8GB"
+        },
+        "price": 2199.99,
+        "salePrice": null,
+        "inventory": 15,
+        "isActive": true
+      }
+    ],
+    "images": [
+      {
+        "imageUrl": "/images/products/rog-zephyrus-1.jpg",
+        "isMain": true,
+        "alt": "ASUS ROG Zephyrus G15 front view"
+      },
+      {
+        "imageUrl": "/images/products/rog-zephyrus-2.jpg",
+        "isMain": false,
+        "alt": "ASUS ROG Zephyrus G15 open view"
+      }
+    ]
+  },
+  {
+    "name": "Samsung 980 PRO",
+    "brand": "Samsung",
+    "description": "The Samsung 980 PRO represents the pinnacle of NVMe SSD technology, leveraging PCIe 4.0 to deliver sequential read speeds up to 7,000 MB/s and write speeds up to 5,000 MB/s - nearly twice as fast as PCIe 3.0 SSDs. As Samsung's fastest consumer SSD, it features V-NAND technology and a proprietary Elpis controller optimized for speed and efficiency.",
+    "shortDescription": "High-performance PCIe 4.0 NVMe SSD with speeds up to 7,000 MB/s",
+    "basePrice": 229.99,
+    "isActive": true,
+    "isNewProduct": true,
+    "isBestSeller": true,
+    "isFeatured": true,
+    "categoryNames": ["Internal SSD", "Storage"],
+    "tags": ["storage", "ssd", "nvme", "samsung", "pcie4", "m.2"],
+    "variants": [
+      {
+        "name": "500GB",
+        "sku": "SM-980PRO-500",
+        "attributes": {
+          "capacity": "500GB",
+          "interface": "PCIe 4.0 x4, NVMe 1.3c",
+          "readSpeed": "6,900 MB/s",
+          "writeSpeed": "5,000 MB/s",
+          "formFactor": "M.2 2280",
+          "tbw": "300 TB"
+        },
+        "price": 229.99,
+        "salePrice": 199.99,
+        "inventory": 35,
+        "isActive": true
+      },
+      {
+        "name": "1TB",
+        "sku": "SM-980PRO-1TB",
+        "attributes": {
+          "capacity": "1TB",
+          "interface": "PCIe 4.0 x4, NVMe 1.3c",
+          "readSpeed": "7,000 MB/s",
+          "writeSpeed": "5,000 MB/s",
+          "formFactor": "M.2 2280",
+          "tbw": "600 TB"
+        },
+        "price": 399.99,
+        "salePrice": 349.99,
+        "inventory": 30,
+        "isActive": true
+      }
+    ],
+    "images": [
+      {
+        "imageUrl": "/images/products/samsung-980pro-1.jpg",
+        "isMain": true,
+        "alt": "Samsung 980 PRO front view"
+      },
+      {
+        "imageUrl": "/images/products/samsung-980pro-2.jpg",
+        "isMain": false,
+        "alt": "Samsung 980 PRO angle view"
+      }
+    ]
+  }
+]
