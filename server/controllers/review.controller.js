@@ -53,8 +53,22 @@ export const addProductReview = async (req, res, next) => {
   try {
     const { productId } = req.params;
     const { rating, comment } = req.body;
+
+    // If authenticated, use user info from req.user
+    // If guest, require userName in the body
     const userId = req.user ? req.user._id : null;
-    const userName = req.user ? req.user.fullName : req.body.userName;
+    let userName;
+
+    if (userId) {
+      // For authenticated users, always use the name from their profile
+      userName = req.user.fullName;
+    } else {
+      // For guests, require userName in request
+      userName = req.body.userName;
+      if (!userName) {
+        throw new ApiError("User name is required for guest reviews", 400);
+      }
+    }
 
     // Validate inputs
     if (!productId) {
@@ -63,10 +77,6 @@ export const addProductReview = async (req, res, next) => {
 
     if (!rating || rating < 1 || rating > 5) {
       throw new ApiError("Rating must be between 1 and 5", 400);
-    }
-
-    if (!userName) {
-      throw new ApiError("User name is required", 400);
     }
 
     // Check if product exists
@@ -83,28 +93,24 @@ export const addProductReview = async (req, res, next) => {
       }
 
       // Optionally: Check if user has purchased the product
-      // For verified purchase badge
       const hasPurchased = await Order.exists({
         userId,
         "items.productId": productId,
-        "status.status": "delivered", // assuming you have a status field in orders
+        "status.status": "delivered",
       });
 
-      // Create new review
+      // Create new review with user ID
       const review = new Review({
         productId,
         userId,
-        userName,
+        userName, // Use the name from the user's profile
         rating,
         comment,
         isVerifiedPurchase: hasPurchased ? true : false,
       });
 
       await review.save();
-
-      // Update product's average rating
       await product.updateRating();
-
       return res.success(review, "Review added successfully");
     } else {
       // Guest review (no user ID)
@@ -117,10 +123,7 @@ export const addProductReview = async (req, res, next) => {
       });
 
       await review.save();
-
-      // Update product's average rating
       await product.updateRating();
-
       return res.success(review, "Review added successfully");
     }
   } catch (error) {
