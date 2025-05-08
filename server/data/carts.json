@@ -1,0 +1,32 @@
+[
+  {
+    "userEmail": "guest@example.com",
+    "sessionId": "session-123456789",
+    "items": [
+      {
+        "productName": "Samsung 980 PRO",
+        "variantName": "500GB",
+        "productVariantId": "SM-980PRO-500",
+        "quantity": 1,
+        "price": 199.99
+      }
+    ],
+    "createdAt": "2024-05-05T10:15:00.000Z",
+    "updatedAt": "2024-05-05T10:15:00.000Z",
+    "expiresAt": "2024-06-04T10:15:00.000Z"
+  },
+  {
+    "userEmail": "emily.wilson@example.com",
+    "items": [
+      {
+        "productName": "NVIDIA GeForce RTX 3080",
+        "variantName": "Founders Edition",
+        "productVariantId": "NV-RTX3080-FE",
+        "quantity": 1,
+        "price": 699.99
+      }
+    ],
+    "createdAt": "2024-05-04T15:30:00.000Z",
+    "updatedAt": "2024-05-04T16:45:00.000Z"
+  }
+]

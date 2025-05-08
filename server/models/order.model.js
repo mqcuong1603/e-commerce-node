@@ -164,8 +164,7 @@ OrderSchema.pre("save", function (next) {
   next();
 });
 
-// Index for faster queries
-OrderSchema.index({ orderNumber: 1 });
+// Index for faster queries (removed duplicate orderNumber index)
 OrderSchema.index({ userId: 1 });
 OrderSchema.index({ createdAt: -1 });
 
@@ -191,6 +190,5 @@ OrderSchema.virtual("statusHistory", {
   foreignField: "orderId",
   options: { sort: { createdAt: -1 } },
 });
-8;
 
 export default model("Order", OrderSchema);

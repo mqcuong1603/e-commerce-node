@@ -54,9 +54,6 @@ const DiscountCodeSchema = new Schema(
   }
 );
 
-// Index for faster queries
-DiscountCodeSchema.index({ code: 1 });
-
 // Virtual for remaining uses
 DiscountCodeSchema.virtual("remainingUses").get(function () {
   return Math.max(0, this.usageLimit - this.usedCount);

@@ -369,6 +369,224 @@ class EmailService {
       return { success: false, error: error.message };
     }
   }
+
+  /**
+   * Send order confirmation email
+   * @param {Object} order - Order details
+   * @returns {Promise<Object>} Send result
+   */
+  async sendOrderConfirmationEmail(order) {
+    const mailOptions = {
+      from: `"Computer Store" <${
+        process.env.EMAIL_FROM || "noreply@example.com"
+      }>`,
+      to: order.email,
+      subject: `Order Confirmation #${order.orderNumber}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 5px;">
+          <h2 style="color: #333; text-align: center;">Order Confirmation</h2>
+          <p>Hello ${order.fullName},</p>
+          <p>Thank you for your order. We are pleased to confirm that your order has been received and is being processed.</p>
+          <div style="background-color: #f8f8f8; padding: 15px; border-radius: 5px; margin: 20px 0;">
+            <p style="margin: 5px 0;"><strong>Order Number:</strong> ${
+              order.orderNumber
+            }</p>
+            <p style="margin: 5px 0;"><strong>Order Date:</strong> ${new Date(
+              order.createdAt
+            ).toLocaleDateString()}</p>
+            <p style="margin: 5px 0;"><strong>Total Amount:</strong> $${order.total.toFixed(
+              2
+            )}</p>
+          </div>
+          <h3 style="margin-top: 30px;">Order Details</h3>
+          <table style="width: 100%; border-collapse: collapse;">
+            <thead>
+              <tr style="background-color: #f2f2f2;">
+                <th style="padding: 10px; text-align: left; border-bottom: 1px solid #ddd;">Product</th>
+                <th style="padding: 10px; text-align: right; border-bottom: 1px solid #ddd;">Quantity</th>
+                <th style="padding: 10px; text-align: right; border-bottom: 1px solid #ddd;">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${order.items
+                .map(
+                  (item) => `
+                <tr>
+                  <td style="padding: 10px; border-bottom: 1px solid #ddd;">${
+                    item.productName
+                  } - ${item.variantName}</td>
+                  <td style="padding: 10px; text-align: right; border-bottom: 1px solid #ddd;">${
+                    item.quantity
+                  }</td>
+                  <td style="padding: 10px; text-align: right; border-bottom: 1px solid #ddd;">$${item.price.toFixed(
+                    2
+                  )}</td>
+                </tr>
+              `
+                )
+                .join("")}
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="2" style="padding: 10px; text-align: right;"><strong>Subtotal:</strong></td>
+                <td style="padding: 10px; text-align: right;">$${order.subtotal.toFixed(
+                  2
+                )}</td>
+              </tr>
+              <tr>
+                <td colspan="2" style="padding: 10px; text-align: right;"><strong>Shipping:</strong></td>
+                <td style="padding: 10px; text-align: right;">$${order.shippingFee.toFixed(
+                  2
+                )}</td>
+              </tr>
+              ${
+                order.discountAmount > 0
+                  ? `
+                <tr>
+                  <td colspan="2" style="padding: 10px; text-align: right;"><strong>Discount:</strong></td>
+                  <td style="padding: 10px; text-align: right;">-$${order.discountAmount.toFixed(
+                    2
+                  )}</td>
+                </tr>
+              `
+                  : ""
+              }
+              <tr>
+                <td colspan="2" style="padding: 10px; text-align: right;"><strong>Total:</strong></td>
+                <td style="padding: 10px; text-align: right; font-weight: bold;">$${order.total.toFixed(
+                  2
+                )}</td>
+              </tr>
+            </tfoot>
+          </table>
+          <div style="margin-top: 30px;">
+            <h3>Shipping Address</h3>
+            <p>${order.shippingAddress.fullName}<br>
+            ${order.shippingAddress.addressLine1}<br>
+            ${
+              order.shippingAddress.addressLine2
+                ? order.shippingAddress.addressLine2 + "<br>"
+                : ""
+            }
+            ${order.shippingAddress.city}, ${order.shippingAddress.state} ${
+        order.shippingAddress.postalCode
+      }<br>
+            ${order.shippingAddress.country}</p>
+          </div>
+          <div style="text-align: center; margin-top: 30px;">
+            <a href="${
+              process.env.CLIENT_URL || "http://localhost:3000"
+            }/orders/${
+        order._id
+      }" style="background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">View Your Order</a>
+          </div>
+          <p style="margin-top: 30px; font-size: 12px; color: #999; text-align: center;">
+            Thank you for shopping with us!
+          </p>
+        </div>
+      `,
+    };
+
+    try {
+      const info = await this.transporter.sendMail(mailOptions);
+      console.log("Order confirmation email sent: %s", info.messageId);
+      return { success: true, messageId: info.messageId };
+    } catch (error) {
+      console.error("Error sending order confirmation email:", error);
+      return { success: false, error: error.message };
+    }
+  }
+
+  /**
+   * Send order status update email
+   * @param {Object} options - Email options
+   * @param {string} options.email - Recipient email
+   * @param {string} options.orderNumber - Order number
+   * @param {string} options.status - New order status
+   * @param {string} options.fullName - Recipient name
+   * @returns {Promise<Object>} Send result
+   */
+  async sendOrderStatusUpdate({ email, orderNumber, status, fullName }) {
+    // Create status-specific messaging
+    let statusTitle = "Order Status Update";
+    let statusMessage = "Your order status has been updated.";
+    let statusColor = "#4CAF50"; // Default green
+
+    switch (status) {
+      case "confirmed":
+        statusTitle = "Order Confirmed";
+        statusMessage =
+          "Great news! Your order has been confirmed and is now being processed. We'll let you know once it ships.";
+        statusColor = "#4CAF50"; // Green
+        break;
+      case "processing":
+        statusTitle = "Order Processing";
+        statusMessage =
+          "Your order is now being processed. We're getting your items ready for shipment.";
+        statusColor = "#2196F3"; // Blue
+        break;
+      case "shipping":
+        statusTitle = "Order Shipped";
+        statusMessage =
+          "Your order is on the way! It has been shipped and is now on its way to you.";
+        statusColor = "#FF9800"; // Orange
+        break;
+      case "delivered":
+        statusTitle = "Order Delivered";
+        statusMessage =
+          "Your order has been delivered! We hope you enjoy your purchase.";
+        statusColor = "#4CAF50"; // Green
+        break;
+      case "cancelled":
+        statusTitle = "Order Cancelled";
+        statusMessage =
+          "Your order has been cancelled. If you did not request this cancellation, please contact our customer support.";
+        statusColor = "#F44336"; // Red
+        break;
+    }
+
+    const mailOptions = {
+      from: `"Computer Store" <${
+        process.env.EMAIL_FROM || "noreply@example.com"
+      }>`,
+      to: email,
+      subject: `${statusTitle} - Order #${orderNumber}`,
+      html: `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee; border-radius: 5px;">
+          <h2 style="color: ${statusColor}; text-align: center;">${statusTitle}</h2>
+          <p>Hello ${fullName},</p>
+          <p>${statusMessage}</p>
+          <div style="background-color: #f8f8f8; padding: 15px; border-radius: 5px; margin: 20px 0;">
+            <p style="margin: 5px 0;"><strong>Order Number:</strong> ${orderNumber}</p>
+            <p style="margin: 5px 0;"><strong>Status:</strong> <span style="color: ${statusColor}; font-weight: bold;">${
+        status.charAt(0).toUpperCase() + status.slice(1)
+      }</span></p>
+            <p style="margin: 5px 0;"><strong>Updated:</strong> ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}</p>
+          </div>
+          <div style="text-align: center; margin-top: 30px;">
+            <a href="${
+              process.env.CLIENT_URL || "http://localhost:3000"
+            }/orders/${orderNumber}" 
+               style="background-color: ${statusColor}; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">
+              View Order Details
+            </a>
+          </div>
+          <p style="margin-top: 30px; font-size: 12px; color: #999; text-align: center;">
+            Thank you for shopping with us!
+          </p>
+        </div>
+      `,
+    };
+
+    try {
+      const info = await this.transporter.sendMail(mailOptions);
+      console.log(`Order status update email sent: ${info.messageId}`);
+      return { success: true, messageId: info.messageId };
+    } catch (error) {
+      console.error("Error sending order status update email:", error);
+      return { success: false, error: error.message };
+    }
+  }
 }
 
 // Create and export a singleton instance

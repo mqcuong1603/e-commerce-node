@@ -2,8 +2,8 @@ services:
   # Backend service
   server:
     build:
-      context: ./server
-      dockerfile: ../docker/Dockerfile.server
+      context: .
+      dockerfile: docker/Dockerfile.server
     container_name: ecommerce-server
     restart: always
     environment:
@@ -13,18 +13,41 @@ services:
       - JWT_SECRET=your_jwt_secret_key
       - SESSION_SECRET=your_session_secret_key
       - CLIENT_URL=http://localhost:8080
+      - SEED_DATABASE=true
     ports:
       - "3000:3000"
+    env_file:
+      - ./.env
     depends_on:
       mongo:
         condition: service_healthy
-    env_file:
-      - ./.env
     volumes:
       - ./server:/app
-      - ./.env:/app/.env
+      - /app/node_modules
     networks:
       - app-network
+
+  # Frontend service
+  # client:
+  #   build:
+  #     context: .
+  #     dockerfile: docker/Dockerfile.client
+  #   container_name: ecommerce-client
+  #   restart: always
+  #   ports:
+  #     - "8080:80"
+  #   environment:
+  #     - REACT_APP_API_URL=http://localhost:3000
+  #     - REACT_APP_SOCKET_URL=http://localhost:3000
+  #     - REACT_APP_NODE_ENV=development
+  #   depends_on:
+  #     - server
+  #   volumes:
+  #     - ./client:/app
+  #     - /app/node_modules
+  #     - /app/build
+  #   networks:
+  #     - app-network
 
   # MongoDB service
   mongo:
@@ -36,6 +59,7 @@ services:
     environment:
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=password123
+      - MONGO_INITDB_DATABASE=ecommerce
     volumes:
       - mongo-data:/data/db
     networks:
