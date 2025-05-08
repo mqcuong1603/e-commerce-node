@@ -46,5 +46,37 @@
     "role": "customer",
     "status": "active",
     "loyaltyPoints": 300
+  },
+  {
+    "email": "jennifer.park@example.com",
+    "fullName": "Jennifer Park",
+    "password": "Password123!",
+    "role": "customer",
+    "status": "active",
+    "loyaltyPoints": 180
+  },
+  {
+    "email": "robert.williams@example.com",
+    "fullName": "Robert Williams",
+    "password": "Password123!",
+    "role": "customer",
+    "status": "active",
+    "loyaltyPoints": 95
+  },
+  {
+    "email": "sophia.martinez@example.com",
+    "fullName": "Sophia Martinez",
+    "password": "Password123!",
+    "role": "customer",
+    "status": "active",
+    "loyaltyPoints": 250
+  },
+  {
+    "email": "james.brown@example.com",
+    "fullName": "James Brown",
+    "password": "Password123!",
+    "role": "customer",
+    "status": "inactive",
+    "loyaltyPoints": 50
   }
 ]

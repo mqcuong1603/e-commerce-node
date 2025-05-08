@@ -16,9 +16,9 @@ import categoryRoutes from "./routes/category.routes.js";
 import cartRoutes from "./routes/cart.routes.js";
 import reviewRoutes from "./routes/review.routes.js";
 import userRoutes from "./routes/user.routes.js";
-// import orderRoutes from "./routes/order.routes.js";
-// import discountRoutes from "./routes/discount.routes.js";
-// import adminRoutes from "./routes/admin.routes.js";
+import orderRoutes from "./routes/order.routes.js";
+import discountRoutes from "./routes/discount.routes.js";
+import adminOrderRoutes from "./routes/admin/order.routes.js";
 
 // Import middleware
 import {
@@ -113,9 +113,9 @@ app.use("/api/categories", categoryRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/reviews", reviewRoutes);
 app.use("/api/users", userRoutes);
-// app.use("/api/orders", orderRoutes);
-// app.use("/api/discounts", discountRoutes);
-// app.use("/api/admin", authMiddleware, adminMiddleware, adminRoutes);
+app.use("/api/orders", orderRoutes);
+app.use("/api/discounts", authMiddleware, adminMiddleware, discountRoutes);
+app.use("/api/admin/orders", adminOrderRoutes);
 
 // Health check endpoint
 app.get("/health", (req, res) => {

@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -9,7 +8,10 @@ import Product from "../models/product.model.js";
 import ProductVariant from "../models/productVariant.model.js";
 import ProductImage from "../models/productImage.model.js";
 import Review from "../models/review.model.js";
-import { hash } from "bcryptjs";
+import DiscountCode from "../models/discountCode.model.js";
+import Order from "../models/order.model.js";
+import OrderStatus from "../models/orderStatus.model.js";
+import Cart from "../models/cart.model.js";
 
 // Get __dirname equivalent in ES modules
 const __filename = fileURLToPath(import.meta.url);
@@ -24,9 +26,16 @@ const checkDataExists = async () => {
   const categoryCount = await Category.countDocuments();
   const productCount = await Product.countDocuments();
   const addressCount = await Address.countDocuments();
+  const discountCount = await DiscountCode.countDocuments();
+  const orderCount = await Order.countDocuments();
 
   return (
-    userCount > 0 && categoryCount > 0 && productCount > 0 && addressCount > 0
+    userCount > 0 &&
+    categoryCount > 0 &&
+    productCount > 0 &&
+    addressCount > 0 &&
+    discountCount > 0 &&
+    orderCount > 0
   );
 };
 
@@ -153,6 +162,7 @@ const seedProducts = async (categories) => {
   if (!productsData) return null;
 
   const createdProducts = {};
+  const createdVariants = {};
 
   for (const product of productsData) {
     // Map category names to IDs
@@ -179,6 +189,8 @@ const seedProducts = async (categories) => {
           productId: newProduct._id,
         });
         await newVariant.save();
+        // Store variant by SKU for orders
+        createdVariants[variant.sku] = newVariant;
       }
     }
 
@@ -195,7 +207,7 @@ const seedProducts = async (categories) => {
   }
 
   console.log("Products created successfully");
-  return createdProducts;
+  return { products: createdProducts, variants: createdVariants };
 };
 
 // Seed reviews
@@ -258,6 +270,219 @@ const seedReviews = async (products, users) => {
   console.log("Reviews created successfully");
 };
 
+// Seed discount codes
+const seedDiscountCodes = async (users) => {
+  console.log("Seeding discount codes...");
+
+  const discountCodesData = readJsonFile("discountCodes.json");
+  if (!discountCodesData) return null;
+
+  const createdDiscountCodes = {};
+
+  for (const discountData of discountCodesData) {
+    // Check if discount code already exists
+    const existingCode = await DiscountCode.findOne({
+      code: discountData.code,
+    });
+    if (existingCode) {
+      console.log(
+        `Discount code ${discountData.code} already exists, skipping...`
+      );
+      createdDiscountCodes[discountData.code] = existingCode;
+      continue;
+    }
+
+    // Map admin email to ID for created by
+    let createdBy = null;
+    if (discountData.createdByEmail && users[discountData.createdByEmail]) {
+      createdBy = users[discountData.createdByEmail]._id;
+    } else {
+      console.log(
+        `Admin user ${discountData.createdByEmail} not found for discount code ${discountData.code}`
+      );
+      // Try to find any admin user as a fallback
+      const adminUser = await User.findOne({ role: "admin" });
+      if (adminUser) {
+        createdBy = adminUser._id;
+      }
+    }
+
+    // Create new discount code
+    const discountCode = new DiscountCode({
+      code: discountData.code,
+      discountType: discountData.discountType,
+      discountValue: discountData.discountValue,
+      usageLimit: discountData.usageLimit,
+      usedCount: discountData.usedCount || 0,
+      createdBy: createdBy,
+      isActive:
+        discountData.isActive !== undefined ? discountData.isActive : true,
+    });
+
+    await discountCode.save();
+    createdDiscountCodes[discountData.code] = discountCode;
+    console.log(`Discount code ${discountData.code} created successfully`);
+  }
+
+  console.log("Discount codes created successfully");
+  return createdDiscountCodes;
+};
+
+// Seed orders and order statuses
+const seedOrders = async (users, products, variants) => {
+  console.log("Seeding orders...");
+
+  const ordersData = readJsonFile("orders.json");
+  if (!ordersData) return null;
+
+  const createdOrders = {};
+
+  for (const orderData of ordersData) {
+    // Map user email to ID
+    let userId = null;
+    if (orderData.userEmail && users[orderData.userEmail]) {
+      userId = users[orderData.userEmail]._id;
+    } else {
+      console.log(
+        `User ${orderData.userEmail} not found for order ${orderData.orderNumber}, creating as guest order`
+      );
+    }
+
+    // Process order items
+    const processedItems = [];
+    if (orderData.items && Array.isArray(orderData.items)) {
+      for (const item of orderData.items) {
+        // Find variant by SKU
+        let variantId = null;
+        if (item.sku && variants[item.sku]) {
+          variantId = variants[item.sku]._id;
+        } else {
+          console.log(
+            `Variant with SKU ${item.sku} not found for order ${orderData.orderNumber}, skipping item`
+          );
+          continue;
+        }
+
+        processedItems.push({
+          productVariantId: variantId,
+          productName: item.productName,
+          variantName: item.variantName,
+          price: item.price,
+          quantity: item.quantity,
+          totalPrice: item.totalPrice,
+        });
+      }
+    }
+
+    // Create order
+    const order = new Order({
+      orderNumber: orderData.orderNumber,
+      userId: userId,
+      email: orderData.userEmail,
+      fullName: orderData.fullName,
+      shippingAddress: orderData.shippingAddress,
+      items: processedItems,
+      subtotal: orderData.subtotal,
+      shippingFee: orderData.shippingFee,
+      tax: orderData.tax || 0,
+      discountCode: orderData.discountCode,
+      discountAmount: orderData.discountAmount || 0,
+      loyaltyPointsUsed: orderData.loyaltyPointsUsed || 0,
+      loyaltyPointsEarned: orderData.loyaltyPointsEarned || 0,
+      total: orderData.total,
+      paymentStatus: orderData.paymentStatus || "pending",
+      createdAt: orderData.createdAt
+        ? new Date(orderData.createdAt)
+        : new Date(),
+    });
+
+    await order.save();
+    createdOrders[orderData.orderNumber] = order;
+    console.log(`Order ${orderData.orderNumber} created successfully`);
+
+    // Create order statuses
+    if (orderData.statusHistory && Array.isArray(orderData.statusHistory)) {
+      for (const statusData of orderData.statusHistory) {
+        const status = new OrderStatus({
+          orderId: order._id,
+          status: statusData.status,
+          note: statusData.note,
+          createdAt: statusData.createdAt
+            ? new Date(statusData.createdAt)
+            : new Date(),
+        });
+        await status.save();
+      }
+      console.log(
+        `Created ${orderData.statusHistory.length} status entries for order ${orderData.orderNumber}`
+      );
+    }
+  }
+
+  console.log("Orders and statuses created successfully");
+  return createdOrders;
+};
+
+// Seed carts
+const seedCarts = async (users, variants) => {
+  console.log("Seeding carts...");
+
+  const cartsData = readJsonFile("carts.json");
+  if (!cartsData) return null;
+
+  for (const cartData of cartsData) {
+    // Handle user cart or guest cart
+    let userId = null;
+    let sessionId = cartData.sessionId;
+
+    if (cartData.userEmail && users[cartData.userEmail]) {
+      userId = users[cartData.userEmail]._id;
+      sessionId = null; // If user is set, no session ID needed
+    }
+
+    // Process cart items
+    const processedItems = [];
+    if (cartData.items && Array.isArray(cartData.items)) {
+      for (const item of cartData.items) {
+        // Find variant by SKU or ID
+        let variantId = null;
+        if (item.productVariantId && variants[item.productVariantId]) {
+          variantId = variants[item.productVariantId]._id;
+        } else {
+          console.log(`Variant not found for cart item, skipping`);
+          continue;
+        }
+
+        processedItems.push({
+          productVariantId: variantId,
+          quantity: item.quantity,
+          price: item.price,
+          addedAt: new Date(),
+        });
+      }
+    }
+
+    // Create cart
+    const cart = new Cart({
+      userId: userId,
+      sessionId: sessionId,
+      items: processedItems,
+      createdAt: cartData.createdAt ? new Date(cartData.createdAt) : new Date(),
+      updatedAt: cartData.updatedAt ? new Date(cartData.updatedAt) : new Date(),
+      expiresAt: cartData.expiresAt ? new Date(cartData.expiresAt) : null,
+    });
+
+    await cart.save();
+    console.log(
+      `Cart created for ${
+        userId ? "user " + cartData.userEmail : "session " + sessionId
+      }`
+    );
+  }
+
+  console.log("Carts created successfully");
+};
+
 // Main seeding function
 export const seedDatabaseFromJson = async () => {
   try {
@@ -281,11 +506,20 @@ export const seedDatabaseFromJson = async () => {
     // Seed categories
     const categories = await seedCategories();
 
-    // Seed products
-    const products = await seedProducts(categories);
+    // Seed products and get variants
+    const { products, variants } = await seedProducts(categories);
 
-    // Seed reviews last (as they depend on users and products)
+    // Seed discount codes (depends on admin users)
+    const discountCodes = await seedDiscountCodes(users);
+
+    // Seed orders (depends on users, products and variants)
+    const orders = await seedOrders(users, products, variants);
+
+    // Seed reviews (depends on users and products)
     await seedReviews(products, users);
+
+    // Seed carts (depends on users and variants)
+    await seedCarts(users, variants);
 
     console.log("Database seeding completed successfully");
   } catch (error) {
