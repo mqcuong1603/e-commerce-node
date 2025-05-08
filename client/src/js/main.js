@@ -6,7 +6,6 @@ import "../css/styles.css";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import $ from "jquery";
 import Swal from "sweetalert2";
 import io from "socket.io-client";
 import "sweetalert2/src/sweetalert2.scss";
@@ -68,9 +67,20 @@ try {
 
 // Initialize app when DOM is loaded
 document.addEventListener("DOMContentLoaded", async function () {
-  // Initialize tooltips and popovers
-  $('[data-bs-toggle="tooltip"]').tooltip();
-  $('[data-bs-toggle="popover"]').popover();
+  // Initialize tooltips and popovers using Bootstrap's native JavaScript
+  const tooltipTriggerList = [].slice.call(
+    document.querySelectorAll('[data-bs-toggle="tooltip"]')
+  );
+  tooltipTriggerList.map(function (tooltipTriggerEl) {
+    return new bootstrap.Tooltip(tooltipTriggerEl);
+  });
+
+  const popoverTriggerList = [].slice.call(
+    document.querySelectorAll('[data-bs-toggle="popover"]')
+  );
+  popoverTriggerList.map(function (popoverTriggerEl) {
+    return new bootstrap.Popover(popoverTriggerEl);
+  });
 
   // Check authentication status
   await checkAuthStatus();

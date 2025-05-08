@@ -10,7 +10,7 @@ module.exports = (env, argv) => {
   return {
     entry: "./src/js/main.js",
     output: {
-      path: path.resolve(__dirname, "dist"),
+      path: path.resolve(__dirname, "build"),
       filename: "js/bundle.js",
       clean: true,
     },
@@ -110,7 +110,7 @@ module.exports = (env, argv) => {
     ],
     devServer: {
       static: {
-        directory: path.join(__dirname, "dist"),
+        directory: path.join(__dirname, "build"),
       },
       compress: true,
       port: 9000,
