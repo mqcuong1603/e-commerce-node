@@ -1,14 +1,14 @@
 // src/js/home.js
 // Home page functionality
 
-import { productAPI, categoryAPI } from './api-client.js';
-import { setupAddToCartButtons, showToast } from './utils.js';
+import { productAPI, categoryAPI } from "./api/index.js";
+import { setupAddToCartButtons, showToast } from "./utils.js";
 
 // DOM elements we'll work with
-const newProductsContainer = document.getElementById('new-products');
-const bestSellersContainer = document.getElementById('best-sellers');
-const categoryProductsContainer = document.getElementById('category-products');
-const mainCarousel = document.getElementById('mainCarousel');
+const newProductsContainer = document.getElementById("new-products");
+const bestSellersContainer = document.getElementById("best-sellers");
+const categoryProductsContainer = document.getElementById("category-products");
+const mainCarousel = document.getElementById("mainCarousel");
 
 // Initialize the home page
 export async function initHomePage() {
@@ -16,31 +16,31 @@ export async function initHomePage() {
     // Show loading indicators
     if (newProductsContainer) showLoadingIndicator(newProductsContainer);
     if (bestSellersContainer) showLoadingIndicator(bestSellersContainer);
-    if (categoryProductsContainer) showLoadingIndicator(categoryProductsContainer);
-    
+    if (categoryProductsContainer)
+      showLoadingIndicator(categoryProductsContainer);
+
     // Initialize category navigation
     await initCategoryNavigation();
-    
+
     // Fetch all landing page products from API
     const response = await productAPI.getLandingPageProducts();
     const data = response.data;
-    
+
     // Render each section if container exists and data is available
     if (newProductsContainer && data.newProducts) {
       renderProductGrid(newProductsContainer, data.newProducts);
     }
-    
+
     if (bestSellersContainer && data.bestSellers) {
       renderProductGrid(bestSellersContainer, data.bestSellers);
     }
-    
+
     if (categoryProductsContainer && data.categoryProducts) {
       renderCategoryProducts(categoryProductsContainer, data.categoryProducts);
     }
-    
   } catch (error) {
-    console.error('Failed to load landing page products:', error);
-    
+    console.error("Failed to load landing page products:", error);
+
     // Show error messages in each container
     if (newProductsContainer) showErrorMessage(newProductsContainer);
     if (bestSellersContainer) showErrorMessage(bestSellersContainer);
@@ -53,19 +53,21 @@ export async function initHomePage() {
  */
 async function initCategoryNavigation() {
   try {
-    const categoryNav = document.querySelector('.category-nav');
+    const categoryNav = document.querySelector(".category-nav");
     if (!categoryNav) return;
-    
+
     // Get categories for navigation
     const response = await categoryAPI.getMenuCategories();
     const categories = response.data;
-    
-    let categoryHtml = '';
-    
+
+    let categoryHtml = "";
+
     // Generate HTML for category navigation
-    categories.forEach(category => {
+    categories.forEach((category) => {
       categoryHtml += `
-        <a href="products.html?category=${category.slug}" class="category-item text-center mx-2">
+        <a href="products.html?category=${
+          category.slug
+        }" class="category-item text-center mx-2">
           <div class="category-icon">
             <i class="bi ${getCategoryIcon(category.name)}"></i>
           </div>
@@ -73,15 +75,14 @@ async function initCategoryNavigation() {
         </a>
       `;
     });
-    
+
     // Update category navigation
-    const categoryContainer = categoryNav.querySelector('.row > div');
+    const categoryContainer = categoryNav.querySelector(".row > div");
     if (categoryContainer) {
       categoryContainer.innerHTML = categoryHtml;
     }
-    
   } catch (error) {
-    console.error('Failed to load category navigation:', error);
+    console.error("Failed to load category navigation:", error);
   }
 }
 
@@ -93,20 +94,20 @@ async function initCategoryNavigation() {
 function getCategoryIcon(categoryName) {
   // Map category names to appropriate Bootstrap icons
   const iconMap = {
-    'Laptops': 'bi-laptop',
-    'Monitors': 'bi-display',
-    'Storage': 'bi-device-hdd',
-    'Processors': 'bi-cpu',
-    'Motherboards': 'bi-motherboard',
-    'Graphics Cards': 'bi-gpu-card',
-    'RAM': 'bi-memory',
-    'Power Supplies': 'bi-lightning',
-    'Cooling & Cases': 'bi-fan',
+    Laptops: "bi-laptop",
+    Monitors: "bi-display",
+    Storage: "bi-device-hdd",
+    Processors: "bi-cpu",
+    Motherboards: "bi-motherboard",
+    "Graphics Cards": "bi-gpu-card",
+    RAM: "bi-memory",
+    "Power Supplies": "bi-lightning",
+    "Cooling & Cases": "bi-fan",
     // Add more mappings as needed
   };
-  
+
   // Return mapped icon or default
-  return iconMap[categoryName] || 'bi-box';
+  return iconMap[categoryName] || "bi-box";
 }
 
 /**
@@ -152,26 +153,42 @@ function renderProductGrid(container, products) {
     `;
     return;
   }
-  
+
   let html = '<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">';
-  
-  products.forEach(product => {
+
+  products.forEach((product) => {
     // Get first variant and image for display
-    const variant = product.variants && product.variants.length > 0 ? product.variants[0] : null;
-    const image = product.images && product.images.length > 0 ? product.images[0] : null;
-    
+    const variant =
+      product.variants && product.variants.length > 0
+        ? product.variants[0]
+        : null;
+    const image =
+      product.images && product.images.length > 0 ? product.images[0] : null;
+
     if (variant) {
       const price = variant.salePrice || variant.price;
       const regularPrice = variant.salePrice ? variant.price : null;
-      const imageUrl = image ? image.imageUrl : '/images/placeholder.jpg';
-      
+      const imageUrl = image ? image.imageUrl : "/images/placeholder.jpg";
+
       html += `
         <div class="col">
           <div class="card h-100 product-card">
             <div class="badge-overlay">
-              ${product.isNewProduct ? '<span class="badge bg-success">New</span>' : ''}
-              ${product.isBestSeller ? '<span class="badge bg-danger">Best Seller</span>' : ''}
-              ${variant.salePrice ? '<span class="badge bg-warning">Sale</span>' : ''}
+              ${
+                product.isNewProduct
+                  ? '<span class="badge bg-success">New</span>'
+                  : ""
+              }
+              ${
+                product.isBestSeller
+                  ? '<span class="badge bg-danger">Best Seller</span>'
+                  : ""
+              }
+              ${
+                variant.salePrice
+                  ? '<span class="badge bg-warning">Sale</span>'
+                  : ""
+              }
             </div>
             <a href="product-detail.html?slug=${product.slug}">
               <img src="${imageUrl}" class="card-img-top" alt="${product.name}">
@@ -181,10 +198,13 @@ function renderProductGrid(container, products) {
               <p class="card-text">${product.shortDescription}</p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="price-block">
-                  ${regularPrice ? 
-                    `<span class="text-muted text-decoration-line-through">$${regularPrice.toFixed(2)}</span>
-                     <span class="fs-5 text-danger">$${price.toFixed(2)}</span>` : 
-                    `<span class="fs-5">$${price.toFixed(2)}</span>`
+                  ${
+                    regularPrice
+                      ? `<span class="text-muted text-decoration-line-through">$${regularPrice.toFixed(
+                          2
+                        )}</span>
+                     <span class="fs-5 text-danger">$${price.toFixed(2)}</span>`
+                      : `<span class="fs-5">$${price.toFixed(2)}</span>`
                   }
                 </div>
                 <button class="btn btn-primary btn-sm add-to-cart" 
@@ -200,10 +220,10 @@ function renderProductGrid(container, products) {
       `;
     }
   });
-  
-  html += '</div>';
+
+  html += "</div>";
   container.innerHTML = html;
-  
+
   // Setup add to cart buttons
   setupAddToCartButtons();
 }
@@ -223,11 +243,11 @@ function renderCategoryProducts(container, categoryProducts) {
     `;
     return;
   }
-  
-  let html = '';
-  
+
+  let html = "";
+
   // For each category in the data
-  Object.values(categoryProducts).forEach(categoryData => {
+  Object.values(categoryProducts).forEach((categoryData) => {
     html += `
       <div class="mb-5">
         <div class="d-flex justify-content-between align-items-center mb-3">
@@ -238,37 +258,60 @@ function renderCategoryProducts(container, categoryProducts) {
         </div>
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
     `;
-    
+
     // Render products in this category
-    categoryData.products.forEach(product => {
-      const variant = product.variants && product.variants.length > 0 ? product.variants[0] : null;
-      const image = product.images && product.images.length > 0 ? product.images[0] : null;
-      
+    categoryData.products.forEach((product) => {
+      const variant =
+        product.variants && product.variants.length > 0
+          ? product.variants[0]
+          : null;
+      const image =
+        product.images && product.images.length > 0 ? product.images[0] : null;
+
       if (variant) {
         const price = variant.salePrice || variant.price;
         const regularPrice = variant.salePrice ? variant.price : null;
-        const imageUrl = image ? image.imageUrl : '/images/placeholder.jpg';
-        
+        const imageUrl = image ? image.imageUrl : "/images/placeholder.jpg";
+
         html += `
           <div class="col">
             <div class="card h-100 product-card">
               <div class="badge-overlay">
-                ${product.isNewProduct ? '<span class="badge bg-success">New</span>' : ''}
-                ${product.isBestSeller ? '<span class="badge bg-danger">Best Seller</span>' : ''}
-                ${variant.salePrice ? '<span class="badge bg-warning">Sale</span>' : ''}
+                ${
+                  product.isNewProduct
+                    ? '<span class="badge bg-success">New</span>'
+                    : ""
+                }
+                ${
+                  product.isBestSeller
+                    ? '<span class="badge bg-danger">Best Seller</span>'
+                    : ""
+                }
+                ${
+                  variant.salePrice
+                    ? '<span class="badge bg-warning">Sale</span>'
+                    : ""
+                }
               </div>
               <a href="product-detail.html?slug=${product.slug}">
-                <img src="${imageUrl}" class="card-img-top" alt="${product.name}">
+                <img src="${imageUrl}" class="card-img-top" alt="${
+          product.name
+        }">
               </a>
               <div class="card-body">
                 <h5 class="card-title">${product.name}</h5>
                 <p class="card-text">${product.shortDescription}</p>
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="price-block">
-                    ${regularPrice ? 
-                      `<span class="text-muted text-decoration-line-through">$${regularPrice.toFixed(2)}</span>
-                      <span class="fs-5 text-danger">$${price.toFixed(2)}</span>` : 
-                      `<span class="fs-5">$${price.toFixed(2)}</span>`
+                    ${
+                      regularPrice
+                        ? `<span class="text-muted text-decoration-line-through">$${regularPrice.toFixed(
+                            2
+                          )}</span>
+                      <span class="fs-5 text-danger">$${price.toFixed(
+                        2
+                      )}</span>`
+                        : `<span class="fs-5">$${price.toFixed(2)}</span>`
                     }
                   </div>
                   <button class="btn btn-primary btn-sm add-to-cart" 
@@ -284,22 +327,18 @@ function renderCategoryProducts(container, categoryProducts) {
         `;
       }
     });
-    
-    html += '</div></div>';
+
+    html += "</div></div>";
   });
-  
+
   container.innerHTML = html;
-  
+
   // Setup add to cart buttons
   setupAddToCartButtons();
 }
 
 // Initialize page when DOM is loaded
-document.addEventListener('DOMContentLoaded', initHomePage);
+document.addEventListener("DOMContentLoaded", initHomePage);
 
 // Export functions that might be needed elsewhere
-export {
-  renderProductGrid,
-  showLoadingIndicator,
-  showErrorMessage
-};
+export { renderProductGrid, showLoadingIndicator, showErrorMessage };

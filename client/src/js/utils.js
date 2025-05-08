@@ -1,5 +1,5 @@
 // src/js/utils.js
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 /**
  * Show toast notification
@@ -7,23 +7,23 @@ import Swal from 'sweetalert2';
  * @param {string} message - Toast message
  * @param {string} type - Toast type (success, error, info, warning)
  */
-export function showToast(title, message, type = 'info') {
+export function showToast(title, message, type = "info") {
   // Use SweetAlert2 for toast notifications
   const Toast = Swal.mixin({
     toast: true,
-    position: 'top-end',
+    position: "top-end",
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: true,
     didOpen: (toast) => {
-      toast.addEventListener('mouseenter', Swal.stopTimer);
-      toast.addEventListener('mouseleave', Swal.resumeTimer);
-    }
+      toast.addEventListener("mouseenter", Swal.stopTimer);
+      toast.addEventListener("mouseleave", Swal.resumeTimer);
+    },
   });
-  
+
   Toast.fire({
     icon: type,
-    title: message
+    title: message,
   });
 }
 
@@ -33,10 +33,10 @@ export function showToast(title, message, type = 'info') {
  * @param {string} currency - Currency code (default: USD)
  * @returns {string} Formatted price
  */
-export function formatPrice(price, currency = 'USD') {
-  return new Intl.NumberFormat('en-US', { 
-    style: 'currency', 
-    currency 
+export function formatPrice(price, currency = "USD") {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency,
   }).format(price);
 }
 
@@ -48,11 +48,11 @@ export function formatPrice(price, currency = 'USD') {
  */
 export function formatDate(dateString, options = {}) {
   const date = new Date(dateString);
-  return new Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    ...options
+  return new Intl.DateTimeFormat("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    ...options,
   }).format(date);
 }
 
@@ -65,24 +65,24 @@ export function generateStarRating(rating) {
   const fullStars = Math.floor(rating);
   const halfStar = rating % 1 >= 0.5;
   const emptyStars = 5 - fullStars - (halfStar ? 1 : 0);
-  
-  let html = '';
-  
+
+  let html = "";
+
   // Full stars
   for (let i = 0; i < fullStars; i++) {
     html += '<i class="bi bi-star-fill text-warning"></i>';
   }
-  
+
   // Half star
   if (halfStar) {
     html += '<i class="bi bi-star-half text-warning"></i>';
   }
-  
+
   // Empty stars
   for (let i = 0; i < emptyStars; i++) {
     html += '<i class="bi bi-star text-warning"></i>';
   }
-  
+
   return html;
 }
 
@@ -94,5 +94,40 @@ export function generateStarRating(rating) {
  */
 export function truncateText(text, maxLength = 100) {
   if (!text || text.length <= maxLength) return text;
-  return text.substring(0, maxLength) + '...';
+  return text.substring(0, maxLength) + "...";
+}
+
+// client/src/js/utils.js
+// Add this function to the existing exports
+export function setupAddToCartButtons() {
+  document.querySelectorAll(".add-to-cart").forEach((button) => {
+    button.addEventListener("click", async function () {
+      const productVariantId =
+        this.getAttribute("data-variant-id") ||
+        this.getAttribute("data-product-variant-id");
+      const productName = this.getAttribute("data-product-name");
+      const quantity = 1;
+
+      try {
+        // Import from the correct API module
+        const { cartAPI } = await import("./api/index.js");
+
+        // Add item to cart
+        const response = await cartAPI.addItemToCart(
+          productVariantId,
+          quantity
+        );
+
+        // Show success message
+        showToast(
+          "Success",
+          `${productName} has been added to your cart.`,
+          "success"
+        );
+      } catch (error) {
+        console.error("Failed to add item to cart:", error);
+        showToast("Error", "Failed to add item to cart.", "error");
+      }
+    });
+  });
 }
