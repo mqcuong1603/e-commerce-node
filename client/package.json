@@ -1,0 +1,36 @@
+{
+    "name": "ecommerce-client",
+    "version": "1.0.0",
+    "description": "Frontend for E-commerce Computer Components Store",
+    "main": "index.js",
+    "scripts": {
+      "start": "webpack serve --mode development",
+      "build": "webpack --mode production",
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+      "ecommerce",
+      "computer",
+      "components"
+    ],
+    "author": "",
+    "license": "Apache-2.0",
+    "dependencies": {
+      "axios": "^1.6.5",
+      "bootstrap": "^5.3.2",
+      "bootstrap-icons": "^1.11.3",
+      "jquery": "^3.7.1",
+      "popper.js": "^1.16.1",
+      "sweetalert2": "^11.10.2"
+    },
+    "devDependencies": {
+      "copy-webpack-plugin": "^11.0.0",
+      "css-loader": "^6.8.1",
+      "html-webpack-plugin": "^5.5.3",
+      "mini-css-extract-plugin": "^2.7.6",
+      "style-loader": "^3.3.3",
+      "webpack": "^5.89.0",
+      "webpack-cli": "^5.1.4",
+      "webpack-dev-server": "^4.15.1"
+    }
+  }

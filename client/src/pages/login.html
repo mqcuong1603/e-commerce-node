@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Computer Components Store</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body>
+  <!-- Header / Navigation -->
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
+          <i class="bi bi-cpu-fill me-2"></i>
+          <span class="text-highlight">Tech</span>Hub
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
+                aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="category-menu">
+            <!-- Categories will be loaded dynamically -->
+            <li class="nav-item">
+              <a class="nav-link" href="products.html">All Products</a>
+            </li>
+          </ul>
+          <form class="search-form d-flex mx-auto">
+            <input class="form-control" type="search" placeholder="Search products..." aria-label="Search">
+            <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
+          </form>
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link position-relative" href="cart.html">
+                <i class="bi bi-cart-fill"></i>
+                <span class="cart-count badge rounded-pill bg-danger d-none">0</span>
+              </a>
+            </li>
+            <!-- Authentication links (shown when not logged in) -->
+            <li class="nav-item dropdown" id="auth-menu-items">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" 
+                 data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-circle"></i> Account
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="login.html">Login</a></li>
+                <li><a class="dropdown-item" href="register.html">Register</a></li>
+              </ul>
+            </li>
+            <!-- User menu (shown when logged in) -->
+            <li class="nav-item dropdown d-none" id="user-menu-items">
+              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" 
+                 data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="bi bi-person-fill"></i> <span class="user-fullname">User</span>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                <li><a class="dropdown-item" href="profile.html">My Profile</a></li>
+                <li><a class="dropdown-item" href="profile.html#orders">Order History</a></li>
+                <li><a class="dropdown-item admin-only d-none" href="admin-dashboard.html">Admin Dashboard</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item logout-button" href="#">Logout</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="main-content py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+          <div class="auth-form">
+            <h2 class="text-center mb-4">Login</h2>
+            
+            <form id="login-form">
+              <div class="mb-3">
+                <label for="login-email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="login-email" name="email" required>
+              </div>
+              <div class="mb-3">
+                <label for="login-password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="login-password" name="password" required>
+              </div>
+              <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="remember-me">
+                <label class="form-check-label" for="remember-me">Remember me</label>
+              </div>
+              <div class="d-grid mb-3">
+                <button type="submit" class="btn btn-primary">Login</button>
+              </div>
+              <div class="text-center mb-3">
+                <a href="#" id="forgot-password-link">Forgot Password?</a>
+              </div>
+            </form>
+
+            <div class="divider">OR</div>
+
+            <div class="social-login">
+              <button id="google-login" class="btn btn-outline-danger mb-2 w-100">
+                <i class="bi bi-google me-2"></i> Login with Google
+              </button>
+              <button id="facebook-login" class="btn btn-outline-primary w-100">
+                <i class="bi bi-facebook me-2"></i> Login with Facebook
+              </button>
+            </div>
+
+            <div class="text-center mt-4">
+              <p>Don't have an account? <a href="register.html">Register</a></p>
+            </div>
+          </div>
+
+          <!-- Forgot Password Form (hidden by default) -->
+          <div class="auth-form d-none" id="forgot-password-container">
+            <h2 class="text-center mb-4">Forgot Password</h2>
+            <p class="text-center mb-4">
+              Enter your email address and we'll send you a link to reset your password.
+            </p>
+            
+            <form id="forgot-password-form">
+              <div class="mb-3">
+                <label for="forgot-password-email" class="form-label">Email Address</label>
+                <input type="email" class="form-control" id="forgot-password-email" name="email" required>
+              </div>
+              <div class="d-grid mb-3">
+                <button type="submit" class="btn btn-primary">Send Reset Link</button>
+              </div>
+              <div class="text-center">
+                <a href="#" id="back-to-login-link">Back to Login</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 mb-4 mb-md-0">
+          <div class="footer-about">
+            <h5>About TechHub</h5>
+            <p>We offer premium computer components for gamers, professionals, and enthusiasts. With quality products and expert service, we're your trusted partner for all computing needs.</p>
+            <div class="social-icons">
+              <a href="#"><i class="bi bi-facebook"></i></a>
+              <a href="#"><i class="bi bi-twitter"></i></a>
+              <a href="#"><i class="bi bi-instagram"></i></a>
+              <a href="#"><i class="bi bi-youtube"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-6 col-md-2 mb-4 mb-md-0">
+          <div class="footer-links">
+            <h5>Shop</h5>
+            <ul>
+              <li><a href="products.html">All Products</a></li>
+              <li><a href="products.html?category=laptops">Laptops</a></li>
+              <li><a href="products.html?category=monitors">Monitors</a></li>
+              <li><a href="products.html?category=storage">Storage</a></li>
+              <li><a href="products.html?category=components">Components</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-6 col-md-2 mb-4 mb-md-0">
+          <div class="footer-links">
+            <h5>Support</h5>
+            <ul>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">FAQs</a></li>
+              <li><a href="#">Shipping Policy</a></li>
+              <li><a href="#">Return Policy</a></li>
+              <li><a href="#">Warranty</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="footer-newsletter">
+            <h5>Newsletter</h5>
+            <p>Subscribe to our newsletter for the latest updates and offers.</p>
+            <form>
+              <div class="input-group mb-3">
+                <input type="email" class="form-control" placeholder="Your Email" aria-label="Email" aria-describedby="subscribe-btn">
+                <button class="btn btn-primary" type="button" id="subscribe-btn">Subscribe</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom text-center">
+      <div class="container">
+        <p class="mb-0">&copy; 2025 TechHub. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Toggle between login and forgot password forms
+    document.getElementById('forgot-password-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('login-form').parentElement.classList.add('d-none');
+      document.getElementById('forgot-password-container').classList.remove('d-none');
+    });
+
+    document.getElementById('back-to-login-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      document.getElementById('login-form').parentElement.classList.remove('d-none');
+      document.getElementById('forgot-password-container').classList.add('d-none');
+    });
+  </script>
+</body>
+</html>

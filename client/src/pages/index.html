@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Computer Components Store</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+  </head>
+  <body>
+    <!-- Header / Navigation -->
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="index.html">
+            <i class="bi bi-cpu-fill me-2"></i>
+            <span class="text-highlight">Tech</span>Hub
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="category-menu">
+              <!-- Categories will be loaded dynamically -->
+              <li class="nav-item">
+                <a class="nav-link" href="products.html">All Products</a>
+              </li>
+            </ul>
+            <form class="search-form d-flex mx-auto">
+              <input
+                class="form-control"
+                type="search"
+                placeholder="Search products..."
+                aria-label="Search"
+              />
+              <button class="btn btn-primary" type="submit">
+                <i class="bi bi-search"></i>
+              </button>
+            </form>
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link position-relative" href="cart.html">
+                  <i class="bi bi-cart-fill"></i>
+                  <span class="cart-count badge rounded-pill bg-danger d-none"
+                    >0</span
+                  >
+                </a>
+              </li>
+              <!-- Authentication links (shown when not logged in) -->
+              <li class="nav-item dropdown" id="auth-menu-items">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <i class="bi bi-person-circle"></i> Account
+                </a>
+                <ul
+                  class="dropdown-menu dropdown-menu-end"
+                  aria-labelledby="navbarDropdown"
+                >
+                  <li><a class="dropdown-item" href="login.html">Login</a></li>
+                  <li>
+                    <a class="dropdown-item" href="register.html">Register</a>
+                  </li>
+                </ul>
+              </li>
+              <!-- User menu (shown when logged in) -->
+              <li class="nav-item dropdown d-none" id="user-menu-items">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="userDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <i class="bi bi-person-fill"></i>
+                  <span class="user-fullname">User</span>
+                </a>
+                <ul
+                  class="dropdown-menu dropdown-menu-end"
+                  aria-labelledby="userDropdown"
+                >
+                  <li>
+                    <a class="dropdown-item" href="profile.html">My Profile</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="profile.html#orders"
+                      >Order History</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      class="dropdown-item admin-only d-none"
+                      href="admin-dashboard.html"
+                      >Admin Dashboard</a
+                    >
+                  </li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li>
+                    <a class="dropdown-item logout-button" href="#">Logout</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="main-content">
+      <!-- Category Navigation -->
+      <section class="container-fluid bg-light py-3 mb-4 category-nav">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 d-flex justify-content-between overflow-auto">
+              <a href="products.html" class="category-item text-center mx-2">
+                <div class="category-icon">
+                  <i class="bi bi-laptop"></i>
+                </div>
+                <div class="category-name">Laptop</div>
+              </a>
+              <a
+                href="products.html?category=desktops"
+                class="category-item text-center mx-2"
+              >
+                <div class="category-icon">
+                  <i class="bi bi-pc-display"></i>
+                </div>
+                <div class="category-name">Desktops</div>
+              </a>
+              <a
+                href="products.html?category=monitors"
+                class="category-item text-center mx-2"
+              >
+                <div class="category-icon">
+                  <i class="bi bi-display"></i>
+                </div>
+                <div class="category-name">Monitors</div>
+              </a>
+              <a
+                href="products.html?category=components"
+                class="category-item text-center mx-2"
+              >
+                <div class="category-icon">
+                  <i class="bi bi-cpu"></i>
+                </div>
+                <div class="category-name">Components</div>
+              </a>
+              <a
+                href="products.html?category=peripherals"
+                class="category-item text-center mx-2"
+              >
+                <div class="category-icon">
+                  <i class="bi bi-keyboard"></i>
+                </div>
+                <div class="category-name">Peripherals</div>
+              </a>
+              <a
+                href="products.html?category=storage"
+                class="category-item text-center mx-2"
+              >
+                <div class="category-icon">
+                  <i class="bi bi-device-hdd"></i>
+                </div>
+                <div class="category-name">Storage</div>
+              </a>
+              <a
+                href="products.html?category=networking"
+                class="category-item text-center mx-2"
+              >
+                <div class="category-icon">
+                  <i class="bi bi-router"></i>
+                </div>
+                <div class="category-name">Networking</div>
+              </a>
+              <a
+                href="products.html?category=accessories"
+                class="category-item text-center mx-2"
+              >
+                <div class="category-icon">
+                  <i class="bi bi-headset"></i>
+                </div>
+                <div class="category-name">Accessories</div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Main Slider/Banner Section -->
+      <section class="container mb-4">
+        <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-indicators">
+            <button
+              type="button"
+              data-bs-target="#mainCarousel"
+              data-bs-slide-to="0"
+              class="active"
+              aria-current="true"
+              aria-label="Slide 1"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#mainCarousel"
+              data-bs-slide-to="1"
+              aria-label="Slide 2"
+            ></button>
+            <button
+              type="button"
+              data-bs-target="#mainCarousel"
+              data-bs-slide-to="2"
+              aria-label="Slide 3"
+            ></button>
+          </div>
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img
+                src="/api/placeholder/1200/400"
+                class="d-block w-100"
+                alt="Special Offers"
+              />
+              <div class="carousel-caption d-none d-md-block">
+                <h5>Special Offers</h5>
+                <p>Discover amazing deals on computer components</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img
+                src="/api/placeholder/1200/400"
+                class="d-block w-100"
+                alt="New Arrivals"
+              />
+              <div class="carousel-caption d-none d-md-block">
+                <h5>New Arrivals</h5>
+                <p>Check out our latest products</p>
+              </div>
+            </div>
+            <div class="carousel-item">
+              <img
+                src="/api/placeholder/1200/400"
+                class="d-block w-100"
+                alt="Gaming Collection"
+              />
+              <div class="carousel-caption d-none d-md-block">
+                <h5>Gaming Collection</h5>
+                <p>Take your gaming experience to the next level</p>
+              </div>
+            </div>
+          </div>
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#mainCarousel"
+            data-bs-slide="prev"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#mainCarousel"
+            data-bs-slide="next"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Small Banner Section -->
+      <section class="container mb-4">
+        <div class="row">
+          <div class="col-md-4 mb-3 mb-md-0">
+            <div class="card">
+              <img
+                src="/api/placeholder/400/200"
+                class="card-img-top"
+                alt="Gaming Components"
+              />
+              <div class="card-img-overlay d-flex align-items-end">
+                <h5
+                  class="card-title bg-dark bg-opacity-75 text-white p-2 mb-0 w-100"
+                >
+                  Gaming Components
+                </h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3 mb-md-0">
+            <div class="card">
+              <img
+                src="/api/placeholder/400/200"
+                class="card-img-top"
+                alt="Workstation Solutions"
+              />
+              <div class="card-img-overlay d-flex align-items-end">
+                <h5
+                  class="card-title bg-dark bg-opacity-75 text-white p-2 mb-0 w-100"
+                >
+                  Workstation Solutions
+                </h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card">
+              <img
+                src="/api/placeholder/400/200"
+                class="card-img-top"
+                alt="Exclusive Deals"
+              />
+              <div class="card-img-overlay d-flex align-items-end">
+                <h5
+                  class="card-title bg-dark bg-opacity-75 text-white p-2 mb-0 w-100"
+                >
+                  Exclusive Deals
+                </h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- New Products Section -->
+      <section class="container mb-5">
+        <div class="section-header">
+          <h2>New Arrivals</h2>
+          <p>Check out our latest products</p>
+        </div>
+        <div id="new-products">
+          <!-- Products will be loaded dynamically -->
+          <div class="text-center py-5">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2">Loading new products...</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Best Sellers Section -->
+      <section class="container mb-5">
+        <div class="section-header">
+          <h2>Best Sellers</h2>
+          <p>Our most popular products</p>
+        </div>
+        <div id="best-sellers">
+          <!-- Products will be loaded dynamically -->
+          <div class="text-center py-5">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2">Loading best sellers...</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Categories -->
+      <section class="container mb-5">
+        <div class="section-header">
+          <h2>Categories</h2>
+          <p>Browse our product categories</p>
+        </div>
+        <div id="category-products">
+          <!-- Category products will be loaded dynamically -->
+          <div class="text-center py-5">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2">Loading categories...</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Services Section -->
+      <section class="bg-light-gray py-5 mb-5">
+        <div class="container">
+          <div class="section-header">
+            <h2>Why Choose Us</h2>
+            <p>We're committed to providing the best shopping experience</p>
+          </div>
+          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+            <div class="col">
+              <div class="card h-100 border-0 bg-transparent">
+                <div class="card-body text-center">
+                  <div class="display-4 mb-3 text-primary">
+                    <i class="bi bi-truck"></i>
+                  </div>
+                  <h4 class="card-title">Free Shipping</h4>
+                  <p class="card-text">
+                    Free shipping on all orders over $100.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card h-100 border-0 bg-transparent">
+                <div class="card-body text-center">
+                  <div class="display-4 mb-3 text-primary">
+                    <i class="bi bi-shield-check"></i>
+                  </div>
+                  <h4 class="card-title">Warranty</h4>
+                  <p class="card-text">
+                    All products come with a minimum 1-year warranty.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card h-100 border-0 bg-transparent">
+                <div class="card-body text-center">
+                  <div class="display-4 mb-3 text-primary">
+                    <i class="bi bi-headset"></i>
+                  </div>
+                  <h4 class="card-title">Support</h4>
+                  <p class="card-text">
+                    24/7 customer support for all your inquiries.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="card h-100 border-0 bg-transparent">
+                <div class="card-body text-center">
+                  <div class="display-4 mb-3 text-primary">
+                    <i class="bi bi-arrow-counterclockwise"></i>
+                  </div>
+                  <h4 class="card-title">Easy Returns</h4>
+                  <p class="card-text">30-day hassle-free return policy.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 mb-4 mb-md-0">
+            <div class="footer-about">
+              <h5>About TechHub</h5>
+              <p>
+                We offer premium computer components for gamers, professionals,
+                and enthusiasts. With quality products and expert service, we're
+                your trusted partner for all computing needs.
+              </p>
+              <div class="social-icons">
+                <a href="#"><i class="bi bi-facebook"></i></a>
+                <a href="#"><i class="bi bi-twitter"></i></a>
+                <a href="#"><i class="bi bi-instagram"></i></a>
+                <a href="#"><i class="bi bi-youtube"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-6 col-md-2 mb-4 mb-md-0">
+            <div class="footer-links">
+              <h5>Shop</h5>
+              <ul>
+                <li><a href="products.html">All Products</a></li>
+                <li><a href="products.html?category=laptops">Laptops</a></li>
+                <li><a href="products.html?category=monitors">Monitors</a></li>
+                <li><a href="products.html?category=storage">Storage</a></li>
+                <li>
+                  <a href="products.html?category=components">Components</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-6 col-md-2 mb-4 mb-md-0">
+            <div class="footer-links">
+              <h5>Support</h5>
+              <ul>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">FAQs</a></li>
+                <li><a href="#">Shipping Policy</a></li>
+                <li><a href="#">Return Policy</a></li>
+                <li><a href="#">Warranty</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="footer-newsletter">
+              <h5>Newsletter</h5>
+              <p>
+                Subscribe to our newsletter for the latest updates and offers.
+              </p>
+              <form>
+                <div class="input-group mb-3">
+                  <input
+                    type="email"
+                    class="form-control"
+                    placeholder="Your Email"
+                    aria-label="Email"
+                    aria-describedby="subscribe-btn"
+                  />
+                  <button
+                    class="btn btn-primary"
+                    type="button"
+                    id="subscribe-btn"
+                  >
+                    Subscribe
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom text-center">
+        <div class="container">
+          <p class="mb-0">&copy; 2025 TechHub. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
