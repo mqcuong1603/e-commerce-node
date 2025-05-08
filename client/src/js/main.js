@@ -3,7 +3,8 @@
 import "../css/styles.css";
 
 // Import libraries
-import "bootstrap";
+import * as bootstrap from "bootstrap";
+window.bootstrap = bootstrap; // Make bootstrap available globally
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import Swal from "sweetalert2";
@@ -34,7 +35,11 @@ import { initProductDetail } from "./product-detail.js";
 let socket = null;
 try {
   if (window.io) {
-    socket = io("http://localhost:3000");
+    const serverUrl =
+      process.env.NODE_ENV === "production"
+        ? window.location.origin
+        : "http://localhost:3000";
+    socket = io(serverUrl);
 
     // Listen for real-time review updates
     socket.on("review_update", (data) => {
@@ -118,17 +123,31 @@ function setupPageSpecificFunctions() {
 async function initCategoryMenu() {
   try {
     const categoryMenuContainer = document.getElementById("category-menu");
-    if (!categoryMenuContainer) return;
+    if (!categoryMenuContainer) {
+      console.warn("Category menu container not found");
+      return;
+    }
 
     // Get menu categories
     const response = await categoryAPI.getMenuCategories();
 
-    if (!response.success) {
-      console.error("Failed to load menu categories:", response.message);
+    if (!response || !response.success) {
+      console.error(
+        "Failed to load menu categories:",
+        response?.message || "Unknown error"
+      );
+      categoryMenuContainer.innerHTML =
+        '<li class="nav-item"><a class="nav-link" href="products.html">All Products</a></li>';
       return;
     }
 
     const menuData = response.data;
+    if (!Array.isArray(menuData) || menuData.length === 0) {
+      console.warn("No categories found");
+      categoryMenuContainer.innerHTML =
+        '<li class="nav-item"><a class="nav-link" href="products.html">All Products</a></li>';
+      return;
+    }
 
     // Generate menu HTML
     let menuHtml = "";
