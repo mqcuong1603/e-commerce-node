@@ -28,26 +28,26 @@ services:
       - app-network
 
   # Frontend service
-  # client:
-  #   build:
-  #     context: .
-  #     dockerfile: docker/Dockerfile.client
-  #   container_name: ecommerce-client
-  #   restart: always
-  #   ports:
-  #     - "8080:80"
-  #   environment:
-  #     - REACT_APP_API_URL=http://localhost:3000
-  #     - REACT_APP_SOCKET_URL=http://localhost:3000
-  #     - REACT_APP_NODE_ENV=development
-  #   depends_on:
-  #     - server
-  #   volumes:
-  #     - ./client:/app
-  #     - /app/node_modules
-  #     - /app/build
-  #   networks:
-  #     - app-network
+  client:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.client
+    container_name: ecommerce-client
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      - REACT_APP_API_URL=http://localhost:3000
+      - REACT_APP_SOCKET_URL=http://localhost:3000
+      - REACT_APP_NODE_ENV=development
+    depends_on:
+      - server
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+      - /app/build
+    networks:
+      - app-network
 
   # MongoDB service
   mongo:
