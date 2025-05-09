@@ -3,199 +3,123 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Computer Components Store</title>
+    <title>TechHub - Computer Components Store</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
     <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
     />
   </head>
-  <body>
-    <!-- Header / Navigation -->
-    <header>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-          <a class="navbar-brand" href="index.html">
-            <i class="bi bi-cpu-fill me-2"></i>
-            <span class="text-highlight">Tech</span>Hub
-          </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="category-menu">
-              <!-- Categories will be loaded dynamically -->
-              <li class="nav-item">
-                <a class="nav-link" href="products.html">All Products</a>
-              </li>
-            </ul>
-            <form class="search-form d-flex mx-auto">
-              <input
-                class="form-control"
-                type="search"
-                placeholder="Search products..."
-                aria-label="Search"
-              />
-              <button class="btn btn-primary" type="submit">
-                <i class="bi bi-search"></i>
-              </button>
-            </form>
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link position-relative" href="cart.html">
-                  <i class="bi bi-cart-fill"></i>
-                  <span class="cart-count badge rounded-pill bg-danger d-none"
-                    >0</span
-                  >
-                </a>
-              </li>
-              <!-- Authentication links (shown when not logged in) -->
-              <li class="nav-item dropdown" id="auth-menu-items">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="navbarDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <i class="bi bi-person-circle"></i> Account
-                </a>
-                <ul
-                  class="dropdown-menu dropdown-menu-end"
-                  aria-labelledby="navbarDropdown"
-                >
-                  <li><a class="dropdown-item" href="login.html">Login</a></li>
-                  <li>
-                    <a class="dropdown-item" href="register.html">Register</a>
-                  </li>
-                </ul>
-              </li>
-              <!-- User menu (shown when logged in) -->
-              <li class="nav-item dropdown d-none" id="user-menu-items">
-                <a
-                  class="nav-link dropdown-toggle"
-                  href="#"
-                  id="userDropdown"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  <i class="bi bi-person-fill"></i>
-                  <span class="user-fullname">User</span>
-                </a>
-                <ul
-                  class="dropdown-menu dropdown-menu-end"
-                  aria-labelledby="userDropdown"
-                >
-                  <li>
-                    <a class="dropdown-item" href="profile.html">My Profile</a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="profile.html#orders"
-                      >Order History</a
-                    >
-                  </li>
-                  <li>
-                    <a
-                      class="dropdown-item admin-only d-none"
-                      href="admin-dashboard.html"
-                      >Admin Dashboard</a
-                    >
-                  </li>
-                  <li><hr class="dropdown-divider" /></li>
-                  <li>
-                    <a class="dropdown-item logout-button" href="#">Logout</a>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
+  <body class="bg-light">
+    <!-- Header will be loaded dynamically from client/src/components/header.html -->
+    <header id="header-container"></header>
 
-    <main class="main-content">
+    <main class="pt-5">
       <!-- Category Navigation -->
-      <section class="container-fluid bg-light py-3 mb-4 category-nav">
+      <section class="bg-white shadow-sm py-3 mb-4">
         <div class="container">
           <div class="row">
-            <div class="col-12 d-flex justify-content-between overflow-auto">
-              <a href="products.html" class="category-item text-center mx-2">
-                <div class="category-icon">
-                  <i class="bi bi-laptop"></i>
+            <div class="col-12 d-flex flex-nowrap overflow-auto pb-2">
+              <a
+                href="products.html"
+                class="text-decoration-none text-center mx-3 mx-md-4"
+              >
+                <div
+                  class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center mx-auto mb-2"
+                  style="width: 60px; height: 60px"
+                >
+                  <i class="bi bi-laptop fs-4 text-primary"></i>
                 </div>
-                <div class="category-name">Laptop</div>
+                <div class="text-dark small fw-medium">Laptops</div>
               </a>
               <a
                 href="products.html?category=desktops"
-                class="category-item text-center mx-2"
+                class="text-decoration-none text-center mx-3 mx-md-4"
               >
-                <div class="category-icon">
-                  <i class="bi bi-pc-display"></i>
+                <div
+                  class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center mx-auto mb-2"
+                  style="width: 60px; height: 60px"
+                >
+                  <i class="bi bi-pc-display fs-4 text-primary"></i>
                 </div>
-                <div class="category-name">Desktops</div>
+                <div class="text-dark small fw-medium">Desktops</div>
               </a>
               <a
                 href="products.html?category=monitors"
-                class="category-item text-center mx-2"
+                class="text-decoration-none text-center mx-3 mx-md-4"
               >
-                <div class="category-icon">
-                  <i class="bi bi-display"></i>
+                <div
+                  class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center mx-auto mb-2"
+                  style="width: 60px; height: 60px"
+                >
+                  <i class="bi bi-display fs-4 text-primary"></i>
                 </div>
-                <div class="category-name">Monitors</div>
+                <div class="text-dark small fw-medium">Monitors</div>
               </a>
               <a
                 href="products.html?category=components"
-                class="category-item text-center mx-2"
+                class="text-decoration-none text-center mx-3 mx-md-4"
               >
-                <div class="category-icon">
-                  <i class="bi bi-cpu"></i>
+                <div
+                  class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center mx-auto mb-2"
+                  style="width: 60px; height: 60px"
+                >
+                  <i class="bi bi-cpu fs-4 text-primary"></i>
                 </div>
-                <div class="category-name">Components</div>
+                <div class="text-dark small fw-medium">Components</div>
               </a>
               <a
                 href="products.html?category=peripherals"
-                class="category-item text-center mx-2"
+                class="text-decoration-none text-center mx-3 mx-md-4"
               >
-                <div class="category-icon">
-                  <i class="bi bi-keyboard"></i>
+                <div
+                  class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center mx-auto mb-2"
+                  style="width: 60px; height: 60px"
+                >
+                  <i class="bi bi-keyboard fs-4 text-primary"></i>
                 </div>
-                <div class="category-name">Peripherals</div>
+                <div class="text-dark small fw-medium">Peripherals</div>
               </a>
               <a
                 href="products.html?category=storage"
-                class="category-item text-center mx-2"
+                class="text-decoration-none text-center mx-3 mx-md-4"
               >
-                <div class="category-icon">
-                  <i class="bi bi-device-hdd"></i>
+                <div
+                  class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center mx-auto mb-2"
+                  style="width: 60px; height: 60px"
+                >
+                  <i class="bi bi-device-hdd fs-4 text-primary"></i>
                 </div>
-                <div class="category-name">Storage</div>
+                <div class="text-dark small fw-medium">Storage</div>
               </a>
               <a
                 href="products.html?category=networking"
-                class="category-item text-center mx-2"
+                class="text-decoration-none text-center mx-3 mx-md-4"
               >
-                <div class="category-icon">
-                  <i class="bi bi-router"></i>
+                <div
+                  class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center mx-auto mb-2"
+                  style="width: 60px; height: 60px"
+                >
+                  <i class="bi bi-router fs-4 text-primary"></i>
                 </div>
-                <div class="category-name">Networking</div>
+                <div class="text-dark small fw-medium">Networking</div>
               </a>
               <a
                 href="products.html?category=accessories"
-                class="category-item text-center mx-2"
+                class="text-decoration-none text-center mx-3 mx-md-4"
               >
-                <div class="category-icon">
-                  <i class="bi bi-headset"></i>
+                <div
+                  class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center mx-auto mb-2"
+                  style="width: 60px; height: 60px"
+                >
+                  <i class="bi bi-headset fs-4 text-primary"></i>
                 </div>
-                <div class="category-name">Accessories</div>
+                <div class="text-dark small fw-medium">Accessories</div>
               </a>
             </div>
           </div>
@@ -203,8 +127,12 @@
       </section>
 
       <!-- Main Slider/Banner Section -->
-      <section class="container mb-4">
-        <div id="mainCarousel" class="carousel slide" data-bs-ride="carousel">
+      <section class="container mb-5">
+        <div
+          id="mainCarousel"
+          class="carousel slide shadow-sm rounded-4 overflow-hidden"
+          data-bs-ride="carousel"
+        >
           <div class="carousel-indicators">
             <button
               type="button"
@@ -234,8 +162,10 @@
                 class="d-block w-100"
                 alt="Special Offers"
               />
-              <div class="carousel-caption d-none d-md-block">
-                <h5>Special Offers</h5>
+              <div
+                class="carousel-caption rounded-3 bg-dark bg-opacity-50 p-3 d-none d-md-block"
+              >
+                <h5 class="fw-bold">Special Offers</h5>
                 <p>Discover amazing deals on computer components</p>
               </div>
             </div>
@@ -245,8 +175,10 @@
                 class="d-block w-100"
                 alt="New Arrivals"
               />
-              <div class="carousel-caption d-none d-md-block">
-                <h5>New Arrivals</h5>
+              <div
+                class="carousel-caption rounded-3 bg-dark bg-opacity-50 p-3 d-none d-md-block"
+              >
+                <h5 class="fw-bold">New Arrivals</h5>
                 <p>Check out our latest products</p>
               </div>
             </div>
@@ -256,8 +188,10 @@
                 class="d-block w-100"
                 alt="Gaming Collection"
               />
-              <div class="carousel-caption d-none d-md-block">
-                <h5>Gaming Collection</h5>
+              <div
+                class="carousel-caption rounded-3 bg-dark bg-opacity-50 p-3 d-none d-md-block"
+              >
+                <h5 class="fw-bold">Gaming Collection</h5>
                 <p>Take your gaming experience to the next level</p>
               </div>
             </div>
@@ -284,34 +218,38 @@
       </section>
 
       <!-- Small Banner Section -->
-      <section class="container mb-4">
-        <div class="row">
-          <div class="col-md-4 mb-3 mb-md-0">
-            <div class="card">
+      <section class="container mb-5">
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div
+              class="card border-0 shadow-sm rounded-4 overflow-hidden h-100"
+            >
               <img
                 src="/api/placeholder/400/200"
-                class="card-img-top"
+                class="card-img"
                 alt="Gaming Components"
               />
-              <div class="card-img-overlay d-flex align-items-end">
+              <div class="card-img-overlay d-flex align-items-end p-0">
                 <h5
-                  class="card-title bg-dark bg-opacity-75 text-white p-2 mb-0 w-100"
+                  class="card-title bg-dark bg-opacity-75 text-white p-3 mb-0 w-100 fw-bold"
                 >
                   Gaming Components
                 </h5>
               </div>
             </div>
           </div>
-          <div class="col-md-4 mb-3 mb-md-0">
-            <div class="card">
+          <div class="col-md-4">
+            <div
+              class="card border-0 shadow-sm rounded-4 overflow-hidden h-100"
+            >
               <img
                 src="/api/placeholder/400/200"
-                class="card-img-top"
+                class="card-img"
                 alt="Workstation Solutions"
               />
-              <div class="card-img-overlay d-flex align-items-end">
+              <div class="card-img-overlay d-flex align-items-end p-0">
                 <h5
-                  class="card-title bg-dark bg-opacity-75 text-white p-2 mb-0 w-100"
+                  class="card-title bg-dark bg-opacity-75 text-white p-3 mb-0 w-100 fw-bold"
                 >
                   Workstation Solutions
                 </h5>
@@ -319,15 +257,17 @@
             </div>
           </div>
           <div class="col-md-4">
-            <div class="card">
+            <div
+              class="card border-0 shadow-sm rounded-4 overflow-hidden h-100"
+            >
               <img
                 src="/api/placeholder/400/200"
-                class="card-img-top"
+                class="card-img"
                 alt="Exclusive Deals"
               />
-              <div class="card-img-overlay d-flex align-items-end">
+              <div class="card-img-overlay d-flex align-items-end p-0">
                 <h5
-                  class="card-title bg-dark bg-opacity-75 text-white p-2 mb-0 w-100"
+                  class="card-title bg-dark bg-opacity-75 text-white p-3 mb-0 w-100 fw-bold"
                 >
                   Exclusive Deals
                 </h5>
@@ -339,9 +279,9 @@
 
       <!-- New Products Section -->
       <section class="container mb-5">
-        <div class="section-header">
-          <h2>New Arrivals</h2>
-          <p>Check out our latest products</p>
+        <div class="text-center mb-4">
+          <h2 class="fw-bold">New Arrivals</h2>
+          <p class="text-muted">Check out our latest products</p>
         </div>
         <div id="new-products">
           <!-- Products will be loaded dynamically -->
@@ -356,9 +296,9 @@
 
       <!-- Best Sellers Section -->
       <section class="container mb-5">
-        <div class="section-header">
-          <h2>Best Sellers</h2>
-          <p>Our most popular products</p>
+        <div class="text-center mb-4">
+          <h2 class="fw-bold">Best Sellers</h2>
+          <p class="text-muted">Our most popular products</p>
         </div>
         <div id="best-sellers">
           <!-- Products will be loaded dynamically -->
@@ -373,9 +313,9 @@
 
       <!-- Featured Categories -->
       <section class="container mb-5">
-        <div class="section-header">
-          <h2>Categories</h2>
-          <p>Browse our product categories</p>
+        <div class="text-center mb-4">
+          <h2 class="fw-bold">Categories</h2>
+          <p class="text-muted">Browse our product categories</p>
         </div>
         <div id="category-products">
           <!-- Category products will be loaded dynamically -->
@@ -389,60 +329,78 @@
       </section>
 
       <!-- Services Section -->
-      <section class="bg-light-gray py-5 mb-5">
+      <section class="bg-white py-5 mb-5 shadow-sm">
         <div class="container">
-          <div class="section-header">
-            <h2>Why Choose Us</h2>
-            <p>We're committed to providing the best shopping experience</p>
+          <div class="text-center mb-5">
+            <h2 class="fw-bold">Why Choose Us</h2>
+            <p class="text-muted">
+              We're committed to providing the best shopping experience
+            </p>
           </div>
-          <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
-            <div class="col">
-              <div class="card h-100 border-0 bg-transparent">
-                <div class="card-body text-center">
-                  <div class="display-4 mb-3 text-primary">
-                    <i class="bi bi-truck"></i>
+          <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+              <div class="card h-100 border-0 bg-transparent text-center">
+                <div class="card-body">
+                  <div
+                    class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3"
+                    style="width: 80px; height: 80px"
+                  >
+                    <i class="bi bi-truck fs-2 text-primary"></i>
                   </div>
-                  <h4 class="card-title">Free Shipping</h4>
-                  <p class="card-text">
+                  <h4 class="card-title h5 fw-bold">Free Shipping</h4>
+                  <p class="card-text text-muted">
                     Free shipping on all orders over $100.
                   </p>
                 </div>
               </div>
             </div>
-            <div class="col">
-              <div class="card h-100 border-0 bg-transparent">
-                <div class="card-body text-center">
-                  <div class="display-4 mb-3 text-primary">
-                    <i class="bi bi-shield-check"></i>
+            <div class="col-lg-3 col-md-6">
+              <div class="card h-100 border-0 bg-transparent text-center">
+                <div class="card-body">
+                  <div
+                    class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3"
+                    style="width: 80px; height: 80px"
+                  >
+                    <i class="bi bi-shield-check fs-2 text-primary"></i>
                   </div>
-                  <h4 class="card-title">Warranty</h4>
-                  <p class="card-text">
+                  <h4 class="card-title h5 fw-bold">Warranty</h4>
+                  <p class="card-text text-muted">
                     All products come with a minimum 1-year warranty.
                   </p>
                 </div>
               </div>
             </div>
-            <div class="col">
-              <div class="card h-100 border-0 bg-transparent">
-                <div class="card-body text-center">
-                  <div class="display-4 mb-3 text-primary">
-                    <i class="bi bi-headset"></i>
+            <div class="col-lg-3 col-md-6">
+              <div class="card h-100 border-0 bg-transparent text-center">
+                <div class="card-body">
+                  <div
+                    class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3"
+                    style="width: 80px; height: 80px"
+                  >
+                    <i class="bi bi-headset fs-2 text-primary"></i>
                   </div>
-                  <h4 class="card-title">Support</h4>
-                  <p class="card-text">
+                  <h4 class="card-title h5 fw-bold">Support</h4>
+                  <p class="card-text text-muted">
                     24/7 customer support for all your inquiries.
                   </p>
                 </div>
               </div>
             </div>
-            <div class="col">
-              <div class="card h-100 border-0 bg-transparent">
-                <div class="card-body text-center">
-                  <div class="display-4 mb-3 text-primary">
-                    <i class="bi bi-arrow-counterclockwise"></i>
+            <div class="col-lg-3 col-md-6">
+              <div class="card h-100 border-0 bg-transparent text-center">
+                <div class="card-body">
+                  <div
+                    class="bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center mx-auto mb-3"
+                    style="width: 80px; height: 80px"
+                  >
+                    <i
+                      class="bi bi-arrow-counterclockwise fs-2 text-primary"
+                    ></i>
                   </div>
-                  <h4 class="card-title">Easy Returns</h4>
-                  <p class="card-text">30-day hassle-free return policy.</p>
+                  <h4 class="card-title h5 fw-bold">Easy Returns</h4>
+                  <p class="card-text text-muted">
+                    30-day hassle-free return policy.
+                  </p>
                 </div>
               </div>
             </div>
@@ -451,85 +409,77 @@
       </section>
     </main>
 
-    <!-- Footer -->
-    <footer>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4 mb-4 mb-md-0">
-            <div class="footer-about">
-              <h5>About TechHub</h5>
-              <p>
-                We offer premium computer components for gamers, professionals,
-                and enthusiasts. With quality products and expert service, we're
-                your trusted partner for all computing needs.
-              </p>
-              <div class="social-icons">
-                <a href="#"><i class="bi bi-facebook"></i></a>
-                <a href="#"><i class="bi bi-twitter"></i></a>
-                <a href="#"><i class="bi bi-instagram"></i></a>
-                <a href="#"><i class="bi bi-youtube"></i></a>
+    <!-- Footer will be loaded dynamically from client/src/components/footer.html -->
+    <footer id="footer-container"></footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Script to load header and footer components -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Load header
+        fetch("/client/src/components/header.html")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(
+                `Failed to load header: ${response.status} ${response.statusText}`
+              );
+            }
+            return response.text();
+          })
+          .then((html) => {
+            document.getElementById("header-container").innerHTML = html;
+
+            // After loading header, highlight the home page in the navigation
+            setTimeout(() => {
+              const homeLinks = document.querySelectorAll(
+                'a[href="index.html"]'
+              );
+              homeLinks.forEach((link) => {
+                if (link.classList.contains("nav-link")) {
+                  link.classList.add("active");
+                }
+              });
+            }, 100);
+          })
+          .catch((error) => {
+            console.error("Error loading header:", error);
+            document.getElementById("header-container").innerHTML = `
+              <div class="alert alert-danger m-3" role="alert">
+                <h4 class="alert-heading">Error Loading Header</h4>
+                <p>${error.message}</p>
+                <hr>
+                <p class="mb-0">Please check the path to your header component (/client/src/components/header.html).</p>
               </div>
-            </div>
-          </div>
-          <div class="col-6 col-md-2 mb-4 mb-md-0">
-            <div class="footer-links">
-              <h5>Shop</h5>
-              <ul>
-                <li><a href="products.html">All Products</a></li>
-                <li><a href="products.html?category=laptops">Laptops</a></li>
-                <li><a href="products.html?category=monitors">Monitors</a></li>
-                <li><a href="products.html?category=storage">Storage</a></li>
-                <li>
-                  <a href="products.html?category=components">Components</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-6 col-md-2 mb-4 mb-md-0">
-            <div class="footer-links">
-              <h5>Support</h5>
-              <ul>
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#">FAQs</a></li>
-                <li><a href="#">Shipping Policy</a></li>
-                <li><a href="#">Return Policy</a></li>
-                <li><a href="#">Warranty</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="footer-newsletter">
-              <h5>Newsletter</h5>
-              <p>
-                Subscribe to our newsletter for the latest updates and offers.
-              </p>
-              <form>
-                <div class="input-group mb-3">
-                  <input
-                    type="email"
-                    class="form-control"
-                    placeholder="Your Email"
-                    aria-label="Email"
-                    aria-describedby="subscribe-btn"
-                  />
-                  <button
-                    class="btn btn-primary"
-                    type="button"
-                    id="subscribe-btn"
-                  >
-                    Subscribe
-                  </button>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom text-center">
-        <div class="container">
-          <p class="mb-0">&copy; 2025 TechHub. All rights reserved.</p>
-        </div>
-      </div>
-    </footer>
+            `;
+          });
+
+        // Load footer
+        fetch("/client/src/components/footer.html")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(
+                `Failed to load footer: ${response.status} ${response.statusText}`
+              );
+            }
+            return response.text();
+          })
+          .then((html) => {
+            document.getElementById("footer-container").innerHTML = html;
+          })
+          .catch((error) => {
+            console.error("Error loading footer:", error);
+            document.getElementById("footer-container").innerHTML = `
+              <div class="alert alert-danger m-3" role="alert">
+                <h4 class="alert-heading">Error Loading Footer</h4>
+                <p>${error.message}</p>
+                <hr>
+                <p class="mb-0">Please check the path to your footer component (/client/src/components/footer.html).</p>
+              </div>
+            `;
+          });
+      });
+    </script>
   </body>
 </html>

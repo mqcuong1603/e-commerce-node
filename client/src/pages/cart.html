@@ -1,236 +1,654 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shopping Cart - Computer Components Store</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-</head>
-<body>
-  <!-- Header / Navigation -->
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping Cart - TechHub Computer Components Store</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+  </head>
+  <body class="bg-light pt-5">
+    <!-- Header will be loaded dynamically from client/src/components/header.html -->
+    <header id="header-container"></header>
+
+    <main class="py-5">
       <div class="container">
-        <a class="navbar-brand" href="index.html">
-          <i class="bi bi-cpu-fill me-2"></i>
-          <span class="text-highlight">Tech</span>Hub
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
-                aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="category-menu">
-            <!-- Categories will be loaded dynamically -->
-            <li class="nav-item">
-              <a class="nav-link" href="products.html">All Products</a>
-            </li>
-          </ul>
-          <form class="search-form d-flex mx-auto">
-            <input class="form-control" type="search" placeholder="Search products..." aria-label="Search">
-            <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
-          </form>
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link position-relative" href="cart.html">
-                <i class="bi bi-cart-fill"></i>
-                <span class="cart-count badge rounded-pill bg-danger d-none">0</span>
-              </a>
-            </li>
-            <!-- Authentication links (shown when not logged in) -->
-            <li class="nav-item dropdown" id="auth-menu-items">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" 
-                 data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-person-circle"></i> Account
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="login.html">Login</a></li>
-                <li><a class="dropdown-item" href="register.html">Register</a></li>
-              </ul>
-            </li>
-            <!-- User menu (shown when logged in) -->
-            <li class="nav-item dropdown d-none" id="user-menu-items">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" 
-                 data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-person-fill"></i> <span class="user-fullname">User</span>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                <li><a class="dropdown-item" href="profile.html">My Profile</a></li>
-                <li><a class="dropdown-item" href="profile.html#orders">Order History</a></li>
-                <li><a class="dropdown-item admin-only d-none" href="admin-dashboard.html">Admin Dashboard</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item logout-button" href="#">Logout</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
+        <h1 class="fw-bold mb-4">Shopping Cart</h1>
 
-  <main class="main-content py-5">
-    <div class="container">
-      <h1 class="mb-4">Shopping Cart</h1>
-
-      <!-- Empty Cart Message -->
-      <div id="empty-cart" class="text-center py-5 d-none">
-        <div class="display-1 text-muted mb-4">
-          <i class="bi bi-cart"></i>
-        </div>
-        <h3 class="mb-3">Your cart is empty</h3>
-        <p class="mb-4">Looks like you haven't added any products to your cart yet.</p>
-        <a href="products.html" class="btn btn-primary">Continue Shopping</a>
-      </div>
-
-      <!-- Cart Contents -->
-      <div id="cart-container">
-        <div class="row">
-          <div class="col-lg-8">
-            <div class="card mb-4">
-              <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="mb-0">Cart Items</h5>
-                <button id="clear-cart" class="btn btn-sm btn-outline-danger">
-                  <i class="bi bi-trash"></i> Clear Cart
-                </button>
-              </div>
-              <div class="card-body">
-                <div class="table-responsive">
-                  <table class="table table-hover">
-                    <thead>
-                      <tr>
-                        <th>Product</th>
-                        <th class="text-end">Price</th>
-                        <th>Quantity</th>
-                        <th class="text-end">Total</th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody id="cart-items">
-                      <!-- Cart items will be loaded dynamically -->
-                      <tr>
-                        <td colspan="5" class="text-center py-4">
-                          <div class="spinner-border text-primary" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                          </div>
-                          <p class="mt-2">Loading cart items...</p>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
+        <!-- Empty Cart Message -->
+        <div id="empty-cart" class="text-center py-5 d-none">
+          <div class="display-1 text-muted mb-4">
+            <i class="bi bi-cart"></i>
           </div>
-          <div class="col-lg-4">
-            <div class="card cart-summary">
-              <div class="card-header">
-                <h5 class="mb-0">Order Summary</h5>
-              </div>
-              <div class="card-body">
-                <div class="d-flex justify-content-between mb-2">
-                  <span>Subtotal</span>
-                  <span id="cart-subtotal">$0.00</span>
-                </div>
-                <div class="d-flex justify-content-between mb-2">
-                  <span>Shipping</span>
-                  <span id="cart-shipping">$0.00</span>
-                </div>
-                <div class="d-flex justify-content-between mb-2">
-                  <span>Tax (10%)</span>
-                  <span id="cart-tax">$0.00</span>
-                </div>
-                <hr>
-                <div class="d-flex justify-content-between mb-3">
-                  <span class="fw-bold">Total</span>
-                  <span class="fw-bold" id="cart-total">$0.00</span>
-                </div>
-                <div class="d-grid">
-                  <button class="btn btn-primary btn-lg" id="proceed-to-checkout">
-                    Proceed to Checkout <i class="bi bi-arrow-right"></i>
+          <h3 class="mb-3">Your cart is empty</h3>
+          <p class="mb-4">
+            Looks like you haven't added any products to your cart yet.
+          </p>
+          <a href="products.html" class="btn btn-primary">Continue Shopping</a>
+        </div>
+
+        <!-- Cart Contents -->
+        <div id="cart-container">
+          <div class="row g-4">
+            <!-- Cart Items -->
+            <div class="col-lg-8">
+              <div class="card border-0 shadow-sm rounded-4 mb-4">
+                <div
+                  class="card-header bg-white d-flex justify-content-between align-items-center py-3 border-0"
+                >
+                  <h5 class="card-title mb-0 fw-bold">Cart Items</h5>
+                  <button id="clear-cart" class="btn btn-sm btn-outline-danger">
+                    <i class="bi bi-trash me-1"></i> Clear Cart
                   </button>
                 </div>
-                <div class="text-center mt-3">
-                  <small class="text-muted">Free shipping on orders over $100</small>
+                <div class="card-body p-0">
+                  <div class="table-responsive">
+                    <table class="table table-hover align-middle mb-0">
+                      <thead class="table-light">
+                        <tr>
+                          <th class="ps-4">Product</th>
+                          <th class="text-end">Price</th>
+                          <th>Quantity</th>
+                          <th class="text-end">Total</th>
+                          <th class="text-center pe-4">Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody id="cart-items">
+                        <!-- Cart items will be loaded dynamically -->
+                        <tr>
+                          <td colspan="5" class="text-center py-5">
+                            <div
+                              class="spinner-border text-primary"
+                              role="status"
+                            >
+                              <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="mt-2">Loading cart items...</p>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="card mt-3">
-              <div class="card-body">
-                <h6 class="card-title mb-3">We Accept</h6>
-                <div class="d-flex justify-content-between align-items-center">
-                  <i class="bi bi-credit-card fs-2"></i>
-                  <i class="bi bi-paypal fs-2"></i>
-                  <i class="bi bi-wallet2 fs-2"></i>
-                  <i class="bi bi-bank fs-2"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
 
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4 mb-4 mb-md-0">
-          <div class="footer-about">
-            <h5>About TechHub</h5>
-            <p>We offer premium computer components for gamers, professionals, and enthusiasts. With quality products and expert service, we're your trusted partner for all computing needs.</p>
-            <div class="social-icons">
-              <a href="#"><i class="bi bi-facebook"></i></a>
-              <a href="#"><i class="bi bi-twitter"></i></a>
-              <a href="#"><i class="bi bi-instagram"></i></a>
-              <a href="#"><i class="bi bi-youtube"></i></a>
+            <!-- Order Summary -->
+            <div class="col-lg-4">
+              <div class="card border-0 shadow-sm rounded-4 mb-3">
+                <div class="card-header bg-white py-3 border-0">
+                  <h5 class="card-title mb-0 fw-bold">Order Summary</h5>
+                </div>
+                <div class="card-body">
+                  <div class="d-flex justify-content-between mb-3">
+                    <span>Subtotal</span>
+                    <span id="cart-subtotal" class="fw-medium">$0.00</span>
+                  </div>
+                  <div class="d-flex justify-content-between mb-3">
+                    <span>Shipping</span>
+                    <span id="cart-shipping" class="fw-medium">$0.00</span>
+                  </div>
+                  <div class="d-flex justify-content-between mb-3">
+                    <span>Tax (10%)</span>
+                    <span id="cart-tax" class="fw-medium">$0.00</span>
+                  </div>
+                  <hr />
+                  <div class="d-flex justify-content-between mb-4">
+                    <span class="fw-bold">Total</span>
+                    <span class="fw-bold fs-5 text-primary" id="cart-total"
+                      >$0.00</span
+                    >
+                  </div>
+                  <div class="d-grid gap-2">
+                    <button class="btn btn-primary" id="proceed-to-checkout">
+                      Proceed to Checkout <i class="bi bi-arrow-right ms-1"></i>
+                    </button>
+                    <a href="products.html" class="btn btn-outline-secondary">
+                      <i class="bi bi-arrow-left me-1"></i> Continue Shopping
+                    </a>
+                  </div>
+                  <div class="alert alert-light mt-3 mb-0 text-center">
+                    <i class="bi bi-truck text-primary me-2"></i>
+                    <small>Free shipping on orders over $100</small>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Payment Methods -->
+              <div class="card border-0 shadow-sm rounded-4">
+                <div class="card-body">
+                  <h6 class="fw-bold mb-3">We Accept</h6>
+                  <div
+                    class="d-flex justify-content-between align-items-center"
+                  >
+                    <div class="d-flex flex-column align-items-center">
+                      <i class="bi bi-credit-card fs-3 text-primary"></i>
+                      <span class="small mt-1">Credit Card</span>
+                    </div>
+                    <div class="d-flex flex-column align-items-center">
+                      <i class="bi bi-paypal fs-3 text-primary"></i>
+                      <span class="small mt-1">PayPal</span>
+                    </div>
+                    <div class="d-flex flex-column align-items-center">
+                      <i class="bi bi-wallet2 fs-3 text-primary"></i>
+                      <span class="small mt-1">Digital Wallet</span>
+                    </div>
+                    <div class="d-flex flex-column align-items-center">
+                      <i class="bi bi-bank fs-3 text-primary"></i>
+                      <span class="small mt-1">Bank Transfer</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="col-6 col-md-2 mb-4 mb-md-0">
-          <div class="footer-links">
-            <h5>Shop</h5>
-            <ul>
-              <li><a href="products.html">All Products</a></li>
-              <li><a href="products.html?category=laptops">Laptops</a></li>
-              <li><a href="products.html?category=monitors">Monitors</a></li>
-              <li><a href="products.html?category=storage">Storage</a></li>
-              <li><a href="products.html?category=components">Components</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-6 col-md-2 mb-4 mb-md-0">
-          <div class="footer-links">
-            <h5>Support</h5>
-            <ul>
-              <li><a href="#">Contact Us</a></li>
-              <li><a href="#">FAQs</a></li>
-              <li><a href="#">Shipping Policy</a></li>
-              <li><a href="#">Return Policy</a></li>
-              <li><a href="#">Warranty</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="footer-newsletter">
-            <h5>Newsletter</h5>
-            <p>Subscribe to our newsletter for the latest updates and offers.</p>
-            <form>
-              <div class="input-group mb-3">
-                <input type="email" class="form-control" placeholder="Your Email" aria-label="Email" aria-describedby="subscribe-btn">
-                <button class="btn btn-primary" type="button" id="subscribe-btn">Subscribe</button>
+      </div>
+    </main>
+
+    <!-- Footer will be loaded dynamically from client/src/components/footer.html -->
+    <footer id="footer-container"></footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SweetAlert2 for better alerts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.2/dist/sweetalert2.all.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Load header and footer components
+        loadComponents();
+
+        // Simulate cart data for demonstration
+        setTimeout(() => loadCartDemo(), 800);
+
+        // Event handlers for cart functionality
+        setupCartEventHandlers();
+      });
+
+      // Load header and footer components
+      function loadComponents() {
+        // Load header
+        fetch("/client/src/components/header.html")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(
+                `Failed to load header: ${response.status} ${response.statusText}`
+              );
+            }
+            return response.text();
+          })
+          .then((html) => {
+            document.getElementById("header-container").innerHTML = html;
+
+            // Highlight the cart page in the navigation
+            setTimeout(() => {
+              const cartLinks = document.querySelectorAll(
+                'a[href="cart.html"]'
+              );
+              cartLinks.forEach((link) => {
+                if (link.classList.contains("nav-link")) {
+                  link.classList.add("active");
+                }
+              });
+            }, 100);
+          })
+          .catch((error) => {
+            console.error("Error loading header:", error);
+            document.getElementById("header-container").innerHTML = `
+            <div class="alert alert-danger m-3" role="alert">
+              <h4 class="alert-heading">Error Loading Header</h4>
+              <p>${error.message}</p>
+              <hr>
+              <p class="mb-0">Please check the path to your header component.</p>
+            </div>
+          `;
+          });
+
+        // Load footer
+        fetch("/client/src/components/footer.html")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(
+                `Failed to load footer: ${response.status} ${response.statusText}`
+              );
+            }
+            return response.text();
+          })
+          .then((html) => {
+            document.getElementById("footer-container").innerHTML = html;
+          })
+          .catch((error) => {
+            console.error("Error loading footer:", error);
+            document.getElementById("footer-container").innerHTML = `
+            <div class="alert alert-danger m-3" role="alert">
+              <h4 class="alert-heading">Error Loading Footer</h4>
+              <p>${error.message}</p>
+              <hr>
+              <p class="mb-0">Please check the path to your footer component.</p>
+            </div>
+          `;
+          });
+      }
+
+      // Demo function to simulate loading cart data
+      function loadCartDemo() {
+        // Sample cart data
+        const cartData = {
+          items: [
+            {
+              productVariantId: {
+                _id: "var1",
+                productId: {
+                  name: "AMD Ryzen 9 5900X",
+                  slug: "amd-ryzen-9-5900x",
+                },
+                name: "Base Model",
+                price: 499.99,
+                images: [{ imageUrl: "/api/placeholder/100/100" }],
+              },
+              quantity: 1,
+              price: 499.99,
+            },
+            {
+              productVariantId: {
+                _id: "var2",
+                productId: {
+                  name: "NVIDIA GeForce RTX 3080",
+                  slug: "nvidia-geforce-rtx-3080",
+                },
+                name: "10GB GDDR6X",
+                price: 799.99,
+                salePrice: 699.99,
+                images: [{ imageUrl: "/api/placeholder/100/100" }],
+              },
+              quantity: 1,
+              price: 699.99,
+            },
+            {
+              productVariantId: {
+                _id: "var3",
+                productId: {
+                  name: "Samsung 970 EVO Plus",
+                  slug: "samsung-970-evo-plus",
+                },
+                name: "1TB NVMe M.2",
+                price: 149.99,
+                images: [{ imageUrl: "/api/placeholder/100/100" }],
+              },
+              quantity: 2,
+              price: 149.99,
+            },
+          ],
+        };
+
+        // Check if cart has items
+        if (cartData.items && cartData.items.length > 0) {
+          document.getElementById("cart-container").classList.remove("d-none");
+          document.getElementById("empty-cart").classList.add("d-none");
+          renderCartItems(cartData);
+        } else {
+          document.getElementById("cart-container").classList.add("d-none");
+          document.getElementById("empty-cart").classList.remove("d-none");
+        }
+      }
+
+      // Render cart items
+      function renderCartItems(cartData) {
+        const cartTableBody = document.getElementById("cart-items");
+        let itemsHtml = "";
+        let subtotal = 0;
+
+        cartData.items.forEach((item) => {
+          const variant = item.productVariantId;
+          const product = variant.productId;
+          const image =
+            variant.images && variant.images.length > 0
+              ? variant.images[0]
+              : null;
+          const itemTotal = item.price * item.quantity;
+          subtotal += itemTotal;
+
+          // Check if item is on sale
+          const isSale = variant.salePrice && variant.salePrice < variant.price;
+          const displayPrice = isSale ? variant.salePrice : variant.price;
+
+          itemsHtml += `
+          <tr data-product-variant-id="${variant._id}">
+            <td class="ps-4">
+              <div class="d-flex align-items-center">
+                <img src="${image ? image.imageUrl : "/api/placeholder/80/80"}" 
+                     alt="${
+                       product.name
+                     }" class="rounded me-3" style="width: 80px; height: 80px; object-fit: contain;">
+                <div>
+                  <h6 class="mb-0"><a href="product-detail.html?slug=${
+                    product.slug
+                  }" class="text-decoration-none text-dark">${
+            product.name
+          }</a></h6>
+                  <span class="text-muted">${variant.name}</span>
+                  ${
+                    isSale
+                      ? '<span class="badge bg-warning text-dark ms-2">SALE</span>'
+                      : ""
+                  }
+                </div>
               </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom text-center">
-      <div class="container">
-        <p class="mb-0">&copy; 2025 TechHub. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
-</body>
+            </td>
+            <td class="text-end fw-medium">$${displayPrice.toFixed(2)}</td>
+            <td>
+              <div class="input-group input-group-sm" style="width: 120px;">
+                <button class="btn btn-outline-secondary decrease-quantity" type="button">
+                  <i class="bi bi-dash"></i>
+                </button>
+                <input type="number" class="form-control text-center item-quantity" 
+                       value="${item.quantity}" min="1" max="99">
+                <button class="btn btn-outline-secondary increase-quantity" type="button">
+                  <i class="bi bi-plus"></i>
+                </button>
+              </div>
+            </td>
+            <td class="text-end fw-medium item-total">$${itemTotal.toFixed(
+              2
+            )}</td>
+            <td class="text-center pe-4">
+              <button class="btn btn-sm btn-outline-danger remove-item" title="Remove item">
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+        `;
+        });
+
+        cartTableBody.innerHTML = itemsHtml;
+
+        // Calculate tax and shipping
+        const shipping = subtotal > 100 ? 0 : 15;
+        const tax = subtotal * 0.1; // 10% tax
+        const total = subtotal + shipping + tax;
+
+        // Update cart summary
+        document.getElementById(
+          "cart-subtotal"
+        ).textContent = `$${subtotal.toFixed(2)}`;
+        document.getElementById("cart-shipping").textContent =
+          shipping === 0 ? "FREE" : `$${shipping.toFixed(2)}`;
+        document.getElementById("cart-tax").textContent = `$${tax.toFixed(2)}`;
+        document.getElementById("cart-total").textContent = `$${total.toFixed(
+          2
+        )}`;
+
+        // Update cart badge
+        updateCartBadge(cartData.items.length);
+      }
+
+      // Setup cart event handlers
+      function setupCartEventHandlers() {
+        const cartTableBody = document.getElementById("cart-items");
+
+        // Event delegation for cart item interactions
+        if (cartTableBody) {
+          cartTableBody.addEventListener("click", function (e) {
+            // Handle quantity decrease
+            if (
+              e.target.classList.contains("decrease-quantity") ||
+              e.target.closest(".decrease-quantity")
+            ) {
+              const row = e.target.closest("tr");
+              const quantityInput = row.querySelector(".item-quantity");
+              const currentQty = parseInt(quantityInput.value);
+              if (currentQty > 1) {
+                quantityInput.value = currentQty - 1;
+                updateItemQuantity(row, currentQty - 1);
+              }
+            }
+
+            // Handle quantity increase
+            if (
+              e.target.classList.contains("increase-quantity") ||
+              e.target.closest(".increase-quantity")
+            ) {
+              const row = e.target.closest("tr");
+              const quantityInput = row.querySelector(".item-quantity");
+              const currentQty = parseInt(quantityInput.value);
+              if (currentQty < 99) {
+                quantityInput.value = currentQty + 1;
+                updateItemQuantity(row, currentQty + 1);
+              }
+            }
+
+            // Handle remove item
+            if (
+              e.target.classList.contains("remove-item") ||
+              e.target.closest(".remove-item")
+            ) {
+              const row = e.target.closest("tr");
+              removeCartItem(row);
+            }
+          });
+
+          // Listen for direct input on quantity fields
+          cartTableBody.addEventListener("change", function (e) {
+            if (e.target.classList.contains("item-quantity")) {
+              const row = e.target.closest("tr");
+              const newQty = parseInt(e.target.value);
+              if (newQty >= 1 && newQty <= 99) {
+                updateItemQuantity(row, newQty);
+              } else if (newQty < 1) {
+                e.target.value = 1;
+                updateItemQuantity(row, 1);
+              } else {
+                e.target.value = 99;
+                updateItemQuantity(row, 99);
+              }
+            }
+          });
+        }
+
+        // Clear cart button
+        const clearCartBtn = document.getElementById("clear-cart");
+        if (clearCartBtn) {
+          clearCartBtn.addEventListener("click", function () {
+            Swal.fire({
+              title: "Clear Cart?",
+              text: "This will remove all items from your cart.",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#dc3545",
+              cancelButtonColor: "#6c757d",
+              confirmButtonText: "Yes, clear cart",
+              cancelButtonText: "Cancel",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                // In a real implementation, this would call the cart API
+                document
+                  .getElementById("cart-container")
+                  .classList.add("d-none");
+                document
+                  .getElementById("empty-cart")
+                  .classList.remove("d-none");
+                updateCartBadge(0);
+
+                Swal.fire({
+                  title: "Cart Cleared",
+                  text: "Your shopping cart has been emptied.",
+                  icon: "success",
+                  confirmButtonColor: "#0d6efd",
+                });
+              }
+            });
+          });
+        }
+
+        // Proceed to checkout button
+        const checkoutBtn = document.getElementById("proceed-to-checkout");
+        if (checkoutBtn) {
+          checkoutBtn.addEventListener("click", function () {
+            // Check if user is logged in (simulated here)
+            const isLoggedIn = false; // Replace with actual auth check
+
+            if (!isLoggedIn) {
+              Swal.fire({
+                title: "Login Required",
+                text: "Please log in to proceed with checkout.",
+                icon: "info",
+                showCancelButton: true,
+                confirmButtonText: "Login",
+                cancelButtonText: "Continue as Guest",
+                confirmButtonColor: "#0d6efd",
+                cancelButtonColor: "#6c757d",
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  window.location.href = `login.html?redirect=${encodeURIComponent(
+                    "checkout.html"
+                  )}`;
+                } else {
+                  window.location.href = "checkout.html";
+                }
+              });
+            } else {
+              window.location.href = "checkout.html";
+            }
+          });
+        }
+      }
+
+      // Update item quantity
+      function updateItemQuantity(row, newQuantity) {
+        // Get product info
+        const variantId = row.getAttribute("data-product-variant-id");
+        const priceElement = row.querySelector("td:nth-child(2)");
+        const price = parseFloat(priceElement.textContent.replace("$", ""));
+        const totalElement = row.querySelector(".item-total");
+
+        // Calculate new total
+        const newTotal = price * newQuantity;
+        totalElement.textContent = `$${newTotal.toFixed(2)}`;
+
+        // Update cart summary
+        updateCartSummary();
+
+        // In a real implementation, this would call the cart API to update the quantity
+        console.log(`Updated item ${variantId} to quantity ${newQuantity}`);
+      }
+
+      // Remove cart item
+      function removeCartItem(row) {
+        // Get product info
+        const variantId = row.getAttribute("data-product-variant-id");
+        const productName = row.querySelector("h6").textContent;
+
+        Swal.fire({
+          title: "Remove Item?",
+          text: `Are you sure you want to remove "${productName}" from your cart?`,
+          icon: "question",
+          showCancelButton: true,
+          confirmButtonColor: "#dc3545",
+          cancelButtonColor: "#6c757d",
+          confirmButtonText: "Remove",
+          cancelButtonText: "Cancel",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            // Remove row with animation
+            row.style.backgroundColor = "#fff9f9";
+            setTimeout(() => {
+              row.style.transition = "opacity 0.5s ease";
+              row.style.opacity = "0";
+              setTimeout(() => {
+                row.remove();
+                updateCartSummary();
+
+                // Check if cart is empty
+                const cartItems = document.querySelectorAll("#cart-items tr");
+                if (cartItems.length === 0) {
+                  document
+                    .getElementById("cart-container")
+                    .classList.add("d-none");
+                  document
+                    .getElementById("empty-cart")
+                    .classList.remove("d-none");
+                }
+
+                // Update cart badge
+                const newCount = cartItems.length;
+                updateCartBadge(newCount);
+
+                // In a real implementation, this would call the cart API to remove the item
+                console.log(`Removed item ${variantId} from cart`);
+              }, 500);
+            }, 100);
+          }
+        });
+      }
+
+      // Update cart summary based on current items
+      function updateCartSummary() {
+        let subtotal = 0;
+
+        // Calculate subtotal from all items
+        document.querySelectorAll("#cart-items tr").forEach((row) => {
+          const totalText = row.querySelector(".item-total").textContent;
+          subtotal += parseFloat(totalText.replace("$", ""));
+        });
+
+        // Calculate tax and shipping
+        const shipping = subtotal > 100 ? 0 : 15;
+        const tax = subtotal * 0.1; // 10% tax
+        const total = subtotal + shipping + tax;
+
+        // Update cart summary with animation
+        animateCounterValue("cart-subtotal", subtotal);
+        document.getElementById("cart-shipping").textContent =
+          shipping === 0 ? "FREE" : `$${shipping.toFixed(2)}`;
+        animateCounterValue("cart-tax", tax);
+        animateCounterValue("cart-total", total);
+      }
+
+      // Animate counter for smoother price changes
+      function animateCounterValue(elementId, targetValue) {
+        const element = document.getElementById(elementId);
+        const startValue = parseFloat(element.textContent.replace("$", ""));
+        const duration = 300; // milliseconds
+        const startTime = performance.now();
+
+        function updateCounter(currentTime) {
+          const elapsedTime = currentTime - startTime;
+          const progress = Math.min(elapsedTime / duration, 1);
+          const currentValue =
+            startValue + (targetValue - startValue) * progress;
+          element.textContent = `$${currentValue.toFixed(2)}`;
+
+          if (progress < 1) {
+            requestAnimationFrame(updateCounter);
+          }
+        }
+
+        requestAnimationFrame(updateCounter);
+      }
+
+      // Update cart badge count
+      function updateCartBadge(count) {
+        const cartBadges = document.querySelectorAll(".badge.bg-danger");
+
+        cartBadges.forEach((badge) => {
+          badge.textContent = count;
+
+          if (count > 0) {
+            badge.classList.remove("d-none");
+          } else {
+            badge.classList.add("d-none");
+          }
+        });
+      }
+    </script>
+  </body>
 </html>

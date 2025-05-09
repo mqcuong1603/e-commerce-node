@@ -1,3 +1,4 @@
+<!-- Header Component -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
   <div class="container">
     <a class="navbar-brand fw-bold" href="index.html">
@@ -17,6 +18,9 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html">Home</a>
+        </li>
         <li class="nav-item">
           <a class="nav-link" href="products.html">All Products</a>
         </li>
@@ -71,6 +75,9 @@
         <li class="nav-item">
           <a class="nav-link" href="#">Deals</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">New Arrivals</a>
+        </li>
       </ul>
 
       <form class="d-flex mx-auto my-2 my-lg-0" style="max-width: 500px">
@@ -93,8 +100,10 @@
             <i class="bi bi-cart-fill fs-5"></i>
             <span
               class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-              >0</span
+              id="cart-count"
             >
+              0
+            </span>
           </a>
         </li>
         <!-- Authentication links (shown when not logged in) -->
@@ -107,12 +116,10 @@
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <i class="bi bi-person-circle fs-5"></i> Account
+            <i class="bi bi-person-circle fs-5"></i>
+            Account
           </a>
-          <ul
-            class="dropdown-menu dropdown-menu-end dropdown-menu-dark"
-            aria-labelledby="navbarDropdown"
-          >
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
             <li><a class="dropdown-item" href="login.html">Login</a></li>
             <li><a class="dropdown-item" href="register.html">Register</a></li>
           </ul>
@@ -130,10 +137,7 @@
             <i class="bi bi-person-fill fs-5"></i>
             <span class="user-fullname">User</span>
           </a>
-          <ul
-            class="dropdown-menu dropdown-menu-end dropdown-menu-dark"
-            aria-labelledby="userDropdown"
-          >
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-dark">
             <li><a class="dropdown-item" href="profile.html">My Profile</a></li>
             <li>
               <a class="dropdown-item" href="profile.html#orders"

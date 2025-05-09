@@ -1,215 +1,1215 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Products - Computer Components Store</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-</head>
-<body>
-  <!-- Header / Navigation -->
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Products - TechHub Computer Components Store</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+  </head>
+  <body class="bg-light pt-5">
+    <!-- Header will be loaded dynamically from client/src/components/header.html -->
+    <header id="header-container"></header>
+
+    <main class="py-5">
       <div class="container">
-        <a class="navbar-brand" href="index.html">
-          <i class="bi bi-cpu-fill me-2"></i>
-          <span class="text-highlight">Tech</span>Hub
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
-                aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="category-menu">
-            <!-- Categories will be loaded dynamically -->
-            <li class="nav-item">
-              <a class="nav-link" href="products.html">All Products</a>
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-4">
+          <ol class="breadcrumb" id="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="index.html" class="text-decoration-none">Home</a>
             </li>
-          </ul>
-          <form class="search-form d-flex mx-auto">
-            <input class="form-control" type="search" placeholder="Search products..." aria-label="Search">
-            <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
-          </form>
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link position-relative" href="cart.html">
-                <i class="bi bi-cart-fill"></i>
-                <span class="cart-count badge rounded-pill bg-danger d-none">0</span>
-              </a>
-            </li>
-            <!-- Authentication links (shown when not logged in) -->
-            <li class="nav-item dropdown" id="auth-menu-items">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" 
-                 data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-person-circle"></i> Account
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="login.html">Login</a></li>
-                <li><a class="dropdown-item" href="register.html">Register</a></li>
-              </ul>
-            </li>
-            <!-- User menu (shown when logged in) -->
-            <li class="nav-item dropdown d-none" id="user-menu-items">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" 
-                 data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-person-fill"></i> <span class="user-fullname">User</span>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                <li><a class="dropdown-item" href="profile.html">My Profile</a></li>
-                <li><a class="dropdown-item" href="profile.html#orders">Order History</a></li>
-                <li><a class="dropdown-item admin-only d-none" href="admin-dashboard.html">Admin Dashboard</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item logout-button" href="#">Logout</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
+            <li class="breadcrumb-item active" aria-current="page">Products</li>
+          </ol>
+        </nav>
 
-  <main class="main-content py-5">
-    <div class="container">
-      <!-- Breadcrumb -->
-      <nav aria-label="breadcrumb" class="mb-4">
-        <ol class="breadcrumb" id="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Products</li>
-        </ol>
-      </nav>
+        <div class="row g-4">
+          <!-- Filters Sidebar -->
+          <div class="col-lg-3">
+            <div class="card border-0 shadow-sm rounded-4 mb-4">
+              <div class="card-header bg-white border-0 py-3">
+                <h4 class="card-title mb-0 fw-bold">Filters</h4>
+              </div>
+              <div class="card-body">
+                <form id="filter-form">
+                  <div class="mb-3">
+                    <label for="search" class="form-label fw-medium"
+                      >Search</label
+                    >
+                    <div class="input-group">
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="search"
+                        name="search"
+                        placeholder="Search products..."
+                      />
+                      <button class="btn btn-outline-primary" type="submit">
+                        <i class="bi bi-search"></i>
+                      </button>
+                    </div>
+                  </div>
 
-      <div class="row">
-        <!-- Filters Sidebar -->
-        <div class="col-lg-3">
-          <div class="filters-sidebar">
-            <h4>Filters</h4>
-            <form id="filter-form">
-              <div class="mb-3">
-                <label for="search" class="form-label">Search</label>
-                <input type="text" class="form-control" id="search" name="search">
+                  <hr />
+
+                  <div class="mb-3">
+                    <label for="category-select" class="form-label fw-medium"
+                      >Category</label
+                    >
+                    <select
+                      class="form-select"
+                      id="category-select"
+                      name="category"
+                    >
+                      <option value="">All Categories</option>
+                      <option value="processors">Processors</option>
+                      <option value="graphics-cards">Graphics Cards</option>
+                      <option value="motherboards">Motherboards</option>
+                      <option value="memory">Memory</option>
+                      <option value="storage">Storage</option>
+                      <option value="power-supplies">Power Supplies</option>
+                      <option value="cases">Cases</option>
+                      <option value="cooling">Cooling</option>
+                    </select>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="brand-select" class="form-label fw-medium"
+                      >Brand</label
+                    >
+                    <select class="form-select" id="brand-select" name="brand">
+                      <option value="">All Brands</option>
+                      <option value="AMD">AMD</option>
+                      <option value="Intel">Intel</option>
+                      <option value="NVIDIA">NVIDIA</option>
+                      <option value="ASUS">ASUS</option>
+                      <option value="MSI">MSI</option>
+                      <option value="Gigabyte">Gigabyte</option>
+                      <option value="Corsair">Corsair</option>
+                      <option value="Samsung">Samsung</option>
+                    </select>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label fw-medium">Price Range</label>
+                    <div class="d-flex align-items-center">
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        id="min-price"
+                        name="minPrice"
+                        placeholder="Min"
+                      />
+                      <span class="mx-2">-</span>
+                      <input
+                        type="number"
+                        class="form-control form-control-sm"
+                        id="max-price"
+                        name="maxPrice"
+                        placeholder="Max"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label fw-medium">Rating</label>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value="4"
+                        id="rating4"
+                        name="rating"
+                      />
+                      <label class="form-check-label" for="rating4">
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star text-warning"></i>
+                        & Up
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value="3"
+                        id="rating3"
+                        name="rating"
+                      />
+                      <label class="form-check-label" for="rating3">
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star text-warning"></i>
+                        <i class="bi bi-star text-warning"></i>
+                        & Up
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value="2"
+                        id="rating2"
+                        name="rating"
+                      />
+                      <label class="form-check-label" for="rating2">
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star text-warning"></i>
+                        <i class="bi bi-star text-warning"></i>
+                        <i class="bi bi-star text-warning"></i>
+                        & Up
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label fw-medium">Availability</label>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value="instock"
+                        id="instock"
+                        name="availability"
+                        checked
+                      />
+                      <label class="form-check-label" for="instock">
+                        In Stock
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        class="form-check-input"
+                        type="checkbox"
+                        value="preorder"
+                        id="preorder"
+                        name="availability"
+                      />
+                      <label class="form-check-label" for="preorder">
+                        Pre-order
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-primary">
+                      <i class="bi bi-funnel-fill me-2"></i>Apply Filters
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-outline-secondary"
+                      id="clear-filters"
+                    >
+                      <i class="bi bi-x-circle me-2"></i>Clear Filters
+                    </button>
+                  </div>
+                </form>
               </div>
-              <div class="mb-3">
-                <label for="brand-select" class="form-label">Brand</label>
-                <select class="form-select" id="brand-select" name="brand">
-                  <option value="">All Brands</option>
-                  <!-- Brands will be loaded dynamically -->
-                </select>
+            </div>
+
+            <!-- Recently Viewed -->
+            <div class="card border-0 shadow-sm rounded-4">
+              <div class="card-header bg-white border-0 py-3">
+                <h5 class="card-title mb-0 fw-bold">Recently Viewed</h5>
               </div>
-              <div class="mb-3">
-                <label class="form-label">Price Range</label>
-                <div class="price-range">
-                  <input type="number" class="form-control" id="min-price" name="minPrice" placeholder="Min">
-                  <span>-</span>
-                  <input type="number" class="form-control" id="max-price" name="maxPrice" placeholder="Max">
+              <div class="card-body">
+                <div class="d-flex mb-3">
+                  <img
+                    src="/api/placeholder/80/80"
+                    alt="Product"
+                    class="img-thumbnail me-2"
+                    style="width: 50px; height: 50px; object-fit: contain"
+                  />
+                  <div>
+                    <a
+                      href="product-detail.html?id=1"
+                      class="text-decoration-none fw-medium text-dark"
+                      >AMD Ryzen 9 5900X</a
+                    >
+                    <div class="text-danger">$499.99</div>
+                  </div>
+                </div>
+                <div class="d-flex mb-3">
+                  <img
+                    src="/api/placeholder/80/80"
+                    alt="Product"
+                    class="img-thumbnail me-2"
+                    style="width: 50px; height: 50px; object-fit: contain"
+                  />
+                  <div>
+                    <a
+                      href="product-detail.html?id=2"
+                      class="text-decoration-none fw-medium text-dark"
+                      >NVIDIA GeForce RTX 3080</a
+                    >
+                    <div class="text-danger">$699.99</div>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <img
+                    src="/api/placeholder/80/80"
+                    alt="Product"
+                    class="img-thumbnail me-2"
+                    style="width: 50px; height: 50px; object-fit: contain"
+                  />
+                  <div>
+                    <a
+                      href="product-detail.html?id=3"
+                      class="text-decoration-none fw-medium text-dark"
+                      >Samsung 970 EVO Plus</a
+                    >
+                    <div class="text-danger">$149.99</div>
+                  </div>
                 </div>
               </div>
-              <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-primary">Apply Filters</button>
-                <button type="button" class="btn btn-outline-secondary" id="clear-filters">Clear Filters</button>
-              </div>
-            </form>
-          </div>
-        </div>
-
-        <!-- Products -->
-        <div class="col-lg-9">
-          <div class="d-flex justify-content-between align-items-center mb-4">
-            <h2 id="products-title">All Products</h2>
-            <div class="d-flex align-items-center">
-              <label for="sort-select" class="me-2">Sort by:</label>
-              <select class="form-select form-select-sm" id="sort-select">
-                <option value="newest">Newest</option>
-                <option value="price_asc">Price: Low to High</option>
-                <option value="price_desc">Price: High to Low</option>
-                <option value="name_asc">Name: A to Z</option>
-                <option value="name_desc">Name: Z to A</option>
-                <option value="bestselling">Best Selling</option>
-                <option value="rating">Top Rated</option>
-              </select>
             </div>
           </div>
 
-          <div id="products-container">
-            <!-- Products will be loaded dynamically -->
-            <div class="text-center py-5">
-              <div class="spinner-border text-primary" role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div>
-              <p class="mt-2">Loading products...</p>
-            </div>
-          </div>
+          <!-- Products -->
+          <div class="col-lg-9">
+            <!-- Products Header -->
+            <div
+              class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4"
+            >
+              <h2 id="products-title" class="mb-3 mb-md-0 fw-bold">
+                All Products
+              </h2>
+              <div class="d-flex align-items-center">
+                <span class="text-muted me-2 d-none d-md-block">Sort by:</span>
+                <select
+                  class="form-select form-select-sm"
+                  id="sort-select"
+                  style="width: auto"
+                >
+                  <option value="newest">Newest</option>
+                  <option value="price_asc">Price: Low to High</option>
+                  <option value="price_desc">Price: High to Low</option>
+                  <option value="rating">Top Rated</option>
+                  <option value="bestselling">Best Selling</option>
+                </select>
 
-          <!-- Pagination -->
-          <nav aria-label="Product pagination" class="mt-4">
-            <ul class="pagination justify-content-center" id="pagination">
-              <!-- Pagination will be generated dynamically -->
-            </ul>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4 mb-4 mb-md-0">
-          <div class="footer-about">
-            <h5>About TechHub</h5>
-            <p>We offer premium computer components for gamers, professionals, and enthusiasts. With quality products and expert service, we're your trusted partner for all computing needs.</p>
-            <div class="social-icons">
-              <a href="#"><i class="bi bi-facebook"></i></a>
-              <a href="#"><i class="bi bi-twitter"></i></a>
-              <a href="#"><i class="bi bi-instagram"></i></a>
-              <a href="#"><i class="bi bi-youtube"></i></a>
-            </div>
-          </div>
-        </div>
-        <div class="col-6 col-md-2 mb-4 mb-md-0">
-          <div class="footer-links">
-            <h5>Shop</h5>
-            <ul>
-              <li><a href="products.html">All Products</a></li>
-              <li><a href="products.html?category=laptops">Laptops</a></li>
-              <li><a href="products.html?category=monitors">Monitors</a></li>
-              <li><a href="products.html?category=storage">Storage</a></li>
-              <li><a href="products.html?category=components">Components</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-6 col-md-2 mb-4 mb-md-0">
-          <div class="footer-links">
-            <h5>Support</h5>
-            <ul>
-              <li><a href="#">Contact Us</a></li>
-              <li><a href="#">FAQs</a></li>
-              <li><a href="#">Shipping Policy</a></li>
-              <li><a href="#">Return Policy</a></li>
-              <li><a href="#">Warranty</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="footer-newsletter">
-            <h5>Newsletter</h5>
-            <p>Subscribe to our newsletter for the latest updates and offers.</p>
-            <form>
-              <div class="input-group mb-3">
-                <input type="email" class="form-control" placeholder="Your Email" aria-label="Email" aria-describedby="subscribe-btn">
-                <button class="btn btn-primary" type="button" id="subscribe-btn">Subscribe</button>
+                <div
+                  class="ms-3 btn-group"
+                  role="group"
+                  aria-label="View options"
+                >
+                  <button
+                    type="button"
+                    class="btn btn-outline-primary btn-sm active"
+                    id="grid-view"
+                  >
+                    <i class="bi bi-grid-3x3"></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-outline-primary btn-sm"
+                    id="list-view"
+                  >
+                    <i class="bi bi-list"></i>
+                  </button>
+                </div>
               </div>
-            </form>
+            </div>
+
+            <!-- Filter Tags -->
+            <div id="active-filters" class="mb-4">
+              <div class="d-flex flex-wrap gap-2">
+                <span class="badge bg-primary bg-opacity-10 text-primary p-2">
+                  Category: Processors
+                  <button
+                    type="button"
+                    class="btn-close btn-close-sm ms-2"
+                    aria-label="Remove filter"
+                  ></button>
+                </span>
+                <span class="badge bg-primary bg-opacity-10 text-primary p-2">
+                  Brand: AMD
+                  <button
+                    type="button"
+                    class="btn-close btn-close-sm ms-2"
+                    aria-label="Remove filter"
+                  ></button>
+                </span>
+                <span class="badge bg-primary bg-opacity-10 text-primary p-2">
+                  Price: $200 - $600
+                  <button
+                    type="button"
+                    class="btn-close btn-close-sm ms-2"
+                    aria-label="Remove filter"
+                  ></button>
+                </span>
+              </div>
+            </div>
+
+            <!-- Grid View -->
+            <div id="grid-view-container">
+              <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-4">
+                <!-- Product Item -->
+                <div class="col">
+                  <div class="card h-100 border-0 shadow-sm rounded-4">
+                    <div class="position-relative">
+                      <img
+                        src="/api/placeholder/300/300"
+                        class="card-img-top p-3"
+                        alt="AMD Ryzen 9 5900X"
+                      />
+                      <div class="position-absolute top-0 start-0 m-3">
+                        <span class="badge bg-danger">-15%</span>
+                      </div>
+                    </div>
+                    <div class="card-body pb-0">
+                      <h5 class="card-title">AMD Ryzen 9 5900X</h5>
+                      <div class="mb-2">
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-half text-warning"></i>
+                        <span class="text-muted ms-1">(128)</span>
+                      </div>
+                      <p class="card-text">
+                        12 cores and 24 processing threads, bundled with Wraith
+                        Prism cooler.
+                      </p>
+                    </div>
+                    <div class="card-footer bg-white border-0 pt-0">
+                      <div
+                        class="d-flex justify-content-between align-items-center"
+                      >
+                        <div>
+                          <span
+                            class="text-muted text-decoration-line-through me-2"
+                            >$599.99</span
+                          >
+                          <span class="fs-5 fw-bold text-danger">$499.99</span>
+                        </div>
+                        <div>
+                          <a
+                            href="product-detail.html?id=1"
+                            class="btn btn-sm btn-outline-primary me-1"
+                          >
+                            <i class="bi bi-eye"></i>
+                          </a>
+                          <button
+                            class="btn btn-sm btn-primary add-to-cart"
+                            data-product-id="1"
+                          >
+                            <i class="bi bi-cart-plus"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Product Item -->
+                <div class="col">
+                  <div class="card h-100 border-0 shadow-sm rounded-4">
+                    <div class="position-relative">
+                      <img
+                        src="/api/placeholder/300/300"
+                        class="card-img-top p-3"
+                        alt="AMD Ryzen 7 5800X"
+                      />
+                      <div class="position-absolute top-0 start-0 m-3">
+                        <span class="badge bg-success">New</span>
+                      </div>
+                    </div>
+                    <div class="card-body pb-0">
+                      <h5 class="card-title">AMD Ryzen 7 5800X</h5>
+                      <div class="mb-2">
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star text-warning"></i>
+                        <span class="text-muted ms-1">(86)</span>
+                      </div>
+                      <p class="card-text">
+                        8 cores and 16 processing threads for demanding gaming
+                        and content creation.
+                      </p>
+                    </div>
+                    <div class="card-footer bg-white border-0 pt-0">
+                      <div
+                        class="d-flex justify-content-between align-items-center"
+                      >
+                        <div>
+                          <span class="fs-5 fw-bold">$399.99</span>
+                        </div>
+                        <div>
+                          <a
+                            href="product-detail.html?id=2"
+                            class="btn btn-sm btn-outline-primary me-1"
+                          >
+                            <i class="bi bi-eye"></i>
+                          </a>
+                          <button
+                            class="btn btn-sm btn-primary add-to-cart"
+                            data-product-id="2"
+                          >
+                            <i class="bi bi-cart-plus"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Product Item -->
+                <div class="col">
+                  <div class="card h-100 border-0 shadow-sm rounded-4">
+                    <div class="position-relative">
+                      <img
+                        src="/api/placeholder/300/300"
+                        class="card-img-top p-3"
+                        alt="AMD Ryzen 5 5600X"
+                      />
+                    </div>
+                    <div class="card-body pb-0">
+                      <h5 class="card-title">AMD Ryzen 5 5600X</h5>
+                      <div class="mb-2">
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-half text-warning"></i>
+                        <span class="text-muted ms-1">(142)</span>
+                      </div>
+                      <p class="card-text">
+                        6 cores and 12 threads for smooth 1080p gaming and
+                        content creation.
+                      </p>
+                    </div>
+                    <div class="card-footer bg-white border-0 pt-0">
+                      <div
+                        class="d-flex justify-content-between align-items-center"
+                      >
+                        <div>
+                          <span class="fs-5 fw-bold">$299.99</span>
+                        </div>
+                        <div>
+                          <a
+                            href="product-detail.html?id=3"
+                            class="btn btn-sm btn-outline-primary me-1"
+                          >
+                            <i class="bi bi-eye"></i>
+                          </a>
+                          <button
+                            class="btn btn-sm btn-primary add-to-cart"
+                            data-product-id="3"
+                          >
+                            <i class="bi bi-cart-plus"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Product Item -->
+                <div class="col">
+                  <div class="card h-100 border-0 shadow-sm rounded-4">
+                    <div class="position-relative">
+                      <img
+                        src="/api/placeholder/300/300"
+                        class="card-img-top p-3"
+                        alt="Intel Core i9-12900K"
+                      />
+                      <div class="position-absolute top-0 start-0 m-3">
+                        <span class="badge bg-warning text-dark">Featured</span>
+                      </div>
+                    </div>
+                    <div class="card-body pb-0">
+                      <h5 class="card-title">Intel Core i9-12900K</h5>
+                      <div class="mb-2">
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <span class="text-muted ms-1">(74)</span>
+                      </div>
+                      <p class="card-text">
+                        16 cores (8P+8E) and 24 threads for next-gen gaming
+                        performance.
+                      </p>
+                    </div>
+                    <div class="card-footer bg-white border-0 pt-0">
+                      <div
+                        class="d-flex justify-content-between align-items-center"
+                      >
+                        <div>
+                          <span class="fs-5 fw-bold">$599.99</span>
+                        </div>
+                        <div>
+                          <a
+                            href="product-detail.html?id=4"
+                            class="btn btn-sm btn-outline-primary me-1"
+                          >
+                            <i class="bi bi-eye"></i>
+                          </a>
+                          <button
+                            class="btn btn-sm btn-primary add-to-cart"
+                            data-product-id="4"
+                          >
+                            <i class="bi bi-cart-plus"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Product Item -->
+                <div class="col">
+                  <div class="card h-100 border-0 shadow-sm rounded-4">
+                    <div class="position-relative">
+                      <img
+                        src="/api/placeholder/300/300"
+                        class="card-img-top p-3"
+                        alt="Intel Core i7-12700K"
+                      />
+                    </div>
+                    <div class="card-body pb-0">
+                      <h5 class="card-title">Intel Core i7-12700K</h5>
+                      <div class="mb-2">
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-half text-warning"></i>
+                        <span class="text-muted ms-1">(56)</span>
+                      </div>
+                      <p class="card-text">
+                        12 cores (8P+4E) and 20 threads for high-performance
+                        computing.
+                      </p>
+                    </div>
+                    <div class="card-footer bg-white border-0 pt-0">
+                      <div
+                        class="d-flex justify-content-between align-items-center"
+                      >
+                        <div>
+                          <span class="fs-5 fw-bold">$419.99</span>
+                        </div>
+                        <div>
+                          <a
+                            href="product-detail.html?id=5"
+                            class="btn btn-sm btn-outline-primary me-1"
+                          >
+                            <i class="bi bi-eye"></i>
+                          </a>
+                          <button
+                            class="btn btn-sm btn-primary add-to-cart"
+                            data-product-id="5"
+                          >
+                            <i class="bi bi-cart-plus"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Product Item -->
+                <div class="col">
+                  <div class="card h-100 border-0 shadow-sm rounded-4">
+                    <div class="position-relative">
+                      <img
+                        src="/api/placeholder/300/300"
+                        class="card-img-top p-3"
+                        alt="Intel Core i5-12600K"
+                      />
+                      <div class="position-absolute top-0 start-0 m-3">
+                        <span class="badge bg-danger">Hot</span>
+                      </div>
+                    </div>
+                    <div class="card-body pb-0">
+                      <h5 class="card-title">Intel Core i5-12600K</h5>
+                      <div class="mb-2">
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star text-warning"></i>
+                        <span class="text-muted ms-1">(95)</span>
+                      </div>
+                      <p class="card-text">
+                        10 cores (6P+4E) and 16 threads, great value for gaming
+                        builds.
+                      </p>
+                    </div>
+                    <div class="card-footer bg-white border-0 pt-0">
+                      <div
+                        class="d-flex justify-content-between align-items-center"
+                      >
+                        <div>
+                          <span class="fs-5 fw-bold">$299.99</span>
+                        </div>
+                        <div>
+                          <a
+                            href="product-detail.html?id=6"
+                            class="btn btn-sm btn-outline-primary me-1"
+                          >
+                            <i class="bi bi-eye"></i>
+                          </a>
+                          <button
+                            class="btn btn-sm btn-primary add-to-cart"
+                            data-product-id="6"
+                          >
+                            <i class="bi bi-cart-plus"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- List View (hidden by default) -->
+            <div id="list-view-container" class="d-none">
+              <div class="list-group mb-4">
+                <!-- Product Item -->
+                <div class="list-group-item border-0 shadow-sm rounded-4 mb-3">
+                  <div class="row g-0">
+                    <div class="col-md-3">
+                      <div class="position-relative">
+                        <img
+                          src="/api/placeholder/300/300"
+                          class="img-fluid rounded-start p-2"
+                          alt="AMD Ryzen 9 5900X"
+                        />
+                        <div class="position-absolute top-0 start-0 m-2">
+                          <span class="badge bg-danger">-15%</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-9">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between mb-2">
+                          <h5 class="card-title mb-0">AMD Ryzen 9 5900X</h5>
+                          <div>
+                            <span
+                              class="text-muted text-decoration-line-through me-2"
+                              >$599.99</span
+                            >
+                            <span class="fs-5 fw-bold text-danger"
+                              >$499.99</span
+                            >
+                          </div>
+                        </div>
+                        <div class="mb-2">
+                          <i class="bi bi-star-fill text-warning"></i>
+                          <i class="bi bi-star-fill text-warning"></i>
+                          <i class="bi bi-star-fill text-warning"></i>
+                          <i class="bi bi-star-fill text-warning"></i>
+                          <i class="bi bi-star-half text-warning"></i>
+                          <span class="text-muted ms-1">(128 reviews)</span>
+                        </div>
+                        <p class="card-text">
+                          12 cores and 24 processing threads, bundled with the
+                          AMD Wraith Prism cooler. Perfect for high-end gaming
+                          and content creation workloads. Enhanced thermal
+                          solution and incredible performance for enthusiasts
+                          and gamers alike.
+                        </p>
+                        <div
+                          class="d-flex justify-content-between align-items-center"
+                        >
+                          <div class="text-success">
+                            <i class="bi bi-check-circle-fill"></i> In Stock
+                          </div>
+                          <div>
+                            <a
+                              href="product-detail.html?id=1"
+                              class="btn btn-outline-primary me-2"
+                            >
+                              <i class="bi bi-eye me-1"></i>View Details
+                            </a>
+                            <button
+                              class="btn btn-primary add-to-cart"
+                              data-product-id="1"
+                            >
+                              <i class="bi bi-cart-plus me-1"></i>Add to Cart
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Product Item -->
+                <div class="list-group-item border-0 shadow-sm rounded-4 mb-3">
+                  <div class="row g-0">
+                    <div class="col-md-3">
+                      <div class="position-relative">
+                        <img
+                          src="/api/placeholder/300/300"
+                          class="img-fluid rounded-start p-2"
+                          alt="AMD Ryzen 7 5800X"
+                        />
+                        <div class="position-absolute top-0 start-0 m-2">
+                          <span class="badge bg-success">New</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-9">
+                      <div class="card-body">
+                        <div class="d-flex justify-content-between mb-2">
+                          <h5 class="card-title mb-0">AMD Ryzen 7 5800X</h5>
+                          <div>
+                            <span class="fs-5 fw-bold">$399.99</span>
+                          </div>
+                        </div>
+                        <div class="mb-2">
+                          <i class="bi bi-star-fill text-warning"></i>
+                          <i class="bi bi-star-fill text-warning"></i>
+                          <i class="bi bi-star-fill text-warning"></i>
+                          <i class="bi bi-star-fill text-warning"></i>
+                          <i class="bi bi-star text-warning"></i>
+                          <span class="text-muted ms-1">(86 reviews)</span>
+                        </div>
+                        <p class="card-text">
+                          8 cores and 16 processing threads for demanding gaming
+                          and content creation. The 5800X delivers exceptional
+                          performance with boost clocks up to 4.7GHz. Great for
+                          gamers and content creators looking for high
+                          performance without breaking the bank.
+                        </p>
+                        <div
+                          class="d-flex justify-content-between align-items-center"
+                        >
+                          <div class="text-success">
+                            <i class="bi bi-check-circle-fill"></i> In Stock
+                          </div>
+                          <div>
+                            <a
+                              href="product-detail.html?id=2"
+                              class="btn btn-outline-primary me-2"
+                            >
+                              <i class="bi bi-eye me-1"></i>View Details
+                            </a>
+                            <button
+                              class="btn btn-primary add-to-cart"
+                              data-product-id="2"
+                            >
+                              <i class="bi bi-cart-plus me-1"></i>Add to Cart
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Additional list items would follow the same pattern -->
+              </div>
+            </div>
+
+            <!-- Pagination -->
+            <nav aria-label="Product pagination">
+              <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                  <a
+                    class="page-link"
+                    href="#"
+                    tabindex="-1"
+                    aria-disabled="true"
+                  >
+                    <i class="bi bi-chevron-left"></i>
+                  </a>
+                </li>
+                <li class="page-item active" aria-current="page">
+                  <span class="page-link">1</span>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                  <a class="page-link" href="#">
+                    <i class="bi bi-chevron-right"></i>
+                  </a>
+                </li>
+              </ul>
+            </nav>
           </div>
         </div>
       </div>
-    </div>
-    <div class="footer-bottom text-center">
-      <div class="container">
-        <p class="mb-0">&copy; 2025 TechHub. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
-</body>
+    </main>
+
+    <!-- Footer will be loaded dynamically from client/src/components/footer.html -->
+    <footer id="footer-container"></footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SweetAlert2 for better alerts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.2/dist/sweetalert2.all.min.js"></script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Load header and footer components
+        loadComponents();
+
+        // Setup product page functionality
+        setupProductPage();
+      });
+
+      // Load header and footer components
+      function loadComponents() {
+        // Load header
+        fetch("/client/src/components/header.html")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(
+                `Failed to load header: ${response.status} ${response.statusText}`
+              );
+            }
+            return response.text();
+          })
+          .then((html) => {
+            document.getElementById("header-container").innerHTML = html;
+
+            // After loading header, highlight the products page in navigation
+            setTimeout(() => {
+              const productLinks = document.querySelectorAll(
+                'a[href="products.html"]'
+              );
+              productLinks.forEach((link) => {
+                if (link.classList.contains("nav-link")) {
+                  link.classList.add("active");
+                }
+              });
+            }, 100);
+          })
+          .catch((error) => {
+            console.error("Error loading header:", error);
+            document.getElementById("header-container").innerHTML = `
+            <div class="alert alert-danger m-3" role="alert">
+              <h4 class="alert-heading">Error Loading Header</h4>
+              <p>${error.message}</p>
+              <hr>
+              <p class="mb-0">Please check the path to your header component.</p>
+            </div>
+          `;
+          });
+
+        // Load footer
+        fetch("/client/src/components/footer.html")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(
+                `Failed to load footer: ${response.status} ${response.statusText}`
+              );
+            }
+            return response.text();
+          })
+          .then((html) => {
+            document.getElementById("footer-container").innerHTML = html;
+          })
+          .catch((error) => {
+            console.error("Error loading footer:", error);
+            document.getElementById("footer-container").innerHTML = `
+            <div class="alert alert-danger m-3" role="alert">
+              <h4 class="alert-heading">Error Loading Footer</h4>
+              <p>${error.message}</p>
+              <hr>
+              <p class="mb-0">Please check the path to your footer component.</p>
+            </div>
+          `;
+          });
+      }
+
+      // Setup product page functionality
+      function setupProductPage() {
+        // Get URL parameters to set initial filters
+        const urlParams = new URLSearchParams(window.location.search);
+        const categoryParam = urlParams.get("category");
+        const searchParam = urlParams.get("search");
+        const brandParam = urlParams.get("brand");
+
+        // Setup filters based on URL parameters
+        if (categoryParam) {
+          document.getElementById("category-select").value = categoryParam;
+          updateProductHeader(categoryParam);
+        }
+
+        if (searchParam) {
+          document.getElementById("search").value = searchParam;
+          updateProductHeader(`Search: "${searchParam}"`);
+        }
+
+        if (brandParam) {
+          document.getElementById("brand-select").value = brandParam;
+          updateProductHeader(`Brand: ${brandParam}`);
+        }
+
+        // Setup filter form submission
+        setupFilterForm();
+
+        // Setup view toggle buttons
+        setupViewToggle();
+
+        // Setup active filter removal
+        setupActiveFilters();
+
+        // Setup add to cart buttons
+        setupAddToCartButtons();
+
+        // Setup pagination
+        setupPagination();
+      }
+
+      // Update product header based on active filters
+      function updateProductHeader(title) {
+        const productsTitle = document.getElementById("products-title");
+        if (productsTitle && title) {
+          productsTitle.textContent = title;
+        }
+      }
+
+      // Setup filter form
+      function setupFilterForm() {
+        const filterForm = document.getElementById("filter-form");
+        if (!filterForm) return;
+
+        filterForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          // Get form data
+          const formData = new FormData(filterForm);
+          const category = formData.get("category");
+          const brand = formData.get("brand");
+          const search = formData.get("search");
+          const minPrice = formData.get("minPrice");
+          const maxPrice = formData.get("maxPrice");
+
+          // Build query string
+          const queryParams = new URLSearchParams();
+          if (category) queryParams.append("category", category);
+          if (brand) queryParams.append("brand", brand);
+          if (search) queryParams.append("search", search);
+          if (minPrice) queryParams.append("minPrice", minPrice);
+          if (maxPrice) queryParams.append("maxPrice", maxPrice);
+
+          // Update URL and reload page with new filters
+          // In a real implementation, this would use AJAX to update results without page reload
+          window.location.href = `products.html?${queryParams.toString()}`;
+        });
+
+        // Clear filters button
+        const clearFiltersBtn = document.getElementById("clear-filters");
+        if (clearFiltersBtn) {
+          clearFiltersBtn.addEventListener("click", function () {
+            // Reset form
+            filterForm.reset();
+
+            // Go back to all products
+            window.location.href = "products.html";
+          });
+        }
+      }
+
+      // Setup view toggle buttons
+      function setupViewToggle() {
+        const gridViewBtn = document.getElementById("grid-view");
+        const listViewBtn = document.getElementById("list-view");
+        const gridViewContainer = document.getElementById(
+          "grid-view-container"
+        );
+        const listViewContainer = document.getElementById(
+          "list-view-container"
+        );
+
+        if (
+          !gridViewBtn ||
+          !listViewBtn ||
+          !gridViewContainer ||
+          !listViewContainer
+        )
+          return;
+
+        gridViewBtn.addEventListener("click", function () {
+          // Toggle view
+          gridViewContainer.classList.remove("d-none");
+          listViewContainer.classList.add("d-none");
+
+          // Toggle active state
+          gridViewBtn.classList.add("active");
+          listViewBtn.classList.remove("active");
+
+          // Save preference in localStorage
+          localStorage.setItem("productViewPreference", "grid");
+        });
+
+        listViewBtn.addEventListener("click", function () {
+          // Toggle view
+          gridViewContainer.classList.add("d-none");
+          listViewContainer.classList.remove("d-none");
+
+          // Toggle active state
+          gridViewBtn.classList.remove("active");
+          listViewBtn.classList.add("active");
+
+          // Save preference in localStorage
+          localStorage.setItem("productViewPreference", "list");
+        });
+
+        // Load saved preference if exists
+        const viewPreference = localStorage.getItem("productViewPreference");
+        if (viewPreference === "list") {
+          listViewBtn.click();
+        }
+      }
+
+      // Setup active filters removal
+      function setupActiveFilters() {
+        const closeButtons = document.querySelectorAll(
+          "#active-filters .btn-close"
+        );
+
+        closeButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            // Get the filter badge
+            const filterBadge = this.closest(".badge");
+            if (!filterBadge) return;
+
+            // Get filter text
+            const filterText = filterBadge.textContent.trim();
+
+            // Determine what type of filter was removed
+            if (filterText.startsWith("Category:")) {
+              // Remove category filter
+              document.getElementById("category-select").value = "";
+            } else if (filterText.startsWith("Brand:")) {
+              // Remove brand filter
+              document.getElementById("brand-select").value = "";
+            } else if (filterText.startsWith("Price:")) {
+              // Remove price filter
+              document.getElementById("min-price").value = "";
+              document.getElementById("max-price").value = "";
+            }
+
+            // Remove the badge
+            filterBadge.remove();
+
+            // Submit the filter form to update results
+            document
+              .getElementById("filter-form")
+              .dispatchEvent(new Event("submit"));
+          });
+        });
+      }
+
+      // Setup add to cart buttons
+      function setupAddToCartButtons() {
+        const addToCartButtons = document.querySelectorAll(".add-to-cart");
+
+        addToCartButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            const productId = this.getAttribute("data-product-id");
+
+            // Show loading state
+            const originalHTML = this.innerHTML;
+            this.disabled = true;
+            this.innerHTML =
+              '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
+
+            // Simulate adding to cart
+            setTimeout(() => {
+              // Reset button state
+              this.disabled = false;
+              this.innerHTML = originalHTML;
+
+              // Show success message
+              Swal.fire({
+                toast: true,
+                position: "top-end",
+                icon: "success",
+                title: "Product added to cart",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+              });
+
+              // Update cart count
+              updateCartBadge();
+            }, 800);
+          });
+        });
+      }
+
+      // Update cart badge
+      function updateCartBadge() {
+        const cartBadges = document.querySelectorAll(".cart-count");
+
+        if (!cartBadges.length) return;
+
+        // Get current count
+        let currentCount = 0;
+        cartBadges.forEach((badge) => {
+          if (!badge.classList.contains("d-none")) {
+            currentCount = parseInt(badge.textContent) || 0;
+          }
+        });
+
+        // Update the badge
+        const newCount = currentCount + 1;
+
+        cartBadges.forEach((badge) => {
+          badge.textContent = newCount;
+          badge.classList.remove("d-none");
+        });
+      }
+
+      // Setup pagination
+      function setupPagination() {
+        const paginationLinks = document.querySelectorAll(
+          ".pagination .page-link:not(.disabled)"
+        );
+
+        paginationLinks.forEach((link) => {
+          link.addEventListener("click", function (e) {
+            e.preventDefault();
+
+            // Get current URL params
+            const urlParams = new URLSearchParams(window.location.search);
+
+            // Get page number (assuming this is stored as a data attribute)
+            const page =
+              this.getAttribute("data-page") || this.textContent.trim();
+
+            // Update page parameter
+            if (page && !isNaN(page)) {
+              urlParams.set("page", page);
+
+              // Simulate navigation to new page
+              // In a real app, this would load new products via AJAX
+              console.log(`Navigating to page ${page}`);
+
+              // Scroll to top
+              window.scrollTo({ top: 0, behavior: "smooth" });
+
+              // Update URL
+              const newUrl = `products.html?${urlParams.toString()}`;
+              history.pushState(null, "", newUrl);
+            }
+          });
+        });
+      }
+    </script>
+  </body>
 </html>
