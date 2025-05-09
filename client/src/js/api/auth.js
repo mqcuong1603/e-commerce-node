@@ -1,6 +1,6 @@
 // src/js/api/auth.js
 // Authentication API
-import apiClient from '../api-client.js';
+import apiClient from "../api-client.js";
 
 export const authAPI = {
   /**
@@ -9,7 +9,8 @@ export const authAPI = {
    * @returns {Promise} - Registration response
    */
   register(userData) {
-    return apiClient.post('/auth/register', userData);
+    // The backend will generate a temporary password and send it via email
+    return apiClient.post("/auth/register", userData);
   },
 
   /**
@@ -18,7 +19,7 @@ export const authAPI = {
    * @returns {Promise} - Login response with token
    */
   login(credentials) {
-    return apiClient.post('/auth/login', credentials);
+    return apiClient.post("/auth/login", credentials);
   },
 
   /**
@@ -27,7 +28,7 @@ export const authAPI = {
    * @returns {Promise} - Response
    */
   forgotPassword(email) {
-    return apiClient.post('/auth/forgot-password', { email });
+    return apiClient.post("/auth/forgot-password", { email });
   },
 
   /**
@@ -46,7 +47,7 @@ export const authAPI = {
    * @returns {Promise} - Response
    */
   updatePassword(passwordData) {
-    return apiClient.post('/auth/update-password', passwordData);
+    return apiClient.post("/auth/update-password", passwordData);
   },
 
   /**
@@ -54,7 +55,7 @@ export const authAPI = {
    * @returns {Promise} - User data
    */
   getProfile() {
-    return apiClient.get('/users/profile');
+    return apiClient.get("/users/profile");
   },
 
   /**
@@ -63,6 +64,6 @@ export const authAPI = {
    * @returns {Promise} - Updated user data
    */
   updateProfile(profileData) {
-    return apiClient.put('/users/profile', profileData);
-  }
+    return apiClient.put("/users/profile", profileData);
+  },
 };

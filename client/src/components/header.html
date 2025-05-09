@@ -1,58 +1,157 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="index.html">
-        <i class="bi bi-cpu-fill me-2"></i>
-        <span class="text-highlight">Tech</span>Hub
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
-              aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="category-menu">
-          <!-- Categories will be loaded dynamically -->
-          <li class="nav-item">
-            <a class="nav-link" href="products.html">All Products</a>
-          </li>
-        </ul>
-        <form class="search-form d-flex mx-auto">
-          <input class="form-control" type="search" placeholder="Search products..." aria-label="Search">
-          <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
-        </form>
-        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link position-relative" href="cart.html">
-              <i class="bi bi-cart-fill"></i>
-              <span class="cart-count badge rounded-pill bg-danger d-none">0</span>
-            </a>
-          </li>
-          <!-- Authentication links (shown when not logged in) -->
-          <li class="nav-item dropdown" id="auth-menu-items">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" 
-               data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-person-circle"></i> Account
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="login.html">Login</a></li>
-              <li><a class="dropdown-item" href="register.html">Register</a></li>
-            </ul>
-          </li>
-          <!-- User menu (shown when logged in) -->
-          <li class="nav-item dropdown d-none" id="user-menu-items">
-            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" 
-               data-bs-toggle="dropdown" aria-expanded="false">
-              <i class="bi bi-person-fill"></i> <span class="user-fullname">User</span>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-              <li><a class="dropdown-item" href="profile.html">My Profile</a></li>
-              <li><a class="dropdown-item" href="profile.html#orders">Order History</a></li>
-              <li><a class="dropdown-item admin-only d-none" href="admin-dashboard.html">Admin Dashboard</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item logout-button" href="#">Logout</a></li>
-            </ul>
-          </li>
-        </ul>
-      </div>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="index.html">
+      <i class="bi bi-cpu-fill me-2"></i>
+      <span class="text-primary">Tech</span>Hub
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="products.html">All Products</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            Categories
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark">
+            <li>
+              <a class="dropdown-item" href="products.html?category=processors"
+                >Processors</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                href="products.html?category=graphics-cards"
+                >Graphics Cards</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="products.html?category=memory"
+                >Memory</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" href="products.html?category=storage"
+                >Storage</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                href="products.html?category=motherboards"
+                >Motherboards</a
+              >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li>
+              <a class="dropdown-item" href="products.html"
+                >View All Categories</a
+              >
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Deals</a>
+        </li>
+      </ul>
+
+      <form class="d-flex mx-auto my-2 my-lg-0" style="max-width: 500px">
+        <div class="input-group">
+          <input
+            type="search"
+            class="form-control"
+            placeholder="Search products..."
+            aria-label="Search"
+          />
+          <button class="btn btn-primary" type="submit">
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+      </form>
+
+      <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link position-relative" href="cart.html">
+            <i class="bi bi-cart-fill fs-5"></i>
+            <span
+              class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+              >0</span
+            >
+          </a>
+        </li>
+        <!-- Authentication links (shown when not logged in) -->
+        <li class="nav-item dropdown" id="auth-menu-items">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="bi bi-person-circle fs-5"></i> Account
+          </a>
+          <ul
+            class="dropdown-menu dropdown-menu-end dropdown-menu-dark"
+            aria-labelledby="navbarDropdown"
+          >
+            <li><a class="dropdown-item" href="login.html">Login</a></li>
+            <li><a class="dropdown-item" href="register.html">Register</a></li>
+          </ul>
+        </li>
+        <!-- User menu (shown when logged in) -->
+        <li class="nav-item dropdown d-none" id="user-menu-items">
+          <a
+            class="nav-link dropdown-toggle"
+            href="#"
+            id="userDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <i class="bi bi-person-fill fs-5"></i>
+            <span class="user-fullname">User</span>
+          </a>
+          <ul
+            class="dropdown-menu dropdown-menu-end dropdown-menu-dark"
+            aria-labelledby="userDropdown"
+          >
+            <li><a class="dropdown-item" href="profile.html">My Profile</a></li>
+            <li>
+              <a class="dropdown-item" href="profile.html#orders"
+                >Order History</a
+              >
+            </li>
+            <li>
+              <a
+                class="dropdown-item admin-only d-none"
+                href="admin-dashboard.html"
+                >Admin Dashboard</a
+              >
+            </li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="dropdown-item logout-button" href="#">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
     </div>
-  </nav>
+  </div>
+</nav>

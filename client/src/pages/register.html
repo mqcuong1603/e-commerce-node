@@ -1,327 +1,669 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register - Computer Components Store</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-</head>
-<body>
-  <!-- Header / Navigation -->
-  <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-      <div class="container">
-        <a class="navbar-brand" href="index.html">
-          <i class="bi bi-cpu-fill me-2"></i>
-          <span class="text-highlight">Tech</span>Hub
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" 
-                aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0" id="category-menu">
-            <!-- Categories will be loaded dynamically -->
-            <li class="nav-item">
-              <a class="nav-link" href="products.html">All Products</a>
-            </li>
-          </ul>
-          <form class="search-form d-flex mx-auto">
-            <input class="form-control" type="search" placeholder="Search products..." aria-label="Search">
-            <button class="btn btn-primary" type="submit"><i class="bi bi-search"></i></button>
-          </form>
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link position-relative" href="cart.html">
-                <i class="bi bi-cart-fill"></i>
-                <span class="cart-count badge rounded-pill bg-danger d-none">0</span>
-              </a>
-            </li>
-            <!-- Authentication links (shown when not logged in) -->
-            <li class="nav-item dropdown" id="auth-menu-items">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" 
-                 data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-person-circle"></i> Account
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="login.html">Login</a></li>
-                <li><a class="dropdown-item" href="register.html">Register</a></li>
-              </ul>
-            </li>
-            <!-- User menu (shown when logged in) -->
-            <li class="nav-item dropdown d-none" id="user-menu-items">
-              <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" 
-                 data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="bi bi-person-fill"></i> <span class="user-fullname">User</span>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                <li><a class="dropdown-item" href="profile.html">My Profile</a></li>
-                <li><a class="dropdown-item" href="profile.html#orders">Order History</a></li>
-                <li><a class="dropdown-item admin-only d-none" href="admin-dashboard.html">Admin Dashboard</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item logout-button" href="#">Logout</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register - TechHub Computer Components Store</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body class="bg-light pt-5">
+    <!-- Header will be loaded dynamically from components/header.html -->
+    <header id="header-container"></header>
 
-  <main class="main-content py-5">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-md-10 col-lg-8">
-          <div class="auth-form">
-            <h2 class="text-center mb-4">Create Account</h2>
-            
-            <form id="register-form" class="needs-validation" novalidate>
-              <h4 class="mb-3">Account Information</h4>
-              <div class="row">
-                <div class="col-md-6 mb-3">
-                  <label for="register-fullname" class="form-label">Full Name</label>
-                  <input type="text" class="form-control" id="register-fullname" name="fullName" required>
-                  <div class="invalid-feedback">
-                    Please enter your full name.
+    <main>
+      <section class="py-5">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-8">
+              <div class="bg-white rounded-4 shadow-sm p-4 p-md-5 mb-5">
+                <!-- Form Header -->
+                <div class="text-center mb-4">
+                  <div
+                    class="d-inline-flex align-items-center justify-content-center bg-primary bg-opacity-10 rounded-circle mb-3"
+                    style="width: 80px; height: 80px"
+                  >
+                    <i class="bi bi-person-plus fs-1 text-primary"></i>
                   </div>
+                  <h1 class="fw-bold mb-2">Create Your Account</h1>
+                  <p class="text-muted">
+                    Fill in your information below to get started with TechHub
+                  </p>
                 </div>
-                <div class="col-md-6 mb-3">
-                  <label for="register-email" class="form-label">Email Address</label>
-                  <input type="email" class="form-control" id="register-email" name="email" required>
-                  <div class="invalid-feedback">
-                    Please enter a valid email address.
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6 mb-3">
-                  <label for="register-password" class="form-label">Password</label>
-                  <input type="password" class="form-control" id="register-password" 
-                         name="password" required minlength="6">
-                  <div class="invalid-feedback">
-                    Password must be at least 6 characters.
-                  </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                  <label for="register-confirm-password" class="form-label">Confirm Password</label>
-                  <input type="password" class="form-control" id="register-confirm-password" 
-                         name="confirmPassword" required>
-                  <div class="invalid-feedback">
-                    Passwords do not match.
-                  </div>
-                </div>
-              </div>
 
-              <hr class="my-4">
+                <!-- Registration Form -->
+                <form id="register-form" class="needs-validation" novalidate>
+                  <!-- Account Information Section -->
+                  <div class="card border-0 shadow-sm mb-4">
+                    <div
+                      class="card-header bg-primary bg-opacity-10 border-0 py-3"
+                    >
+                      <div class="d-flex align-items-center">
+                        <i class="bi bi-person-vcard me-2 text-primary"></i>
+                        <h5 class="mb-0 fw-semibold">Account Information</h5>
+                      </div>
+                    </div>
+                    <div class="card-body p-4">
+                      <div class="row g-3">
+                        <div class="col-md-6">
+                          <label
+                            for="register-fullname"
+                            class="form-label fw-medium"
+                            >Full Name</label
+                          >
+                          <div class="input-group">
+                            <span class="input-group-text bg-light"
+                              ><i class="bi bi-person"></i
+                            ></span>
+                            <input
+                              type="text"
+                              class="form-control"
+                              id="register-fullname"
+                              name="fullName"
+                              placeholder="Enter your full name"
+                              required
+                            />
+                          </div>
+                          <div class="invalid-feedback">
+                            Please enter your full name.
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <label
+                            for="register-email"
+                            class="form-label fw-medium"
+                            >Email Address</label
+                          >
+                          <div class="input-group">
+                            <span class="input-group-text bg-light"
+                              ><i class="bi bi-envelope"></i
+                            ></span>
+                            <input
+                              type="email"
+                              class="form-control"
+                              id="register-email"
+                              name="email"
+                              placeholder="you@example.com"
+                              required
+                            />
+                          </div>
+                          <div class="invalid-feedback">
+                            Please enter a valid email address.
+                          </div>
+                          <div class="form-text mt-1">
+                            <i
+                              class="bi bi-info-circle-fill text-primary me-1"
+                            ></i>
+                            A temporary password will be sent to this email.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
 
-              <h4 class="mb-3">Shipping Address</h4>
-              <div class="row">
-                <div class="col-md-6 mb-3">
-                  <label for="register-address-fullname" class="form-label">Full Name</label>
-                  <input type="text" class="form-control" id="register-address-fullname" 
-                         name="address.fullName">
-                  <small class="form-text text-muted">
-                    Leave blank to use account name.
-                  </small>
+                  <!-- Shipping Address Section -->
+                  <div class="card border-0 shadow-sm mb-4">
+                    <div
+                      class="card-header bg-primary bg-opacity-10 border-0 py-3"
+                    >
+                      <div class="d-flex align-items-center">
+                        <i class="bi bi-geo-alt me-2 text-primary"></i>
+                        <h5 class="mb-0 fw-semibold">Shipping Address</h5>
+                      </div>
+                    </div>
+                    <div class="card-body p-4">
+                      <div class="row g-3">
+                        <div class="col-md-6">
+                          <label
+                            for="register-address-fullname"
+                            class="form-label fw-medium"
+                            >Full Name for Shipping</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="register-address-fullname"
+                            name="address.fullName"
+                            placeholder="Name to appear on deliveries"
+                          />
+                          <div class="form-text">
+                            <i
+                              class="bi bi-info-circle-fill text-primary me-1"
+                            ></i>
+                            Leave blank to use account name.
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <label
+                            for="register-phone"
+                            class="form-label fw-medium"
+                            >Phone Number</label
+                          >
+                          <div class="input-group">
+                            <span class="input-group-text bg-light"
+                              ><i class="bi bi-telephone"></i
+                            ></span>
+                            <input
+                              type="tel"
+                              class="form-control"
+                              id="register-phone"
+                              name="address.phoneNumber"
+                              placeholder="For delivery communications"
+                              required
+                            />
+                          </div>
+                          <div class="invalid-feedback">
+                            Please enter a valid phone number.
+                          </div>
+                        </div>
+
+                        <div class="col-12">
+                          <label
+                            for="register-address-line1"
+                            class="form-label fw-medium"
+                            >Address Line 1</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="register-address-line1"
+                            name="address.addressLine1"
+                            placeholder="Street address, P.O. box, company name"
+                            required
+                          />
+                          <div class="invalid-feedback">
+                            Please enter your street address.
+                          </div>
+                        </div>
+
+                        <div class="col-12">
+                          <label
+                            for="register-address-line2"
+                            class="form-label fw-medium"
+                          >
+                            Address Line 2
+                            <span class="text-muted">(Optional)</span>
+                          </label>
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="register-address-line2"
+                            name="address.addressLine2"
+                            placeholder="Apartment, suite, unit, building, floor, etc."
+                          />
+                        </div>
+
+                        <div class="col-md-5">
+                          <label
+                            for="register-country"
+                            class="form-label fw-medium"
+                            >Country</label
+                          >
+                          <select
+                            class="form-select"
+                            id="register-country"
+                            name="address.country"
+                            required
+                          >
+                            <option value="">Select a country</option>
+                            <option value="VN" selected>Vietnam</option>
+                            <option value="US">United States</option>
+                            <option value="CA">Canada</option>
+                            <option value="UK">United Kingdom</option>
+                            <option value="AU">Australia</option>
+                            <option value="SG">Singapore</option>
+                            <option value="JP">Japan</option>
+                          </select>
+                          <div class="invalid-feedback">
+                            Please select a country.
+                          </div>
+                        </div>
+
+                        <div class="col-md-4">
+                          <label
+                            for="register-city"
+                            class="form-label fw-medium"
+                            >City</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="register-city"
+                            name="address.city"
+                            required
+                          />
+                          <div class="invalid-feedback">
+                            Please enter your city.
+                          </div>
+                        </div>
+
+                        <div class="col-md-3">
+                          <label
+                            for="register-postal-code"
+                            class="form-label fw-medium"
+                            >Postal Code</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="register-postal-code"
+                            name="address.postalCode"
+                            required
+                          />
+                          <div class="invalid-feedback">
+                            Please enter your postal code.
+                          </div>
+                        </div>
+
+                        <div class="col-12">
+                          <label
+                            for="register-state"
+                            class="form-label fw-medium"
+                            >State/Province</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="register-state"
+                            name="address.state"
+                            required
+                          />
+                          <div class="invalid-feedback">
+                            Please enter your state or province.
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Terms and Preferences Section -->
+                  <div class="card border-0 shadow-sm mb-4">
+                    <div
+                      class="card-header bg-primary bg-opacity-10 border-0 py-3"
+                    >
+                      <div class="d-flex align-items-center">
+                        <i class="bi bi-shield-check me-2 text-primary"></i>
+                        <h5 class="mb-0 fw-semibold">Terms & Preferences</h5>
+                      </div>
+                    </div>
+                    <div class="card-body p-4">
+                      <div class="form-check mb-3">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="register-terms"
+                          required
+                        />
+                        <label class="form-check-label" for="register-terms">
+                          I agree to the
+                          <a href="#" class="text-decoration-none fw-semibold"
+                            >Terms and Conditions</a
+                          >
+                          and
+                          <a href="#" class="text-decoration-none fw-semibold"
+                            >Privacy Policy</a
+                          >
+                        </label>
+                        <div class="invalid-feedback">
+                          You must agree to the terms and conditions to proceed.
+                        </div>
+                      </div>
+
+                      <div class="form-check mb-3">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                          id="register-newsletter"
+                        />
+                        <label
+                          class="form-check-label"
+                          for="register-newsletter"
+                        >
+                          <i class="bi bi-envelope-paper text-success me-1"></i>
+                          Subscribe to our newsletter for exclusive deals and
+                          updates
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Submit Button -->
+                  <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">
+                      <i class="bi bi-person-plus-fill me-2"></i>Create Account
+                    </button>
+                  </div>
+                </form>
+
+                <!-- Social Login Options -->
+                <div class="position-relative my-4">
+                  <hr />
+                  <p
+                    class="small text-muted position-absolute top-50 start-50 translate-middle bg-white px-2"
+                  >
+                    OR CONTINUE WITH
+                  </p>
                 </div>
-                <div class="col-md-6 mb-3">
-                  <label for="register-phone" class="form-label">Phone Number</label>
-                  <input type="tel" class="form-control" id="register-phone" 
-                         name="address.phoneNumber" required>
-                  <div class="invalid-feedback">
-                    Please enter a valid phone number.
+
+                <div class="row g-3">
+                  <div class="col-md-6">
+                    <button
+                      id="google-signup"
+                      class="btn btn-danger w-100 d-flex align-items-center justify-content-center gap-2"
+                    >
+                      <i class="bi bi-google"></i> Google
+                    </button>
+                  </div>
+                  <div class="col-md-6">
+                    <button
+                      id="facebook-signup"
+                      class="btn btn-primary w-100 d-flex align-items-center justify-content-center gap-2"
+                    >
+                      <i class="bi bi-facebook"></i> Facebook
+                    </button>
                   </div>
                 </div>
-              </div>
-              <div class="mb-3">
-                <label for="register-address-line1" class="form-label">Address Line 1</label>
-                <input type="text" class="form-control" id="register-address-line1" 
-                       name="address.addressLine1" required>
-                <div class="invalid-feedback">
-                  Please enter your address.
-                </div>
-              </div>
-              <div class="mb-3">
-                <label for="register-address-line2" class="form-label">Address Line 2</label>
-                <input type="text" class="form-control" id="register-address-line2" 
-                       name="address.addressLine2">
-              </div>
-              <div class="row">
-                <div class="col-md-5 mb-3">
-                  <label for="register-country" class="form-label">Country</label>
-                  <select class="form-select" id="register-country" name="address.country" required>
-                    <option value="">Choose...</option>
-                    <option value="VN" selected>Vietnam</option>
-                    <option value="US">United States</option>
-                    <option value="CA">Canada</option>
-                    <option value="UK">United Kingdom</option>
-                    <!-- Add more countries as needed -->
-                  </select>
-                  <div class="invalid-feedback">
-                    Please select a country.
-                  </div>
-                </div>
-                <div class="col-md-4 mb-3">
-                  <label for="register-state" class="form-label">State/Province</label>
-                  <input type="text" class="form-control" id="register-state" 
-                         name="address.state" required>
-                  <div class="invalid-feedback">
-                    Please enter your state or province.
-                  </div>
-                </div>
-                <div class="col-md-3 mb-3">
-                  <label for="register-postal-code" class="form-label">Postal Code</label>
-                  <input type="text" class="form-control" id="register-postal-code" 
-                         name="address.postalCode" required>
-                  <div class="invalid-feedback">
-                    Please enter your postal code.
-                  </div>
-                </div>
-              </div>
-              <div class="mb-3">
-                <label for="register-city" class="form-label">City</label>
-                <input type="text" class="form-control" id="register-city" 
-                       name="address.city" required>
-                <div class="invalid-feedback">
-                  Please enter your city.
-                </div>
-              </div>
 
-              <hr class="my-4">
-
-              <div class="form-check mb-3">
-                <input type="checkbox" class="form-check-input" id="register-terms" required>
-                <label class="form-check-label" for="register-terms">
-                  I agree to the <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>
-                </label>
-                <div class="invalid-feedback">
-                  You must agree to the terms and conditions.
+                <!-- Login Link -->
+                <div class="text-center mt-4">
+                  <p class="mb-0">
+                    Already have an account?
+                    <a
+                      href="login.html"
+                      class="text-decoration-none fw-semibold"
+                      >Log in here</a
+                    >
+                  </p>
                 </div>
               </div>
-              <div class="form-check mb-3">
-                <input type="checkbox" class="form-check-input" id="register-newsletter">
-                <label class="form-check-label" for="register-newsletter">
-                  Subscribe to our newsletter to receive updates and special offers
-                </label>
-              </div>
-              
-              <div class="d-grid mb-3">
-                <button type="submit" class="btn btn-primary btn-lg">Create Account</button>
-              </div>
-            </form>
-
-            <div class="divider">OR</div>
-
-            <div class="social-login">
-              <button id="google-signup" class="btn btn-outline-danger mb-2 w-100">
-                <i class="bi bi-google me-2"></i> Sign up with Google
-              </button>
-              <button id="facebook-signup" class="btn btn-outline-primary w-100">
-                <i class="bi bi-facebook me-2"></i> Sign up with Facebook
-              </button>
             </div>
+          </div>
+        </div>
+      </section>
+    </main>
 
-            <div class="text-center mt-4">
-              <p>Already have an account? <a href="login.html">Login</a></p>
+    <!-- Footer will be loaded dynamically from components/footer.html -->
+    <footer id="footer-container"></footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SweetAlert2 for better alerts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.2/dist/sweetalert2.all.min.js"></script>
+
+    <script>
+      // Load header and footer components
+      document.addEventListener("DOMContentLoaded", function () {
+        // Load header
+        fetch("/client/src/components/header.html")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(
+                `Failed to load header: ${response.status} ${response.statusText}`
+              );
+            }
+            return response.text();
+          })
+          .then((html) => {
+            document.getElementById("header-container").innerHTML = html;
+
+            // After loading header, highlight the current page in the navigation
+            setTimeout(() => {
+              const registerLinks = document.querySelectorAll(
+                'a[href="register.html"]'
+              );
+              registerLinks.forEach((link) => {
+                if (link.classList.contains("dropdown-item")) {
+                  link.classList.add("active");
+                }
+
+                // If parent is a dropdown, mark it as active too
+                const dropdownToggle = link
+                  .closest(".dropdown")
+                  ?.querySelector(".dropdown-toggle");
+                if (dropdownToggle) {
+                  dropdownToggle.classList.add("active");
+                }
+              });
+            }, 100);
+          })
+          .catch((error) => {
+            console.error("Error loading header:", error);
+            document.getElementById("header-container").innerHTML = `
+            <div class="alert alert-danger" role="alert">
+              <h4 class="alert-heading">Error Loading Header</h4>
+              <p>${error.message}</p>
+              <hr>
+              <p class="mb-0">Please check the path to your header component (/client/src/components/header.html).</p>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
+          `;
+          });
 
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4 mb-4 mb-md-0">
-          <div class="footer-about">
-            <h5>About TechHub</h5>
-            <p>We offer premium computer components for gamers, professionals, and enthusiasts. With quality products and expert service, we're your trusted partner for all computing needs.</p>
-            <div class="social-icons">
-              <a href="#"><i class="bi bi-facebook"></i></a>
-              <a href="#"><i class="bi bi-twitter"></i></a>
-              <a href="#"><i class="bi bi-instagram"></i></a>
-              <a href="#"><i class="bi bi-youtube"></i></a>
+        // Load footer - using the same path structure as the header
+        fetch("/client/src/components/footer.html")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(
+                `Failed to load footer: ${response.status} ${response.statusText}`
+              );
+            }
+            return response.text();
+          })
+          .then((html) => {
+            document.getElementById("footer-container").innerHTML = html;
+          })
+          .catch((error) => {
+            console.error("Error loading footer:", error);
+            document.getElementById("footer-container").innerHTML = `
+            <div class="alert alert-danger" role="alert">
+              <h4 class="alert-heading">Error Loading Footer</h4>
+              <p>${error.message}</p>
+              <hr>
+              <p class="mb-0">Please check the path to your footer component (/client/src/components/footer.html).</p>
             </div>
-          </div>
-        </div>
-        <div class="col-6 col-md-2 mb-4 mb-md-0">
-          <div class="footer-links">
-            <h5>Shop</h5>
-            <ul>
-              <li><a href="products.html">All Products</a></li>
-              <li><a href="products.html?category=laptops">Laptops</a></li>
-              <li><a href="products.html?category=monitors">Monitors</a></li>
-              <li><a href="products.html?category=storage">Storage</a></li>
-              <li><a href="products.html?category=components">Components</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-6 col-md-2 mb-4 mb-md-0">
-          <div class="footer-links">
-            <h5>Support</h5>
-            <ul>
-              <li><a href="#">Contact Us</a></li>
-              <li><a href="#">FAQs</a></li>
-              <li><a href="#">Shipping Policy</a></li>
-              <li><a href="#">Return Policy</a></li>
-              <li><a href="#">Warranty</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="footer-newsletter">
-            <h5>Newsletter</h5>
-            <p>Subscribe to our newsletter for the latest updates and offers.</p>
-            <form>
-              <div class="input-group mb-3">
-                <input type="email" class="form-control" placeholder="Your Email" aria-label="Email" aria-describedby="subscribe-btn">
-                <button class="btn btn-primary" type="button" id="subscribe-btn">Subscribe</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom text-center">
-      <div class="container">
-        <p class="mb-0">&copy; 2025 TechHub. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
+          `;
+          });
 
-  <script>
-    // Form validation
-    (function() {
-      'use strict';
-      
-      // Fetch all forms we want to apply validation to
-      var forms = document.querySelectorAll('.needs-validation');
-      
-      // Loop over them and prevent submission
-      Array.prototype.slice.call(forms).forEach(function(form) {
-        form.addEventListener('submit', function(event) {
-          // Check password match
-          var password = document.getElementById('register-password');
-          var confirmPassword = document.getElementById('register-confirm-password');
-          
-          if (password.value !== confirmPassword.value) {
-            confirmPassword.setCustomValidity('Passwords do not match');
-          } else {
-            confirmPassword.setCustomValidity('');
-          }
-          
-          if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-          
-          form.classList.add('was-validated');
-        }, false);
+        // Auto-fill address name from account name if left empty
+        const fullNameField = document.getElementById("register-fullname");
+        const addressNameField = document.getElementById(
+          "register-address-fullname"
+        );
+
+        if (fullNameField && addressNameField) {
+          fullNameField.addEventListener("input", function () {
+            if (!addressNameField.value) {
+              addressNameField.value = this.value;
+            }
+          });
+        }
+
+        // Form validation
+        const forms = document.querySelectorAll(".needs-validation");
+
+        Array.from(forms).forEach((form) => {
+          form.addEventListener(
+            "submit",
+            (event) => {
+              if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+
+                // Find the first invalid field and scroll to it
+                const invalidField = form.querySelector(":invalid");
+                if (invalidField) {
+                  invalidField.focus();
+                  // Scroll to the invalidField's parent card
+                  const card = invalidField.closest(".card");
+                  if (card) {
+                    card.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }
+                }
+              } else {
+                // Form is valid, show loading state
+                event.preventDefault();
+                const submitBtn = form.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML =
+                  '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Creating account...';
+
+                // Get form data
+                const formData = new FormData(form);
+                const userData = {
+                  fullName: formData.get("fullName"),
+                  email: formData.get("email"),
+                  address: {
+                    fullName:
+                      formData.get("address.fullName") ||
+                      formData.get("fullName"),
+                    phoneNumber: formData.get("address.phoneNumber"),
+                    addressLine1: formData.get("address.addressLine1"),
+                    addressLine2: formData.get("address.addressLine2") || "",
+                    city: formData.get("address.city"),
+                    state: formData.get("address.state"),
+                    postalCode: formData.get("address.postalCode"),
+                    country: formData.get("address.country"),
+                  },
+                  subscribeNewsletter: document.getElementById(
+                    "register-newsletter"
+                  ).checked,
+                };
+
+                // Simulate API call (replace with actual API call in production)
+                setTimeout(() => {
+                  // Reset form and button state
+                  submitBtn.disabled = false;
+                  submitBtn.innerHTML = originalText;
+                  form.reset();
+                  form.classList.remove("was-validated");
+
+                  // Show success message
+                  Swal.fire({
+                    title: "Registration Successful!",
+                    text: "Your account has been created! A temporary password has been sent to your email address. Please check your inbox and use it to log in.",
+                    icon: "success",
+                    confirmButtonText: "Continue to Login",
+                  }).then(() => {
+                    // Redirect to login page
+                    window.location.href = "login.html";
+                  });
+                }, 1500);
+              }
+
+              form.classList.add("was-validated");
+            },
+            false
+          );
+        });
+
+        // Phone number validation with visual feedback
+        const phoneField = document.getElementById("register-phone");
+        if (phoneField) {
+          phoneField.addEventListener("input", function () {
+            const phonePattern =
+              /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/;
+            if (this.value && phonePattern.test(this.value)) {
+              this.classList.add("is-valid");
+              this.classList.remove("is-invalid");
+              this.setCustomValidity("");
+            } else if (this.value) {
+              this.classList.add("is-invalid");
+              this.classList.remove("is-valid");
+              this.setCustomValidity("Please enter a valid phone number");
+            } else {
+              this.classList.remove("is-valid", "is-invalid");
+            }
+          });
+        }
+
+        // Email validation with visual feedback
+        const emailField = document.getElementById("register-email");
+        if (emailField) {
+          emailField.addEventListener("input", function () {
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (this.value && emailPattern.test(this.value)) {
+              this.classList.add("is-valid");
+              this.classList.remove("is-invalid");
+              this.setCustomValidity("");
+            } else if (this.value) {
+              this.classList.add("is-invalid");
+              this.classList.remove("is-valid");
+              this.setCustomValidity("Please enter a valid email address");
+            } else {
+              this.classList.remove("is-valid", "is-invalid");
+            }
+          });
+        }
+
+        // Implement a country-state relationship
+        const countrySelect = document.getElementById("register-country");
+        const stateInput = document.getElementById("register-state");
+        if (countrySelect && stateInput) {
+          countrySelect.addEventListener("change", function () {
+            if (this.value === "US") {
+              stateInput.setAttribute(
+                "placeholder",
+                "e.g. California, New York"
+              );
+            } else if (this.value === "CA") {
+              stateInput.setAttribute("placeholder", "e.g. Ontario, Quebec");
+            } else if (this.value === "UK") {
+              stateInput.setAttribute("placeholder", "e.g. England, Scotland");
+            } else if (this.value === "VN") {
+              stateInput.setAttribute("placeholder", "e.g. Ho Chi Minh, Hanoi");
+            } else {
+              stateInput.setAttribute("placeholder", "");
+            }
+          });
+
+          // Trigger the change event to set initial placeholder
+          const event = new Event("change");
+          countrySelect.dispatchEvent(event);
+        }
+
+        // Social login buttons
+        const googleSignupBtn = document.getElementById("google-signup");
+        if (googleSignupBtn) {
+          googleSignupBtn.addEventListener("click", function () {
+            // Show loading state
+            const originalText = this.innerHTML;
+            this.disabled = true;
+            this.innerHTML =
+              '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Connecting...';
+
+            // Simulate OAuth redirect (replace with actual OAuth flow in production)
+            setTimeout(() => {
+              window.location.href = "/api/auth/google";
+            }, 1000);
+          });
+        }
+
+        const facebookSignupBtn = document.getElementById("facebook-signup");
+        if (facebookSignupBtn) {
+          facebookSignupBtn.addEventListener("click", function () {
+            // Show loading state
+            const originalText = this.innerHTML;
+            this.disabled = true;
+            this.innerHTML =
+              '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Connecting...';
+
+            // Simulate OAuth redirect (replace with actual OAuth flow in production)
+            setTimeout(() => {
+              window.location.href = "/api/auth/facebook";
+            }, 1000);
+          });
+        }
       });
-    })();
-  </script>
-</body>
+    </script>
+  </body>
 </html>
