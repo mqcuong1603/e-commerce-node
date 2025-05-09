@@ -88,5 +88,41 @@
     "comment": "Excellent gaming performance. The only reason I didn't give 5 stars is the power draw and heat output, which is quite high. Make sure you have good cooling.",
     "isVerifiedPurchase": false,
     "createdAt": "2024-04-17T11:25:00.000Z"
+  },
+  {
+    "productName": "Dell XPS 13",
+    "userEmail": "jennifer.park@example.com",
+    "userName": "Jennifer Park",
+    "rating": 5,
+    "comment": "Best laptop I've ever owned. The InfinityEdge display is gorgeous, and the keyboard is a joy to type on. Battery life easily lasts through my workday.",
+    "isVerifiedPurchase": true,
+    "createdAt": "2024-04-28T15:45:00.000Z"
+  },
+  {
+    "productName": "ASUS ROG Zephyrus G15",
+    "userEmail": "robert.williams@example.com",
+    "userName": "Robert Williams",
+    "rating": 4,
+    "comment": "Great gaming laptop with excellent performance. The only downside is the limited port selection, but that's a minor issue given the overall quality.",
+    "isVerifiedPurchase": true,
+    "createdAt": "2024-04-30T12:20:00.000Z"
+  },
+  {
+    "productName": "Samsung 980 PRO",
+    "userEmail": "sophia.martinez@example.com",
+    "userName": "Sophia Martinez",
+    "rating": 5,
+    "comment": "Incredible speed and reliability. Perfect for my video editing workflow. The difference in load times is night and day compared to my old SSD.",
+    "isVerifiedPurchase": true,
+    "createdAt": "2024-04-25T09:55:00.000Z"
+  },
+  {
+    "productName": "LG UltraGear 27GN950",
+    "userEmail": "james.brown@example.com",
+    "userName": "James Brown",
+    "rating": 4,
+    "comment": "Excellent monitor for both gaming and work. The HDR implementation is good, though not as bright as some other options. Still, great value for the price.",
+    "isVerifiedPurchase": false,
+    "createdAt": "2024-04-27T16:40:00.000Z"
   }
 ]
