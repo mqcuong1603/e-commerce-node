@@ -1,6 +1,6 @@
 // src/js/api/categories.js
 // Categories API
-import apiClient from '../api-client.js';
+import apiClient from "../api-client.js";
 
 export const categoryAPI = {
   /**
@@ -8,7 +8,7 @@ export const categoryAPI = {
    * @returns {Promise} - All categories
    */
   getAllCategories() {
-    return apiClient.get('/categories');
+    return apiClient.get("/categories");
   },
 
   /**
@@ -16,7 +16,7 @@ export const categoryAPI = {
    * @returns {Promise} - Category tree
    */
   getCategoryTree() {
-    return apiClient.get('/categories/tree');
+    return apiClient.get("/categories/tree");
   },
 
   /**
@@ -24,7 +24,7 @@ export const categoryAPI = {
    * @returns {Promise} - Menu categories
    */
   getMenuCategories() {
-    return apiClient.get('/categories/menu');
+    return apiClient.get("/categories/menu");
   },
 
   /**
@@ -34,5 +34,5 @@ export const categoryAPI = {
    */
   getCategoryBySlug(slug) {
     return apiClient.get(`/categories/${slug}`);
-  }
+  },
 };

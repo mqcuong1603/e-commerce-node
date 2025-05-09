@@ -1,6 +1,6 @@
 // src/js/api/cart.js
 // Cart API
-import apiClient from '../api-client.js';
+import apiClient from "../api-client.js";
 
 export const cartAPI = {
   /**
@@ -8,7 +8,7 @@ export const cartAPI = {
    * @returns {Promise} - Cart data
    */
   getCart() {
-    return apiClient.get('/cart');
+    return apiClient.get("/cart");
   },
 
   /**
@@ -18,7 +18,7 @@ export const cartAPI = {
    * @returns {Promise} - Updated cart
    */
   addItemToCart(productVariantId, quantity = 1) {
-    return apiClient.post('/cart/items', { productVariantId, quantity });
+    return apiClient.post("/cart/items", { productVariantId, quantity });
   },
 
   /**
@@ -45,6 +45,15 @@ export const cartAPI = {
    * @returns {Promise} - Empty cart
    */
   clearCart() {
-    return apiClient.delete('/cart');
-  }
+    return apiClient.delete("/cart");
+  },
+
+  /**
+   * Apply discount code to cart
+   * @param {string} code - Discount code
+   * @returns {Promise} - Updated cart with discount
+   */
+  applyDiscount(code) {
+    return apiClient.post("/orders/verify-discount", { code });
+  },
 };

@@ -9,7 +9,6 @@ export const authAPI = {
    * @returns {Promise} - Registration response
    */
   register(userData) {
-    // The backend will generate a temporary password and send it via email
     return apiClient.post("/auth/register", userData);
   },
 
@@ -43,7 +42,7 @@ export const authAPI = {
 
   /**
    * Update password when logged in
-   * @param {Object} passwordData - Password update data
+   * @param {Object} passwordData - Password update data (currentPassword, newPassword)
    * @returns {Promise} - Response
    */
   updatePassword(passwordData) {
@@ -65,5 +64,29 @@ export const authAPI = {
    */
   updateProfile(profileData) {
     return apiClient.put("/users/profile", profileData);
+  },
+
+  /**
+   * Get Google OAuth URL
+   * @returns {string} - Google OAuth URL
+   */
+  getGoogleAuthUrl() {
+    return `${apiClient.baseUrl}/auth/google`;
+  },
+
+  /**
+   * Get Facebook OAuth URL
+   * @returns {string} - Facebook OAuth URL
+   */
+  getFacebookAuthUrl() {
+    return `${apiClient.baseUrl}/auth/facebook`;
+  },
+
+  /**
+   * Deactivate user account
+   * @returns {Promise} - Response
+   */
+  deactivateAccount() {
+    return apiClient.put("/users/deactivate");
   },
 };

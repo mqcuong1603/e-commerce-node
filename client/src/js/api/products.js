@@ -1,6 +1,6 @@
 // src/js/api/products.js
 // Products API
-import apiClient from '../api-client.js';
+import apiClient from "../api-client.js";
 
 export const productAPI = {
   /**
@@ -8,7 +8,7 @@ export const productAPI = {
    * @returns {Promise} - Landing page products
    */
   getLandingPageProducts() {
-    return apiClient.get('/products/landing');
+    return apiClient.get("/products/landing");
   },
 
   /**
@@ -40,6 +40,8 @@ export const productAPI = {
    * @returns {Promise} - Products in category with pagination
    */
   getProductsByCategory(categorySlug, page = 1, limit = 12) {
-    return apiClient.get(`/products/category/${categorySlug}?page=${page}&limit=${limit}`);
-  }
+    return apiClient.get(
+      `/products/category/${categorySlug}?page=${page}&limit=${limit}`
+    );
+  },
 };

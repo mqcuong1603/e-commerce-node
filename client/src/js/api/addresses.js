@@ -1,6 +1,6 @@
 // src/js/api/addresses.js
 // User addresses API
-import apiClient from '../api-client.js';
+import apiClient from "../api-client.js";
 
 export const addressAPI = {
   /**
@@ -8,7 +8,7 @@ export const addressAPI = {
    * @returns {Promise} - User addresses
    */
   getUserAddresses() {
-    return apiClient.get('/users/addresses');
+    return apiClient.get("/users/addresses");
   },
 
   /**
@@ -17,7 +17,7 @@ export const addressAPI = {
    * @returns {Promise} - Created address
    */
   addAddress(addressData) {
-    return apiClient.post('/users/addresses', addressData);
+    return apiClient.post("/users/addresses", addressData);
   },
 
   /**
@@ -46,5 +46,5 @@ export const addressAPI = {
    */
   setDefaultAddress(addressId) {
     return apiClient.put(`/users/addresses/${addressId}/default`);
-  }
+  },
 };

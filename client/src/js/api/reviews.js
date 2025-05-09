@@ -1,6 +1,6 @@
 // src/js/api/reviews.js
 // Reviews API
-import apiClient from '../api-client.js';
+import apiClient from "../api-client.js";
 
 export const reviewAPI = {
   /**
@@ -11,13 +11,15 @@ export const reviewAPI = {
    * @returns {Promise} - Reviews with pagination
    */
   getProductReviews(productId, page = 1, limit = 10) {
-    return apiClient.get(`/reviews/product/${productId}?page=${page}&limit=${limit}`);
+    return apiClient.get(
+      `/reviews/product/${productId}?page=${page}&limit=${limit}`
+    );
   },
 
   /**
    * Add review for a product
    * @param {string} productId - Product ID
-   * @param {Object} reviewData - Review data
+   * @param {Object} reviewData - Review data (rating, comment, userName)
    * @returns {Promise} - Created review
    */
   addReview(productId, reviewData) {
@@ -48,6 +50,6 @@ export const reviewAPI = {
    * @returns {Promise} - User reviews
    */
   getUserReviews() {
-    return apiClient.get('/reviews/user');
-  }
+    return apiClient.get("/reviews/user");
+  },
 };
