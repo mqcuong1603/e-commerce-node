@@ -249,7 +249,7 @@
     "items": [
       {
         "productName": "Intel Core i9-12900K",
-        "variantName": "Processor Only",
+        "variantName": "Standard",
         "price": 589.99,
         "quantity": 1,
         "totalPrice": 589.99,
@@ -276,6 +276,110 @@
         "status": "shipping",
         "note": "Order has been shipped via USPS, tracking number: USPS12345678",
         "createdAt": "2024-04-29T11:30:00.000Z"
+      }
+    ]
+  },
+  {
+    "userEmail": "jennifer.park@example.com",
+    "fullName": "Jennifer Park",
+    "orderNumber": "ORD-20240430-K1L2",
+    "subtotal": 1299.99,
+    "shippingFee": 35000,
+    "tax": 0,
+    "discountCode": "SAVE20",
+    "discountAmount": 260.0,
+    "loyaltyPointsUsed": 0,
+    "loyaltyPointsEarned": 120,
+    "total": 1034990,
+    "paymentStatus": "paid",
+    "createdAt": "2024-04-30T10:15:00.000Z",
+    "shippingAddress": {
+      "fullName": "Jennifer Park",
+      "phoneNumber": "678-901-2345",
+      "addressLine1": "444 Birch Lane",
+      "addressLine2": "Unit 5",
+      "city": "Seattle",
+      "state": "WA",
+      "postalCode": "98101",
+      "country": "USA"
+    },
+    "items": [
+      {
+        "productName": "Dell XPS 13",
+        "variantName": "Core i7 / 16GB / 512GB",
+        "price": 1299.99,
+        "quantity": 1,
+        "totalPrice": 1299.99,
+        "sku": "XPS13-I7-16-512"
+      }
+    ],
+    "statusHistory": [
+      {
+        "status": "pending",
+        "note": "Order placed successfully",
+        "createdAt": "2024-04-30T10:15:00.000Z"
+      },
+      {
+        "status": "confirmed",
+        "note": "Payment confirmed",
+        "createdAt": "2024-04-30T10:18:00.000Z"
+      },
+      {
+        "status": "processing",
+        "note": "Order is being processed",
+        "createdAt": "2024-04-30T11:30:00.000Z"
+      }
+    ]
+  },
+  {
+    "userEmail": "robert.williams@example.com",
+    "fullName": "Robert Williams",
+    "orderNumber": "ORD-20240501-M3N4",
+    "subtotal": 799.99,
+    "shippingFee": 35000,
+    "tax": 0,
+    "discountCode": null,
+    "discountAmount": 0,
+    "loyaltyPointsUsed": 0,
+    "loyaltyPointsEarned": 75,
+    "total": 834990,
+    "paymentStatus": "paid",
+    "createdAt": "2024-05-01T14:20:00.000Z",
+    "shippingAddress": {
+      "fullName": "Robert Williams",
+      "phoneNumber": "789-012-3456",
+      "addressLine1": "555 Elm Street",
+      "addressLine2": "Suite 200",
+      "city": "Boston",
+      "state": "MA",
+      "postalCode": "02108",
+      "country": "USA"
+    },
+    "items": [
+      {
+        "productName": "NVIDIA GeForce RTX 3080",
+        "variantName": "10GB GDDR6X",
+        "price": 799.99,
+        "quantity": 1,
+        "totalPrice": 799.99,
+        "sku": "NV-RTX3080-10G"
+      }
+    ],
+    "statusHistory": [
+      {
+        "status": "pending",
+        "note": "Order placed successfully",
+        "createdAt": "2024-05-01T14:20:00.000Z"
+      },
+      {
+        "status": "confirmed",
+        "note": "Payment confirmed",
+        "createdAt": "2024-05-01T14:23:00.000Z"
+      },
+      {
+        "status": "processing",
+        "note": "Order is being processed",
+        "createdAt": "2024-05-01T15:30:00.000Z"
       }
     ]
   }

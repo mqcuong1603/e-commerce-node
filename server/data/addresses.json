@@ -70,5 +70,53 @@
     "postalCode": "33101",
     "country": "USA",
     "isDefault": true
+  },
+  {
+    "userEmail": "jennifer.park@example.com",
+    "fullName": "Jennifer Park",
+    "phoneNumber": "678-901-2345",
+    "addressLine1": "444 Birch Lane",
+    "addressLine2": "Unit 5",
+    "city": "Seattle",
+    "state": "WA",
+    "postalCode": "98101",
+    "country": "USA",
+    "isDefault": true
+  },
+  {
+    "userEmail": "robert.williams@example.com",
+    "fullName": "Robert Williams",
+    "phoneNumber": "789-012-3456",
+    "addressLine1": "555 Elm Street",
+    "addressLine2": "Suite 200",
+    "city": "Boston",
+    "state": "MA",
+    "postalCode": "02108",
+    "country": "USA",
+    "isDefault": true
+  },
+  {
+    "userEmail": "sophia.martinez@example.com",
+    "fullName": "Sophia Martinez",
+    "phoneNumber": "890-123-4567",
+    "addressLine1": "666 Willow Way",
+    "addressLine2": "Apt 3C",
+    "city": "Austin",
+    "state": "TX",
+    "postalCode": "78701",
+    "country": "USA",
+    "isDefault": true
+  },
+  {
+    "userEmail": "james.brown@example.com",
+    "fullName": "James Brown",
+    "phoneNumber": "901-234-5678",
+    "addressLine1": "777 Spruce Street",
+    "addressLine2": "",
+    "city": "Denver",
+    "state": "CO",
+    "postalCode": "80202",
+    "country": "USA",
+    "isDefault": true
   }
 ]
