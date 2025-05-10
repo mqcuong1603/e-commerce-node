@@ -14,13 +14,11 @@ export const getLandingPageProducts = async (req, res, next) => {
     })
       .populate({
         path: "variants",
-        match: { isActive: true },
-        options: { limit: 1 },
+        match: { isActive: true, invetory: { $gt: 0 } },
       })
       .populate({
         path: "images",
         match: { isMain: true },
-        options: { limit: 1 },
       })
       .sort({ createdAt: -1 })
       .limit(8);
@@ -32,13 +30,11 @@ export const getLandingPageProducts = async (req, res, next) => {
     })
       .populate({
         path: "variants",
-        match: { isActive: true },
-        options: { limit: 1 },
+        match: { isActive: true, invetory: { $gt: 0 } },
       })
       .populate({
         path: "images",
         match: { isMain: true },
-        options: { limit: 1 },
       })
       .limit(8);
 
