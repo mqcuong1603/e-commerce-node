@@ -462,3 +462,64 @@ footer {
     font-size: 0.875rem;
   }
 }
+
+/* Styling for placeholder images when load fails */
+.placeholder-image {
+  background-color: #f8f9fa;
+  border: 1px dashed #dee2e6;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100px;
+}
+
+.placeholder-image::after {
+  content: attr(alt);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  color: #6c757d;
+  text-align: center;
+  padding: 10px;
+  width: 90%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+
+/* Product card image styling */
+.product-card .card-img-top {
+  height: 200px;
+  object-fit: contain;
+  padding: 1rem;
+  transition: transform 0.3s;
+}
+
+.product-card:hover .card-img-top:not(.placeholder-image) {
+  transform: scale(1.05);
+}
+
+/* Main product image on detail page */
+.main-product-image {
+  max-height: 400px;
+  object-fit: contain;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Product thumbnail styling */
+.product-thumbnail {
+  height: 60px;
+  width: 60px;
+  object-fit: contain;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.3s;
+}
+
+.product-thumbnail.active {
+  border-color: var(--primary-color, #0d6efd);
+}
