@@ -1,35 +1,35 @@
 # Build stage
-FROM node:20-alpine as build
+FROM node:14-alpine as build
 
 WORKDIR /app
 
-# Copy package.json and package-lock.json
+# Copy package files
 COPY client/package*.json ./
 
 # Install dependencies
-RUN npm ci
+RUN npm install
 
-# Copy the rest of the client code
+# Don't modify fs-extra as it's causing conflicts with react-scripts
+# Remove this line:
+# RUN npm uninstall fs-extra && \
+#     npm install fs-extra@9.1.0 --save
+
+# Copy source files
 COPY client/ ./
 
-# Create images directory if it doesn't exist (for safety)
-RUN mkdir -p /app/src/images
-RUN touch /app/src/images/.gitkeep
-
-# Build the application for production
-RUN npm run build
+# Build the app with environment variable to skip installing husky
+RUN DISABLE_ESLINT_PLUGIN=true npm run build
 
 # Production stage
 FROM nginx:alpine
 
-# Copy the build from the previous stage
-COPY --from=build /app/dist /usr/share/nginx/html
+# Copy build files
+COPY --from=build /app/build /usr/share/nginx/html
 
-# Copy the nginx configuration file
-COPY client/nginx.conf /etc/nginx/conf.d/default.conf
+# Copy nginx config
+COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
 
-# Expose port 80
+# Expose port
 EXPOSE 80
 
-# Start NGINX
 CMD ["nginx", "-g", "daemon off;"]

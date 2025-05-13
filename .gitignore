@@ -1,3 +1,12 @@
+node_modules
+npm-debug.log
+build
+.dockerignore
+.git
+.gitignore
 .env
-docs/client_secret_*.json
-client/node_modules
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+README.md
