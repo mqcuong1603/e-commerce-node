@@ -1,75 +1,93 @@
 // src/store/cart.slice.js
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import CartService from '../services/cart.service';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import CartService from "../services/cart.service";
 
 export const fetchCart = createAsyncThunk(
-  'cart/fetchCart',
+  "cart/fetchCart",
   async (_, { rejectWithValue }) => {
     try {
       const response = await CartService.getCart();
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || 'Failed to fetch cart');
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to fetch cart"
+      );
     }
   }
 );
 
 export const addToCart = createAsyncThunk(
-  'cart/addToCart',
+  "cart/addToCart",
   async ({ productVariantId, quantity }, { rejectWithValue }) => {
     try {
-      const response = await CartService.addItemToCart(productVariantId, quantity);
+      const response = await CartService.addItemToCart(
+        productVariantId,
+        quantity
+      );
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || 'Failed to add item to cart');
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to add item to cart"
+      );
     }
   }
 );
 
 export const updateCartItem = createAsyncThunk(
-  'cart/updateCartItem',
+  "cart/updateCartItem",
   async ({ productVariantId, quantity }, { rejectWithValue }) => {
     try {
-      const response = await CartService.updateCartItem(productVariantId, quantity);
+      const response = await CartService.updateCartItem(
+        productVariantId,
+        quantity
+      );
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || 'Failed to update cart item');
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to update cart item"
+      );
     }
   }
 );
 
 export const removeCartItem = createAsyncThunk(
-  'cart/removeCartItem',
+  "cart/removeCartItem",
   async (productVariantId, { rejectWithValue }) => {
     try {
       const response = await CartService.removeCartItem(productVariantId);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || 'Failed to remove cart item');
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to remove cart item"
+      );
     }
   }
 );
 
 export const clearCart = createAsyncThunk(
-  'cart/clearCart',
+  "cart/clearCart",
   async (_, { rejectWithValue }) => {
     try {
       const response = await CartService.clearCart();
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || 'Failed to clear cart');
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to clear cart"
+      );
     }
   }
 );
 
 export const applyDiscount = createAsyncThunk(
-  'cart/applyDiscount',
+  "cart/applyDiscount",
   async (code, { rejectWithValue }) => {
     try {
       const response = await CartService.verifyDiscount(code);
       return response.data;
     } catch (error) {
-      return rejectWithValue(error.response?.data?.message || 'Invalid discount code');
+      return rejectWithValue(
+        error.response?.data?.message || "Invalid discount code"
+      );
     }
   }
 );
@@ -91,7 +109,7 @@ const initialState = {
 };
 
 const cartSlice = createSlice({
-  name: 'cart',
+  name: "cart",
   initialState,
   reducers: {
     clearCartError: (state) => {
@@ -182,10 +200,15 @@ const cartSlice = createSlice({
         code: action.payload.code,
         amount: action.payload.discountAmount,
       };
-      state.total = state.subtotal + state.shipping + state.tax - action.payload.discountAmount;
+      state.total =
+        state.subtotal +
+        state.shipping +
+        state.tax -
+        action.payload.discountAmount;
     });
   },
 });
 
+export const verifyDiscount = applyDiscount;
 export const { clearCartError } = cartSlice.actions;
 export default cartSlice.reducer;

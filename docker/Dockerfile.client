@@ -1,5 +1,5 @@
 # Build stage
-FROM node:14-alpine as build
+FROM node:20-alpine AS build
 
 WORKDIR /app
 
@@ -9,15 +9,19 @@ COPY client/package*.json ./
 # Install dependencies
 RUN npm install
 
-# Don't modify fs-extra as it's causing conflicts with react-scripts
-# Remove this line:
-# RUN npm uninstall fs-extra && \
-#     npm install fs-extra@9.1.0 --save
+# Create necessary directory structure for missing files
+RUN mkdir -p public src/assets/styles
 
-# Copy source files
+# Create minimal index.html if it doesn't exist
+RUN echo '<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>TechHub</title></head><body><div id="root"></div></body></html>' > public/index.html
+
+# Create placeholder global.css file
+RUN echo '/* Placeholder global styles */' > src/assets/styles/global.css
+
+# Now copy all files, the placeholder will be overwritten if the file exists
 COPY client/ ./
 
-# Build the app with environment variable to skip installing husky
+# Build the app
 RUN DISABLE_ESLINT_PLUGIN=true npm run build
 
 # Production stage
